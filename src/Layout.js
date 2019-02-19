@@ -2,25 +2,21 @@ import m from 'mithril'
 
 const Tab = ({ attrs: { active, tab, idx } }) => {
   const state = { onhover: false }
-  console.log(state)
 
-  const hover = (e) => {
-    state.onhover = !state.onhover
-    // e.target.style.backgroundColor = state.onhover ? 'blue' : ''
-  }
+  const hover = () => (state.onhover = !state.onhover)
 
   return {
-    view: ({ attrs: { active, tab, idx } }) =>
+    view: () =>
       m(
         'a',
         {
           id: idx,
           href: `${tab}`,
-          // oncreate: m.route.link,
+          oncreate: m.route.link,
           onmouseover: hover,
-          // onmouseout: hover,
+          onmouseout: hover,
           style: {
-            backgroundColor: state.onhover ? 'blue' : 'green',
+            backgroundColor: state.onhover ? 'rgba(41,128,185 ,.3)' : '',
             textDecoration: 'none',
             // display: 'flex',
             borderTop: active ? '4px solid rgba(41,128,185 ,1)' : '',
@@ -50,7 +46,9 @@ const Heading = ({ attrs: { model } }) => {
             paddingTop: '35px',
           },
         },
-        tabs.map((tab, idx) => m(Tab, { key: idx, active: model.state.route == tab, tab, idx }))
+        tabs.map((tab, idx) =>
+          m(Tab, { key: idx, active: model.state.route == tab, tab, idx })
+        )
       ),
   }
 }
@@ -110,18 +108,29 @@ const Sidebar = ({ attrs: { model } }) => {
   }
 }
 
-const Body = ({ attrs: { model, children } }) => {
+const Body = () => {
   return {
     view: ({ attrs: { model, children } }) =>
       m('section.body', { style: { display: 'flex' } }, [
         m(Sidebar, { model }),
-        m('.container', { style: { width: '100%', height: '80vh' } }, children),
+        m(
+          '.container',
+          { style: { width: '100%', height: '80vh' } },
+          // JSON.stringify(model.data, null, 4),
+          children
+        ),
       ]),
   }
 }
 
-const Layout = (model) => ({
-  view: ({ children }) => [ m(Heading, { model }), m(Body, { model, children }), m(Footer) ],
-})
+const Layout = ({ attrs: { model } }) => {
+  return {
+    view: ({ children }) => [
+      m(Heading, { model }),
+      m(Body, { model, children }),
+      m(Footer),
+    ],
+  }
+}
 
 export default Layout
