@@ -3,11 +3,6 @@ import Layout from './Layout.js'
 
 const isEmpty = data => data.length == 0
 
-const toVM = item => {
-  console.log(item)
-  return item
-}
-
 const loadData = model => url => route =>
   m.request({ url, method: 'GET' }).then(data => {
     model.data[route] = data
@@ -20,11 +15,20 @@ const getData = model => path => {
   return model
 }
 
-const Item = ({ attrs: item, idx }) => {
-  let dto = JSON.stringify(item, null, 4)
-  // console.log('dto', dto)
+const postVM = ({ title, body }) => ({ title, body })
+
+const toVm = (type, item) => {
+  console.log('item', type)
+  switch (type) {
+    case '/posts':
+      postVM(item)
+      break
+  }
+}
+
+const Item = ({ attrs }) => {
   return {
-    view: ({ attrs: item, idx, model }) => {
+    view: () => {
       return m(
         '',
         {
@@ -36,7 +40,7 @@ const Item = ({ attrs: item, idx }) => {
             height: '150px',
           },
         },
-        dto
+        'item'
       )
     },
   }
@@ -60,7 +64,10 @@ const Container = () => {
           },
         },
         model.data[model.state.route].map((item, idx) => {
-          return m(Item, { key: idx, item })
+          let dto = toVm(model.state.route, item)
+          console.log('dto', dto)
+
+          return m(Item, { key: idx, item: dto })
         })
       ),
   }
@@ -86,8 +93,7 @@ export const App = model => {
     },
     '/todos': {
       onmatch: (_, path) => getData(model)(path),
-      render: a => {
-        console.log('????', a)
+      render: () => {
         return m(Layout, { model }, m(Container, { model }))
       },
     },

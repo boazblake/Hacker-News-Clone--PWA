@@ -43,11 +43,13 @@ const Heading = ({ attrs: { model } }) => {
         'header',
         {
           style: {
+            gridColumn: 'span ',
             display: 'flex',
+            flexFlow: 'row',
             alignContent: 'center',
-            justifyContent: 'flex-start',
+            justifyContent: 'center',
             height: '10vh',
-            padding: '35px 20%',
+            // padding: '35px 20%',
           },
         },
         tabs.map((tab, idx) => m(Tab, { key: idx, active: model.state.route == tab, tab, idx }))
@@ -57,22 +59,7 @@ const Heading = ({ attrs: { model } }) => {
 
 const Footer = () => {
   return {
-    view: ({ attrs: { model } }) =>
-      m('footer', { style: { height: '20vh' } }, m('pre', JSON.stringify(model.data, null, 4))),
-  }
-}
-
-const SidebarButton = () => {
-  return {
-    view: ({ attrs: action, name }) =>
-      m(
-        'button',
-        {
-          style: { width: '100%', height: '40px' },
-          onclick: action,
-        },
-        name
-      ),
+    view: () => m('footer', { style: { height: '20vh' } }, 'Footer'),
   }
 }
 
@@ -135,10 +122,18 @@ const Body = () => {
   }
 }
 
-const Layout = ({ children, attrs: { model } }) => {
-  console.log(children)
+const Layout = ({ attrs: { model } }) => {
   return {
-    view: ({ children }) => [ m(Heading, { model }), m(Body, { model, children }), m(Footer, { model }) ],
+    view: ({ children }) =>
+      m(
+        'section.main',
+        {
+          display: 'grid',
+          gridTemplateColumns: 'repeat(12, 1fr)',
+          gridTemplateRows: '50px 350px 50px',
+        },
+        [ m(Heading, { model }), m(Body, { model, children }), m(Footer, { model }) ]
+      ),
   }
 }
 

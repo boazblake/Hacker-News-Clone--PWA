@@ -18,6 +18,16 @@ html {
   font-color: white;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex-basis: 100%;
+}
+
 @media (max-width: 1333px) {
   .grid-item {
     flex-basis: 33.33%;
