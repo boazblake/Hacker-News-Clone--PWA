@@ -1,107 +1,99 @@
 import m from 'mithril'
 import Layout from './Layout.js'
 
+const isEmpty = data => data.length == 0
+
+const toVM = item => {
+  console.log(item)
+  return item
+}
+
 const loadData = model => url => route =>
   m.request({ url, method: 'GET' }).then(data => {
-    console.log('data', data)
     model.data[route] = data
   })
+
+const getData = model => path => {
+  model.state.route = path
+  model.data[path] ? model.data[path] : (model.data[path] = [])
+  if (isEmpty(model.data[path])) loadData(model)(model.reqs.urls[path])(path)
+  return model
+}
+
+const Item = ({ attrs: item, idx }) => {
+  let dto = JSON.stringify(item, null, 4)
+  // console.log('dto', dto)
+  return {
+    view: ({ attrs: item, idx, model }) => {
+      return m(
+        '',
+        {
+          style: {
+            flexGrow: 1,
+            margin: '10px',
+            backgroundColor: 'rgba(41,18,185 ,.2)',
+            width: '150px',
+            height: '150px',
+          },
+        },
+        dto
+      )
+    },
+  }
+}
 
 const Container = () => {
   return {
     view: ({ attrs: { model } }) =>
       m(
-        'section.posts',
+        'section.container',
         {
           style: {
             display: 'flex',
             flexFlow: 'wrap',
             justifyContent: 'space-around',
             overflowY: 'scroll',
+            overflowX: 'hidden',
             padding: '10px',
             backgroundColor: 'rgba(41,128,185 ,.1)',
             height: '75vh',
-            width: '100%'
-          }
+          },
         },
         model.data[model.state.route].map((item, idx) => {
-          console.log(item)
-          return m(
-            '',
-            {
-              style: {
-                flexGrow: 1,
-                margin: '10px',
-                backgroundColor: 'rgba(41,18,185 ,.2)',
-                width: '150px',
-                height: '150px'
-              },
-              key: idx
-            },
-            item.title
-          )
+          return m(Item, { key: idx, item })
         })
-      )
+      ),
   }
 }
 
-const routes = model => {
+export const App = model => {
   return {
     '/posts': {
-      onmatch: (_, path) => {
-        model.state.route = path
-        model.data[path] ? model.data[path] : (model.data[path] = [])
-        console.log('posts', model.data[path])
-        loadData(model)(model.reqs.urls[path])(path)
-      },
-      render: () => m(Layout, { model }, m(Container, { model }))
+      onmatch: (_, path) => getData(model)(path),
+      render: () => m(Layout, { model }, m(Container, { model })),
     },
     '/comments': {
-      onmatch: (_, path) => {
-        model.state.route = path
-        model.data[path] ? model.data[path] : (model.data[path] = [])
-        console.log('commenrs', model.data[path])
-        loadData(model)(model.reqs.urls[path])(path)
-      },
-      render: () => m(Layout, { model }, m(Container, { model }))
+      onmatch: (_, path) => getData(model)(path),
+      render: () => m(Layout, { model }, m(Container, { model })),
     },
     '/albums': {
-      onmatch: (_, path) => {
-        model.state.route = path
-        model.data[path] ? model.data[path] : (model.data[path] = [])
-        console.log('albums', model.data[path])
-        loadData(model)(model.reqs.urls[path])(path)
-      },
-      render: () => m(Layout, { model }, m(Container, { model }))
+      onmatch: (_, path) => getData(model)(path),
+      render: () => m(Layout, { model }, m(Container, { model })),
     },
     '/photos': {
-      onmatch: (_, path) => {
-        model.state.route = path
-        model.data[path] ? model.data[path] : (model.data[path] = [])
-        console.log('photos', model.data[path])
-        loadData(model)(model.reqs.urls[path])(path)
-      },
-      render: () => m(Layout, { model }, m(Container, { model }))
+      onmatch: (_, path) => getData(model)(path),
+      render: () => m(Layout, { model }, m(Container, { model })),
     },
     '/todos': {
-      onmatch: (_, path) => {
-        model.state.route = path
-        model.data[path] ? model.data[path] : (model.data[path] = [])
-        console.log('todos', model.data[path])
-        loadData(model)(model.reqs.urls[path])(path)
+      onmatch: (_, path) => getData(model)(path),
+      render: a => {
+        console.log('????', a)
+        return m(Layout, { model }, m(Container, { model }))
       },
-      render: () => m(Layout, { model }, m(Container, { model }))
     },
     '/users': {
-      onmatch: (_, path) => {
-        model.state.route = path
-        model.data[path] ? model.data[path] : (model.data[path] = [])
-        console.log('users', model.data[path])
-        loadData(model)(model.reqs.urls[path])(path)
-      },
-      render: () => m(Layout, { model }, m(Container, { model }))
-    }
+      onmatch: (_, path) => getData(model)(path),
+      render: () => m(Layout, { model }, m(Container, { model })),
+    },
   }
 }
-
-export default routes

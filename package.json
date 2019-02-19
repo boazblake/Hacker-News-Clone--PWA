@@ -1,5 +1,5 @@
 {
-  "name": "mattyapp",
+  "name": "flexbox",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -44,8 +44,8 @@
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --progress --config webpack.prod.js",
-    "lint:js": "eslint src/ webpack.*.js --cache --fix"
+    "lint": "eslint src/ webpack.*.js --cache --fix"
   },
-  "description": "Matty App",
-  "author": "bblake <bblake@goempyrean.com>"
+  "description": "flexbox",
+  "author": "boazblake <boazblake@gmail.com>"
 }

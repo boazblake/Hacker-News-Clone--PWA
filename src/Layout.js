@@ -1,14 +1,16 @@
 import m from 'mithril'
 
-const Tab = ({ attrs: { active, tab, idx } }) => {
+const Tab = () => {
   const state = { onhover: false }
-
-  const hover = () => (state.onhover = !state.onhover)
+  const hover = e => {
+    e.stopPropagation()
+    state.onhover = !state.onhover
+  }
 
   return {
-    view: () =>
+    view: ({ attrs: { active, tab, idx } }) =>
       m(
-        'a',
+        'a.grid-item',
         {
           id: idx,
           href: `${tab}`,
@@ -16,13 +18,15 @@ const Tab = ({ attrs: { active, tab, idx } }) => {
           onmouseover: hover,
           onmouseout: hover,
           style: {
-            backgroundColor: state.onhover ? 'rgba(41,128,185 ,.3)' : '',
+            // backgroundColor: state.onhover ? 'rgba(41,128,185 ,.3)' : '',
             textDecoration: 'none',
             // display: 'flex',
-            borderTop: active ? '4px solid rgba(41,128,185 ,1)' : '',
+            flexBasis: '20%',
+            borderTop: active
+              ? '4px solid rgba(41,128,185 ,1)'
+              : !active && state.onhover ? '4px solid rgba(41,128,185 ,.5)' : '',
             // height: '40px',
-            width: '80px',
-            padding: '0 12px 0 12px',
+            // minWidth: '80px',
             justifyContent: 'center',
           },
         },
@@ -41,21 +45,34 @@ const Heading = ({ attrs: { model } }) => {
           style: {
             display: 'flex',
             alignContent: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             height: '10vh',
-            paddingTop: '35px',
+            padding: '35px 20%',
           },
         },
-        tabs.map((tab, idx) =>
-          m(Tab, { key: idx, active: model.state.route == tab, tab, idx })
-        )
+        tabs.map((tab, idx) => m(Tab, { key: idx, active: model.state.route == tab, tab, idx }))
       ),
   }
 }
 
 const Footer = () => {
   return {
-    view: () => m('footer', { style: { height: '20vh' } }, 'FOOTER'),
+    view: ({ attrs: { model } }) =>
+      m('footer', { style: { height: '20vh' } }, m('pre', JSON.stringify(model.data, null, 4))),
+  }
+}
+
+const SidebarButton = () => {
+  return {
+    view: ({ attrs: action, name }) =>
+      m(
+        'button',
+        {
+          style: { width: '100%', height: '40px' },
+          onclick: action,
+        },
+        name
+      ),
   }
 }
 
@@ -113,23 +130,15 @@ const Body = () => {
     view: ({ attrs: { model, children } }) =>
       m('section.body', { style: { display: 'flex' } }, [
         m(Sidebar, { model }),
-        m(
-          '.container',
-          { style: { width: '100%', height: '80vh' } },
-          // JSON.stringify(model.data, null, 4),
-          children
-        ),
+        m('.container', { id: 'container', style: { width: '100%', height: '80vh' } }, children),
       ]),
   }
 }
 
-const Layout = ({ attrs: { model } }) => {
+const Layout = ({ children, attrs: { model } }) => {
+  console.log(children)
   return {
-    view: ({ children }) => [
-      m(Heading, { model }),
-      m(Body, { model, children }),
-      m(Footer),
-    ],
+    view: ({ children }) => [ m(Heading, { model }), m(Body, { model, children }), m(Footer, { model }) ],
   }
 }
 
