@@ -1,8 +1,9 @@
 /* index.css */
-@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
 
 * {
   box-sizing: border-box;
+  font-family:'Montserrat', sans-serif;;
 }
 
 body,
@@ -14,7 +15,6 @@ html {
 #app {
   height: 100%;
   width: 100%;
-  font-family: "RubMontserratik", sans-serif;
   font-color: white;
 }
 

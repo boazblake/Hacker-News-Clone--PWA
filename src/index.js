@@ -15,5 +15,6 @@ if (process.env.NODE_ENV !== 'production') {
 // Styles
 import './index.css'
 import './animations.css'
+import './loader.css'
 
 m.route(root, '/posts', App(model))

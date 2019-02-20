@@ -1,4 +1,9 @@
 {
   "editor.fontFamily": "fira code",
-  "editor.fontSize": 13
+  "editor.fontSize": 13,
+  "eslint.options": {
+    "configFile": "./.eslintrc.js"
+  },
+  "files.insertFinalNewline": true,
+  "files.eol": "\r\n"
 }
