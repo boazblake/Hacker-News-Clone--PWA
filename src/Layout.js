@@ -2,7 +2,7 @@ import m from 'mithril'
 
 const Tab = () => {
   const state = { onhover: false }
-  const hover = e => {
+  const hover = (e) => {
     e.stopPropagation()
     state.onhover = !state.onhover
   }
@@ -10,7 +10,7 @@ const Tab = () => {
   return {
     view: ({ attrs: { active, tab, idx } }) =>
       m(
-        'a.grid-item',
+        'a.Tab',
         {
           id: idx,
           href: `${tab}`,
@@ -18,15 +18,11 @@ const Tab = () => {
           onmouseover: hover,
           onmouseout: hover,
           style: {
-            // backgroundColor: state.onhover ? 'rgba(41,128,185 ,.3)' : '',
             textDecoration: 'none',
-            // display: 'flex',
             flexBasis: '20%',
             borderTop: active
               ? '4px solid rgba(41,128,185 ,1)'
               : !active && state.onhover ? '4px solid rgba(41,128,185 ,.5)' : '',
-            // height: '40px',
-            // minWidth: '80px',
             justifyContent: 'center',
           },
         },
@@ -40,16 +36,14 @@ const Heading = ({ attrs: { model } }) => {
   return {
     view: ({ attrs: { model } }) =>
       m(
-        'header',
+        'header.Heading',
         {
           style: {
-            gridColumn: 'span ',
+            gridArea: 'header ',
             display: 'flex',
             flexFlow: 'row',
             alignContent: 'center',
             justifyContent: 'center',
-            height: '10vh',
-            // padding: '35px 20%',
           },
         },
         tabs.map((tab, idx) => m(Tab, { key: idx, active: model.state.route == tab, tab, idx }))
@@ -59,7 +53,7 @@ const Heading = ({ attrs: { model } }) => {
 
 const Footer = () => {
   return {
-    view: () => m('footer', { style: { height: '20vh' } }, 'Footer'),
+    view: () => m('footer.Footer', { style: { gridArea: 'footer', height: '20vh' } }, 'Footer'),
   }
 }
 
@@ -67,13 +61,12 @@ const Sidebar = ({ attrs: { model } }) => {
   return {
     view: () =>
       m(
-        'aside.slide-left',
+        'aside.Sidebar slide-left',
         {
           style: {
             backgroundColor: 'rgba(41,128,185 ,0.9)',
-            flexGrow: 1,
+            gridArea: 'sidebar',
             width: model.sidebar.isOpen ? '200px' : '60px',
-            height: '75vh',
           },
         },
         [
@@ -114,11 +107,7 @@ const Sidebar = ({ attrs: { model } }) => {
 
 const Body = () => {
   return {
-    view: ({ attrs: { model, children } }) =>
-      m('section.body', { style: { display: 'flex' } }, [
-        m(Sidebar, { model }),
-        m('.container', { id: 'container', style: { width: '100%', height: '80vh' } }, children),
-      ]),
+    view: ({ attrs: { children } }) => m('section.Body', { style: { gridArea: 'content', display: 'flex' } }, children),
   }
 }
 
@@ -126,13 +115,20 @@ const Layout = ({ attrs: { model } }) => {
   return {
     view: ({ children }) =>
       m(
-        'section.main',
+        'section.Layout',
         {
-          display: 'grid',
-          gridTemplateColumns: 'repeat(12, 1fr)',
-          gridTemplateRows: '50px 350px 50px',
+          style: {
+            padding: '40px',
+            display: 'grid',
+            gridTemplateColumns: '1fr ',
+            gridTemplateRows: '5% 70%',
+            gridGap: '10px',
+            gridTemplateAreas: '"....... header header""sidebar content content"  "footer  footer  footer"',
+          },
         },
-        [ m(Heading, { model }), m(Body, { model, children }), m(Footer, { model }) ]
+        children
+          ? [ m(Heading, { model }), m(Sidebar, { model }), m(Body, { model, children }), m(Footer, { model }) ]
+          : []
       ),
   }
 }

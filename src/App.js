@@ -1,11 +1,9 @@
 import m from 'mithril'
 import Layout from './Layout.js'
 
-const IsLoading = {
-  view: () =>
-    m('.holder', [ m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]) ]),
-}
-
+const IsLoading = m('.holder', { style: {} }, [
+  m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
+])
 const isEmpty = (data) => data.length == 0
 
 const loadData = (model) => (url) => (route) =>
@@ -165,14 +163,13 @@ const Component = () => {
     view: ({ attrs: { model } }) => {
       let Component = toComponent(model.state.route)
       let data = model.data[model.state.route]
-      console.log('data', isEmpty(data))
       return m(
         'section.Component',
         {
           style: componentStyle,
         },
         isEmpty(data)
-          ? m(IsLoading)
+          ? IsLoading
           : data.map((item, idx) => {
             return m(Component, {
               key: idx,
