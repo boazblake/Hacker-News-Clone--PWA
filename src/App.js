@@ -23,15 +23,15 @@ const getData = model => path => {
   return model
 }
 
-const itemStyle = {
+const itemStyle = theme => ({
   flexGrow: 1,
   width: '400px',
   padding: '10px',
   margin: '10px',
-  backgroundColor: 'rgba(41,18,185 ,.2)',
-}
+  backgroundColor: theme,
+})
 
-const componentStyle = {
+const componentStyle = theme => ({
   position: 'relative',
   display: 'flex',
   flexFlow: 'row wrap',
@@ -39,49 +39,50 @@ const componentStyle = {
   overflowY: 'scroll',
   overflowX: 'hidden',
   padding: '10px',
-  backgroundColor: 'rgba(41,128,185 ,.1)',
-}
+  backgroundColor: theme,
+})
 
-const Posts = ({ attrs: { item: { title, body } } }) => {
+const Posts = ({ attrs: { theme, item: { title, body } } }) => {
+  console.log(title, body)
   return {
     view: () =>
       m(
         '.Posts',
         {
-          style: itemStyle,
+          style: itemStyle(theme),
         },
         [ m('h1', title), m('p', body) ]
       ),
   }
 }
 
-const Comments = ({ attrs: { item: { email, name, body } } }) => {
+const Comments = ({ attrs: { theme, item: { email, name, body } } }) => {
   return {
     view: () =>
       m(
         '.Comments',
         {
-          style: itemStyle,
+          style: itemStyle(theme),
         },
         [ m('h1', name), m('p', email), m('p', body) ]
       ),
   }
 }
 
-const Albums = ({ attrs: { item: { title } } }) => {
+const Albums = ({ attrs: { theme, item: { title } } }) => {
   return {
     view: () =>
       m(
         '.Albums',
         {
-          style: itemStyle,
+          style: itemStyle(theme),
         },
         [ m('h1', title) ]
       ),
   }
 }
 
-const Photos = ({ attrs: { item: { thumbnailUrl, title, url } } }) => {
+const Photos = ({ attrs: { theme, item: { thumbnailUrl, title, url } } }) => {
   let state = {
     isSmall: true,
     small: thumbnailUrl,
@@ -93,7 +94,7 @@ const Photos = ({ attrs: { item: { thumbnailUrl, title, url } } }) => {
       m(
         '.Photos',
         {
-          style: { ...itemStyle, display: 'flex' },
+          style: { ...itemStyle(theme), display: 'flex' },
         },
         [
           m('h1', { style: { padding: '4px', right: 'auto', flex: 3 } }, title),
@@ -107,13 +108,13 @@ const Photos = ({ attrs: { item: { thumbnailUrl, title, url } } }) => {
   }
 }
 
-const Todos = ({ attrs: { item: { completed, title } } }) => {
+const Todos = ({ attrs: { theme, item: { completed, title } } }) => {
   return {
     view: () =>
       m(
         '.Todos',
         {
-          style: itemStyle,
+          style: itemStyle(theme),
         },
         [
           m('h1', title),
@@ -123,14 +124,18 @@ const Todos = ({ attrs: { item: { completed, title } } }) => {
   }
 }
 
-const Users = ({ attrs: { item: { address, company, email, name, phone, username, website } } }) => {
+const Users = ({ attrs: { theme, item: { address, company, email, name, phone, username, website } } }) => {
   const state = { isOpen: false }
   return {
     view: () =>
       m(
         '.Users',
         {
-          style: { ...itemStyle, overflow: state.isOpen ? 'auto' : 'hidden', height: state.isOpen ? 'auto' : '150px' },
+          style: {
+            ...itemStyle(theme),
+            overflow: state.isOpen ? 'auto' : 'hidden',
+            height: state.isOpen ? 'auto' : '150px',
+          },
         },
         [
           m('h1', name),
@@ -175,7 +180,7 @@ const Component = () => {
       return m(
         'section.Component',
         {
-          style: componentStyle,
+          style: componentStyle(model),
         },
         isEmpty(data)
           ? m('', { style: { width: '80vw' } }, IsLoading)

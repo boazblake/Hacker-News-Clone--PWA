@@ -14,15 +14,22 @@ const reqs = {
   http,
 }
 
-const userVm = ({ address, key }) => ({
-  address,
-  key,
-})
+const themes = type => {
+  let theme = {
+    light: {
+      sidebar: 'rgba(41,128,185 ,0.9)',
+      tab: {
+        active: '4px solid rgba(41,128,185 ,1)',
+        inactiveHover: '4px solid rgba(41,128,185 ,.5)',
+      },
+      item: 'rgba(41,18,185 ,.2)',
+      component: 'rgba(41,128,185 ,.1)',
+    },
+    dark: {},
+  }
 
-const itemVm = ({ item, key }) => ({
-  item,
-  key,
-})
+  return theme
+}
 
 export const model = {
   sidebar: { isOpen: true, modify: sb => !sb.isOpen },
@@ -30,6 +37,5 @@ export const model = {
   data: {},
   state: { url: '', route: '' },
   reqs,
-  userVm,
-  itemVm,
+  theme: type => themes(type),
 }

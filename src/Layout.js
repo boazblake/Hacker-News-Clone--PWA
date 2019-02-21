@@ -8,7 +8,7 @@ const Tab = () => {
   }
 
   return {
-    view: ({ attrs: { active, tab, idx } }) =>
+    view: ({ attrs: { active, tab, idx, activeBorder, inactiveBorder } }) =>
       m(
         'a.Tab',
         {
@@ -21,8 +21,8 @@ const Tab = () => {
             display: 'flex',
             textDecoration: 'none',
             flexBasis: '20%',
-            borderTop: active ? '4px solid rgba(41,128,185 ,1)' : '',
-            borderBottom: !active && state.onhover ? '4px solid rgba(41,128,185 ,.5)' : '',
+            borderTop: active ? activeBorder : '',
+            borderBottom: !active && state.onhover ? inactiveBorder : '',
             justifyContent: 'center',
             alignContent: 'center',
           },
@@ -65,7 +65,7 @@ const Sidebar = ({ attrs: { model } }) => {
         'aside.Sidebar slide-left',
         {
           style: {
-            backgroundColor: 'rgba(41,128,185 ,0.9)',
+            backgroundColor: model.themes.light.sidebar,
             gridArea: 'sidebar',
             width: model.sidebar.isOpen ? '200px' : '60px',
           },
