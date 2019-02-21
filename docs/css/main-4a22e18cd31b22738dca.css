@@ -821,6 +821,7 @@ stretchRight
   100% {
     -webkit-transform: scaleX(1); } }
 .holder {
+  position: absolute;
   width: 100%;
   height: 100%;
   background-color: transparent; }
@@ -981,4 +982,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-38fed4cad570a6aa20ce.css.map*/
+/*# sourceMappingURL=main-4a22e18cd31b22738dca.css.map*/
