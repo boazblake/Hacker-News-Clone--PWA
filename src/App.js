@@ -1,7 +1,7 @@
 import m from 'mithril'
 import Layout from './Layout.js'
 
-const IsLoading = m('.holder', { style: {} }, [
+const IsLoading = m('.holder', [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
 ])
 const isEmpty = data => data.length == 0
@@ -32,6 +32,7 @@ const itemStyle = {
 }
 
 const componentStyle = {
+  position: 'relative',
   display: 'flex',
   flexFlow: 'row wrap',
   justifyContent: 'space-around',
@@ -39,11 +40,9 @@ const componentStyle = {
   overflowX: 'hidden',
   padding: '10px',
   backgroundColor: 'rgba(41,128,185 ,.1)',
-  height: '75vh',
 }
 
 const Posts = ({ attrs: { item: { title, body } } }) => {
-  console.log(title, body)
   return {
     view: () =>
       m(
@@ -179,7 +178,7 @@ const Component = () => {
           style: componentStyle,
         },
         isEmpty(data)
-          ? IsLoading
+          ? m('', { style: { width: '80vw' } }, IsLoading)
           : data.map((item, idx) => {
             return m(Component, {
               key: idx,

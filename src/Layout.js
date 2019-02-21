@@ -2,7 +2,7 @@ import m from 'mithril'
 
 const Tab = () => {
   const state = { onhover: false }
-  const hover = (e) => {
+  const hover = e => {
     e.stopPropagation()
     state.onhover = !state.onhover
   }
@@ -18,12 +18,13 @@ const Tab = () => {
           onmouseover: hover,
           onmouseout: hover,
           style: {
+            display: 'flex',
             textDecoration: 'none',
             flexBasis: '20%',
-            borderTop: active
-              ? '4px solid rgba(41,128,185 ,1)'
-              : !active && state.onhover ? '4px solid rgba(41,128,185 ,.5)' : '',
+            borderTop: active ? '4px solid rgba(41,128,185 ,1)' : '',
+            borderBottom: !active && state.onhover ? '4px solid rgba(41,128,185 ,.5)' : '',
             justifyContent: 'center',
+            alignContent: 'center',
           },
         },
         tab.split('/')[1]
@@ -53,7 +54,7 @@ const Heading = ({ attrs: { model } }) => {
 
 const Footer = () => {
   return {
-    view: () => m('footer.Footer', { style: { gridArea: 'footer', height: '20vh' } }, 'Footer'),
+    view: () => m('footer.Footer', { style: { gridArea: 'footer' } }, 'Footer'),
   }
 }
 
@@ -118,10 +119,11 @@ const Layout = ({ attrs: { model } }) => {
         'section.Layout',
         {
           style: {
+            height: '100vh',
             padding: '40px',
             display: 'grid',
             gridTemplateColumns: '1fr ',
-            gridTemplateRows: '5% 70%',
+            gridTemplateRows: '5% 90%',
             gridGap: '10px',
             gridTemplateAreas: '"....... header header""sidebar content content"  "footer  footer  footer"',
           },
