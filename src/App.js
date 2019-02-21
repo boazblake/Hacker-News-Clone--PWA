@@ -4,19 +4,19 @@ import Layout from './Layout.js'
 const IsLoading = m('.holder', { style: {} }, [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
 ])
-const isEmpty = (data) => data.length == 0
+const isEmpty = data => data.length == 0
 
-const loadData = (model) => (url) => (route) =>
+const loadData = model => url => route =>
   m
     .request({
       url,
       method: 'GET',
     })
-    .then((data) => {
+    .then(data => {
       model.data[route] = data
     })
 
-const getData = (model) => (path) => {
+const getData = model => path => {
   model.state.route = path
   model.data[path] ? model.data[path] : (model.data[path] = [])
   if (isEmpty(model.data[path])) loadData(model)(model.reqs.urls[path])(path)
@@ -83,6 +83,12 @@ const Albums = ({ attrs: { item: { title } } }) => {
 }
 
 const Photos = ({ attrs: { item: { thumbnailUrl, title, url } } }) => {
+  let state = {
+    isSmall: true,
+    small: thumbnailUrl,
+    large: url,
+  }
+
   return {
     view: () =>
       m(
@@ -92,7 +98,11 @@ const Photos = ({ attrs: { item: { thumbnailUrl, title, url } } }) => {
         },
         [
           m('h1', { style: { padding: '4px', right: 'auto', flex: 3 } }, title),
-          m('img', { style: { left: 'auto', flex: '1 150px' }, src: thumbnailUrl }),
+          m('img', {
+            onclick: () => (state.isSmall = !state.isSmall),
+            style: { left: 'auto', flex: '1 150px' },
+            src: state.isSmall ? state.small : state.large,
+          }),
         ]
       ),
   }
@@ -141,7 +151,7 @@ const Users = ({ attrs: { item: { address, company, email, name, phone, username
   }
 }
 
-const toComponent = (type) => {
+const toComponent = type => {
   switch (type) {
   case '/posts':
     return Posts
@@ -181,7 +191,7 @@ const Component = () => {
   }
 }
 
-export const App = (model) => {
+export const App = model => {
   return {
     '/posts': {
       onmatch: (_, path) => getData(model)(path),

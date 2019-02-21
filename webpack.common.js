@@ -81,6 +81,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([ { from: 'assets' } ]),
     new HtmlWebpackPlugin({
+      favicon: './assets/favicon.png',
       template: '../index.html',
     }),
     new webpack.ProvidePlugin({
