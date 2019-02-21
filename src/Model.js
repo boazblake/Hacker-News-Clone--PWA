@@ -25,11 +25,21 @@ const themes = type => {
       item: 'rgba(41,18,185 ,.2)',
       component: 'rgba(41,128,185 ,.1)',
     },
-    dark: {},
+    dark: {
+      sidebar: 'rgba(52,73,94 ,.9)',
+      tab: {
+        active: '4px solid rgba(52,73,94 ,1)',
+        inactiveHover: '4px solid rgba(52,73,94 ,.5))',
+      },
+      item: 'rgba(52,73,94 ,.2)',
+      component: 'rgba(52,73,94 ,.1)',
+    },
   }
 
-  return theme
+  return theme[type]
 }
+
+let mode = 'light'
 
 export const model = {
   sidebar: { isOpen: true, modify: sb => !sb.isOpen },
@@ -37,5 +47,7 @@ export const model = {
   data: {},
   state: { url: '', route: '' },
   reqs,
-  theme: type => themes(type),
+  mode,
+  theme: mode => themes(mode),
+  updateTheme: model => mode => (model.mode = mode),
 }
