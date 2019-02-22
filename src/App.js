@@ -42,47 +42,52 @@ const componentStyle = theme => ({
   backgroundColor: theme,
 })
 
-const Posts = ({ attrs: { theme, item: { title, body } } }) => {
-  console.log(title, body)
+const Posts = ({ attrs: { model, item: { title, body } } }) => {
   return {
-    view: () =>
-      m(
+    view: () => {
+      let itemStyles = itemStyle(model.themes(model.mode).item)
+      return m(
         '.Posts',
         {
-          style: itemStyle(theme),
+          style: itemStyles,
         },
         [ m('h1', title), m('p', body) ]
-      ),
+      )
+    },
   }
 }
 
-const Comments = ({ attrs: { theme, item: { email, name, body } } }) => {
+const Comments = ({ attrs: { model, item: { email, name, body } } }) => {
   return {
-    view: () =>
-      m(
+    view: () => {
+      let itemStyles = itemStyle(model.themes(model.mode).item)
+      return m(
         '.Comments',
         {
-          style: itemStyle(theme),
+          style: itemStyles,
         },
         [ m('h1', name), m('p', email), m('p', body) ]
-      ),
+      )
+    },
   }
 }
 
-const Albums = ({ attrs: { theme, item: { title } } }) => {
+const Albums = ({ attrs: { model, item: { title } } }) => {
   return {
-    view: () =>
-      m(
+    view: () => {
+      let itemStyles = itemStyle(model.themes(model.mode).item)
+      return m(
         '.Albums',
         {
-          style: itemStyle(theme),
+          style: itemStyles,
         },
         [ m('h1', title) ]
-      ),
+      )
+    },
   }
 }
 
-const Photos = ({ attrs: { theme, item: { thumbnailUrl, title, url } } }) => {
+const Photos = ({ attrs: { model, item: { thumbnailUrl, title, url } } }) => {
   let state = {
     isSmall: true,
     small: thumbnailUrl,
@@ -90,11 +95,12 @@ const Photos = ({ attrs: { theme, item: { thumbnailUrl, title, url } } }) => {
   }
 
   return {
-    view: () =>
-      m(
+    view: () => {
+      let itemStyles = itemStyle(model.themes(model.mode).item)
+      return m(
         '.Photos',
         {
-          style: { ...itemStyle(theme), display: 'flex' },
+          style: { ...itemStyles, display: 'flex' },
         },
         [
           m('h1', { style: { padding: '4px', right: 'auto', flex: 3 } }, title),
@@ -104,35 +110,39 @@ const Photos = ({ attrs: { theme, item: { thumbnailUrl, title, url } } }) => {
             src: state.isSmall ? state.small : state.large,
           }),
         ]
-      ),
+      )
+    },
   }
 }
 
-const Todos = ({ attrs: { theme, item: { completed, title } } }) => {
+const Todos = ({ attrs: { model, item: { completed, title } } }) => {
   return {
-    view: () =>
-      m(
+    view: () => {
+      let itemStyles = itemStyle(model.themes(model.mode).item)
+      return m(
         '.Todos',
         {
-          style: itemStyle(theme),
+          style: itemStyles,
         },
         [
           m('h1', title),
           m('input[type=checkbox]', { onclick: () => (completed = !completed), checked: completed }, 'Done'),
         ]
-      ),
+      )
+    },
   }
 }
 
-const Users = ({ attrs: { theme, item: { address, company, email, name, phone, username, website } } }) => {
+const Users = ({ attrs: { model, item: { address, company, email, name, phone, username, website } } }) => {
   const state = { isOpen: false }
   return {
-    view: () =>
-      m(
+    view: () => {
+      let itemStyles = itemStyle(model.themes(model.mode).item)
+      return m(
         '.Users',
         {
           style: {
-            ...itemStyle(theme),
+            ...itemStyles,
             overflow: state.isOpen ? 'auto' : 'hidden',
             height: state.isOpen ? 'auto' : '150px',
           },
@@ -151,7 +161,8 @@ const Users = ({ attrs: { theme, item: { address, company, email, name, phone, u
           m('p', username),
           m('p', website),
         ]
-      ),
+      )
+    },
   }
 }
 
@@ -177,10 +188,11 @@ const Component = () => {
     view: ({ attrs: { model } }) => {
       let Component = toComponent(model.state.route)
       let data = model.data[model.state.route]
+      let componentStyles = componentStyle(model.themes(model.mode).component)
       return m(
         'section.Component',
         {
-          style: componentStyle(model),
+          style: componentStyles,
         },
         isEmpty(data)
           ? m('', { style: { width: '80vw' } }, IsLoading)
@@ -188,6 +200,7 @@ const Component = () => {
             return m(Component, {
               key: idx,
               item: item,
+              model,
             })
           })
       )

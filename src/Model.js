@@ -14,13 +14,13 @@ const reqs = {
   http,
 }
 
-const themes = type => {
+const themes = mode => {
   let theme = {
     light: {
       sidebar: 'rgba(41,128,185 ,0.9)',
       tab: {
-        active: '4px solid rgba(41,128,185 ,1)',
-        inactiveHover: '4px solid rgba(41,128,185 ,.5)',
+        activeBorder: '4px solid rgba(41,128,185 ,1)',
+        inactiveBorder: '4px solid rgba(41,128,185 ,.5)',
       },
       item: 'rgba(41,18,185 ,.2)',
       component: 'rgba(41,128,185 ,.1)',
@@ -36,7 +36,7 @@ const themes = type => {
     },
   }
 
-  return theme[type]
+  return theme[mode]
 }
 
 let mode = 'light'
@@ -48,6 +48,11 @@ export const model = {
   state: { url: '', route: '' },
   reqs,
   mode,
-  theme: mode => themes(mode),
-  updateTheme: model => mode => (model.mode = mode),
+  themes,
+  changeMode: newMode => {
+    mode = newMode
+    console.log('model', model)
+    console.log('mode', mode)
+    console.log('model.mode', model.mode)
+  },
 }

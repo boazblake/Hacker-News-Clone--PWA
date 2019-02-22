@@ -47,7 +47,16 @@ const Heading = ({ attrs: { model } }) => {
             justifyContent: 'center',
           },
         },
-        tabs.map((tab, idx) => m(Tab, { key: idx, active: model.state.route == tab, tab, idx }))
+        tabs.map((tab, idx) =>
+          m(Tab, {
+            key: idx,
+            active: model.state.route == tab,
+            tab,
+            idx,
+            activeBorder: model.themes(model.mode).tab.activeBorder,
+            inactiveBorder: model.themes(model.mode).tab.inactiveBorder,
+          })
+        )
       ),
   }
 }
@@ -65,7 +74,7 @@ const Sidebar = ({ attrs: { model } }) => {
         'aside.Sidebar slide-left',
         {
           style: {
-            backgroundColor: model.themes.light.sidebar,
+            backgroundColor: model.themes(model.mode).sidebar,
             gridArea: 'sidebar',
             width: model.sidebar.isOpen ? '200px' : '60px',
           },
