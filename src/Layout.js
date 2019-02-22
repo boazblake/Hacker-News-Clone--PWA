@@ -1,5 +1,11 @@
 import m from 'mithril'
 
+const adjust = m(
+  'svg',
+  { style: { width: '10px', height: '10px' }, xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 20 20' },
+  [ m('path', { d: 'M10 2v16a8 8 0 1 0 0-16zm0 18a10 10 0 1 1 0-20 10 10 0 0 1 0 20z' }) ]
+)
+
 const Tab = () => {
   const state = { onhover: false }
   const hover = e => {
@@ -95,20 +101,10 @@ const Sidebar = ({ attrs: { model } }) => {
             {
               style: { width: '100%', height: '40px' },
               onclick: () => {
-                model.numItems++
+                model.changeMode()
               },
             },
-            model.sidebar.isOpen ? 'ADD' : '+'
-          ),
-          m(
-            'button',
-            {
-              style: { width: '100%', height: '40px' },
-              onclick: () => {
-                model.numItems--
-              },
-            },
-            model.sidebar.isOpen ? 'REMOVE' : '-'
+            model.sidebar.isOpen ? 'Mode' : adjust
           ),
         ]
       ),

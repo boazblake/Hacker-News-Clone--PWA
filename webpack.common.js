@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   context: resolve(__dirname, 'src'),
+  // resolve: { alias: { zondicons: resolve(__dirname, './assets/zondicons') } },
   entry: {
     main: './index.js',
   },
