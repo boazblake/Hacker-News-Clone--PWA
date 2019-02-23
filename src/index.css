@@ -3,21 +3,59 @@
 
 * {
   box-sizing: border-box;
-  font-family:'Montserrat', sans-serif;;
+  font-family: 'Montserrat', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+h1,
+p {
+  margin: 0 0 1em 0;
 }
 
 body,
 html {
-  /* height: 100%; */
   scroll-behavior: smooth;
-}
-
-#app {
   height: 100%;
   width: 100%;
-  font-color: white;
 }
 
+#layout {
+  height: 100vh;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-remplate-rows: 5% 90%;
+  grid-gap: 10px;
+  grid-template-areas: "....... header header""sidebar content content" "footer  footer  footer";
+}
+
+#header {
+  grid-area: header;
+  display: flex;
+  flex-flow: row;
+  align-content: center;
+  justify-content: center;
+}
+
+#content {
+  grid-area: content;
+  display: flex;
+}
+
+#sidebar {
+  grid-area: sidebar;
+}
+
+#footer {
+  grid-area: footer;
+}
+
+///Flexbox Grids
 .row {
   display: flex;
   flex-direction: row;
@@ -46,5 +84,22 @@ html {
 @media (max-width: 555px) {
   .grid-item {
     flex-basis: 100%;
+  }
+  #layout {
+    height: 100vh;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-remplate-rows: 10% 10% 70% 10%;
+    grid-gap: 10px;
+    grid-template-areas: "header" "sidebar" "content" "footer";
+  }
+
+  #header {
+    flex-flow: column;
+  }
+
+  #sidebar {
+    flex-flow: row;
   }
 }

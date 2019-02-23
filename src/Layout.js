@@ -16,7 +16,7 @@ const Tab = () => {
   return {
     view: ({ attrs: { active, tab, idx, activeBorder, inactiveBorder } }) =>
       m(
-        'a.Tab',
+        'a.tab',
         {
           id: idx,
           href: `${tab}`,
@@ -43,15 +43,9 @@ const Heading = ({ attrs: { model } }) => {
   return {
     view: ({ attrs: { model } }) =>
       m(
-        'header.Heading',
+        'header.heading.grid-item',
         {
-          style: {
-            gridArea: 'header ',
-            display: 'flex',
-            flexFlow: 'row',
-            alignContent: 'center',
-            justifyContent: 'center',
-          },
+          id: 'header',
         },
         tabs.map((tab, idx) =>
           m(Tab, {
@@ -69,7 +63,7 @@ const Heading = ({ attrs: { model } }) => {
 
 const Footer = () => {
   return {
-    view: () => m('footer.Footer', { style: { gridArea: 'footer' } }, 'Footer'),
+    view: () => m('footer.footer.grid-item', { id: 'footer' }, 'Footer'),
   }
 }
 
@@ -77,11 +71,11 @@ const Sidebar = ({ attrs: { model } }) => {
   return {
     view: () =>
       m(
-        'aside.Sidebar slide-left',
+        'aside.sidebar.grid-item slide-left',
         {
+          id: 'sidebar',
           style: {
             backgroundColor: model.themes(model.mode).sidebar,
-            gridArea: 'sidebar',
             width: model.sidebar.isOpen ? '200px' : '60px',
           },
         },
@@ -113,7 +107,7 @@ const Sidebar = ({ attrs: { model } }) => {
 
 const Body = () => {
   return {
-    view: ({ attrs: { children } }) => m('section.Body', { style: { gridArea: 'content', display: 'flex' } }, children),
+    view: ({ attrs: { children } }) => m('section.content.grid-item', { id: 'content' }, children),
   }
 }
 
@@ -121,17 +115,9 @@ const Layout = ({ attrs: { model } }) => {
   return {
     view: ({ children }) =>
       m(
-        'section.Layout',
+        'section.layout',
         {
-          style: {
-            height: '100vh',
-            padding: '40px',
-            display: 'grid',
-            gridTemplateColumns: '1fr ',
-            gridTemplateRows: '5% 90%',
-            gridGap: '10px',
-            gridTemplateAreas: '"....... header header""sidebar content content"  "footer  footer  footer"',
-          },
+          id: 'layout',
         },
         children
           ? [ m(Heading, { model }), m(Sidebar, { model }), m(Body, { model, children }), m(Footer, { model }) ]

@@ -47,7 +47,7 @@ const Posts = ({ attrs: { model, item: { title, body } } }) => {
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.Posts',
+        '.posts',
         {
           style: itemStyles,
         },
@@ -62,7 +62,7 @@ const Comments = ({ attrs: { model, item: { email, name, body } } }) => {
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.Comments',
+        '.comments',
         {
           style: itemStyles,
         },
@@ -77,7 +77,7 @@ const Albums = ({ attrs: { model, item: { title } } }) => {
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.Albums',
+        '.albums',
         {
           style: itemStyles,
         },
@@ -98,7 +98,7 @@ const Photos = ({ attrs: { model, item: { thumbnailUrl, title, url } } }) => {
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.Photos',
+        '.photos',
         {
           style: { ...itemStyles, display: 'flex' },
         },
@@ -120,7 +120,7 @@ const Todos = ({ attrs: { model, item: { completed, title } } }) => {
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.Todos',
+        '.todos',
         {
           style: itemStyles,
         },
@@ -139,7 +139,7 @@ const Users = ({ attrs: { model, item: { address, company, email, name, phone, u
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.Users',
+        '.users',
         {
           style: {
             ...itemStyles,
@@ -190,7 +190,7 @@ const Component = () => {
       let data = model.data[model.state.route]
       let componentStyles = componentStyle(model.themes(model.mode).component)
       return m(
-        'section.Component',
+        'section.component',
         {
           style: componentStyles,
         },

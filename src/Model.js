@@ -39,6 +39,22 @@ const themes = mode => {
   return theme[mode]
 }
 
+// const getProfile = () => {
+//   if (window.innerWidth < 600) {
+//     return 'phone'
+//   } else if (window.innerWidth < 800) {
+//     return 'tablet'
+//   } else return 'desktop'
+// }
+
+// window.addEventListener('resize', e => {
+//   let lastProfile = profile
+//   model.profile = getProfile()
+//   if (lastProfile != profile) m.redraw()
+// })
+
+// let profile = getProfile()
+
 export const model = {
   sidebar: { isOpen: true, modify: sb => !sb.isOpen },
   numItems: 1,
