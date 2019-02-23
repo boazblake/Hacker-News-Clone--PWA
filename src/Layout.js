@@ -67,6 +67,52 @@ const Footer = () => {
   }
 }
 
+const Color = () => {
+  return {
+    view: ({ attrs: { model, color: { color: { r, g, b } } } }) =>
+      m('.color', {
+        id: 'color',
+        onclick: () => (model.mode = { r, g, b }),
+        style: { width: '40px', height: '40px', flexBasis: '20%', backgroundColor: `rgb(${r},${g},${b})` },
+      }),
+  }
+}
+
+const Colors = () => {
+  return {
+    view: ({ attrs: { model } }) => {
+      console.log('pallete', model.pallette)
+      return m(
+        '.colors',
+        { style: { display: 'flex', alignContent: 'flex-start', flexFlow: 'wrap', width: '100%', height: '400px' } },
+        model.pallette.map(color => m(Color, { model, color }))
+      )
+    },
+  }
+}
+
+const openCloseSideBar = model =>
+  m(
+    'button',
+    {
+      style: { width: '100%', height: '40px' },
+      onclick: () => {
+        model.sidebar.isOpen = !model.sidebar.isOpen
+      },
+    },
+    model.sidebar.isOpen ? '<<' : '>>'
+  )
+
+const showModes = model =>
+  m(
+    'button',
+    {
+      style: { margin: ', auto', width: '100%', height: '40px' },
+      onclick: () => model.changeMode(),
+    },
+    model.sidebar.isOpen ? 'Mode' : adjust
+  )
+
 const Sidebar = ({ attrs: { model } }) => {
   return {
     view: () =>
@@ -79,28 +125,7 @@ const Sidebar = ({ attrs: { model } }) => {
             width: model.sidebar.isOpen ? '200px' : '60px',
           },
         },
-        [
-          m(
-            'button',
-            {
-              style: { width: '100%', height: '40px' },
-              onclick: () => {
-                model.sidebar.isOpen = !model.sidebar.isOpen
-              },
-            },
-            model.sidebar.isOpen ? '<<' : '>>'
-          ),
-          m(
-            'button',
-            {
-              style: { width: '100%', height: '40px' },
-              onclick: () => {
-                model.changeMode()
-              },
-            },
-            model.sidebar.isOpen ? 'Mode' : adjust
-          ),
-        ]
+        [ openCloseSideBar(model), showModes(model), model.showModes ? m(Colors, { model }) : '' ]
       ),
   }
 }

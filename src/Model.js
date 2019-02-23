@@ -14,46 +14,25 @@ const reqs = {
   http,
 }
 
-const themes = mode => {
-  let theme = {
-    light: {
-      sidebar: 'rgba(41,128,185 ,0.9)',
-      tab: {
-        activeBorder: '4px solid rgba(41,128,185 ,1)',
-        inactiveBorder: '4px solid rgba(41,128,185 ,.5)',
-      },
-      item: 'rgba(41,18,185 ,.2)',
-      component: 'rgba(41,128,185 ,.1)',
-    },
-    dark: {
-      sidebar: 'rgba(52,73,94 ,.9)',
-      tab: {
-        activeBorder: '4px solid rgba(52,73,94 ,1)',
-        inactiveBorder: '4px solid rgba(52,73,94 ,.5)',
-      },
-      item: 'rgba(52,73,94 ,.2)',
-      component: 'rgba(52,73,94 ,.1)',
-    },
-  }
+const themes = ({ r, g, b }) => ({
+  sidebar: `rgba(${r},${g},${b} ,.9)`,
+  tab: {
+    activeBorder: `4px solid rgba(${r},${g},${b} ,1)`,
+    inactiveBorder: `4px solid rgba(${r},${g},${b} ,.5)`,
+  },
+  item: `rgba(${r},${g},${b} ,.2)`,
+  component: `rgba(${r},${g},${b} ,.1)`,
+})
 
-  return theme[mode]
-}
-
-// const getProfile = () => {
-//   if (window.innerWidth < 600) {
-//     return 'phone'
-//   } else if (window.innerWidth < 800) {
-//     return 'tablet'
-//   } else return 'desktop'
-// }
-
-// window.addEventListener('resize', e => {
-//   let lastProfile = profile
-//   model.profile = getProfile()
-//   if (lastProfile != profile) m.redraw()
-// })
-
-// let profile = getProfile()
+const pallette = [
+  { name: 'turquise', color: { r: 26, g: 188, b: 156 } },
+  { name: 'blue', color: { r: 52, g: 152, b: 219 } },
+  { name: 'purple', color: { r: 155, g: 89, b: 182 } },
+  { name: 'asphalt', color: { r: 52, g: 73, b: 94 } },
+  { name: 'orange', color: { r: 243, g: 156, b: 18 } },
+  { name: 'red', color: { r: 192, g: 57, b: 43 } },
+  { name: 'silver', color: { r: 189, g: 195, b: 199 } },
+]
 
 export const model = {
   sidebar: { isOpen: true, modify: sb => !sb.isOpen },
@@ -61,9 +40,14 @@ export const model = {
   data: {},
   state: { url: '', route: '' },
   reqs,
-  mode: 'light',
+  mode: pallette[0].color,
   themes,
+  showModes: false,
   changeMode: () => {
-    model.mode == 'light' ? (model.mode = 'dark') : (model.mode = 'light')
+    model.showModes = !model.showModes
   },
+  pallette,
+  // changeMode: () => {
+  //   model.mode == 'light' ? (model.mode = 'dark') : (model.mode = 'light')
+  // },
 }
