@@ -47,8 +47,9 @@ const Posts = ({ attrs: { model, item: { title, body } } }) => {
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.posts',
+        '.grid-item',
         {
+          id: 'posts',
           style: itemStyles,
         },
         [ m('h1', title), m('p', body) ]
@@ -62,8 +63,9 @@ const Comments = ({ attrs: { model, item: { email, name, body } } }) => {
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.comments',
+        '.grid-item',
         {
+          id: 'comments',
           style: itemStyles,
         },
         [ m('h1', name), m('p', email), m('p', body) ]
@@ -77,8 +79,9 @@ const Albums = ({ attrs: { model, item: { title } } }) => {
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.albums',
+        '.grid-item',
         {
+          id: 'albums',
           style: itemStyles,
         },
         [ m('h1', title) ]
@@ -98,8 +101,9 @@ const Photos = ({ attrs: { model, item: { thumbnailUrl, title, url } } }) => {
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.photos',
+        '.grid-item',
         {
+          id: 'photos',
           style: { ...itemStyles, display: 'flex' },
         },
         [
@@ -120,8 +124,9 @@ const Todos = ({ attrs: { model, item: { completed, title } } }) => {
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.todos',
+        '.grid-item',
         {
+          id: 'todos',
           style: itemStyles,
         },
         [
@@ -139,8 +144,9 @@ const Users = ({ attrs: { model, item: { address, company, email, name, phone, u
     view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
-        '.users',
+        '.grid-item',
         {
+          id: 'users',
           style: {
             ...itemStyles,
             overflow: state.isOpen ? 'auto' : 'hidden',
@@ -192,6 +198,7 @@ const Component = () => {
       return m(
         'section.component',
         {
+          id: 'component',
           style: componentStyles,
         },
         isEmpty(data)

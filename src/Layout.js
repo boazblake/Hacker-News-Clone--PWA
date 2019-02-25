@@ -78,13 +78,22 @@ const Color = () => {
   }
 }
 
-const Colors = () => {
+const Colors = ({ attrs: { model: { sidebar } } }) => {
+  const getCol = () => (sidebar.isOpen ? 'column' : '')
   return {
+    onupdate: () => getCol(),
     view: ({ attrs: { model } }) => {
-      console.log('pallete', model.pallette)
       return m(
         '.colors',
-        { style: { display: 'flex', alignContent: 'flex-start', flexFlow: 'wrap', width: '100%', height: '400px' } },
+        {
+          style: {
+            display: 'flex',
+            alignContent: 'flex-start',
+            flexFlow: `${getCol()} wrap`,
+            width: '100%',
+            // height: '100px',
+          },
+        },
         model.pallette.map(color => m(Color, { model, color }))
       )
     },
@@ -122,7 +131,6 @@ const Sidebar = ({ attrs: { model } }) => {
           id: 'sidebar',
           style: {
             backgroundColor: model.themes(model.mode).sidebar,
-            width: model.sidebar.isOpen ? '200px' : '60px',
           },
         },
         [ openCloseSideBar(model), showModes(model), model.showModes ? m(Colors, { model }) : '' ]

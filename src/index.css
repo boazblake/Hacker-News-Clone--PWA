@@ -1,5 +1,5 @@
 /* index.css */
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400");
 
 * {
   box-sizing: border-box;
@@ -21,17 +21,17 @@ body,
 html {
   scroll-behavior: smooth;
   height: 100%;
-  width: 100%;
+  width: 95%;
+  margin: 0 auto;
 }
 
 #layout {
   height: 100vh;
-  padding: 40px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-remplate-rows: 5% 90%;
+  grid-template-rows: auto;
   grid-gap: 10px;
-  grid-template-areas: "....... header header""sidebar content content" "footer  footer  footer";
+  grid-template-areas: ". header header" "sidebar content content" "footer footer footer";
 }
 
 #header {
@@ -40,19 +40,38 @@ html {
   flex-flow: row;
   align-content: center;
   justify-content: center;
+  width: 100%;
+  margin: 0 auto;
 }
 
 #content {
   grid-area: content;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#component {
   display: flex;
+  flex-flow: ow;
+  justify-content: flex-start;
+  align-content: stretch;
 }
 
 #sidebar {
   grid-area: sidebar;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-content: stretch;
+}
+
+#sidebar.button {
+  flex-basis: 20%;
 }
 
 #footer {
   grid-area: footer;
+  margin: 0 auto;
 }
 
 ///Flexbox Grids
@@ -66,32 +85,58 @@ html {
   flex-basis: 100%;
 }
 
-@media (max-width: 1333px) {
+/* Large desktop */
+@media (min-width: 1200px) {
   .grid-item {
-    flex-basis: 33.33%;
-  }
-}
-@media (max-width: 1073px) {
-  .grid-item {
-    flex-basis: 33.33%;
-  }
-}
-@media (max-width: 815px) {
-  .grid-item {
-    flex-basis: 50%;
-  }
-}
-@media (max-width: 555px) {
-  .grid-item {
-    flex-basis: 100%;
+    flex-basis: 20%;
   }
   #layout {
     height: 100vh;
-    padding: 40px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-remplate-rows: 10% 10% 70% 10%;
-    grid-gap: 10px;
+    grid-remplate-rows: 10% 10% 10% 10%;
+    grid-gap: 2%;
+    grid-template-areas: "header" "sidebar" "content" "footer";
+  }
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 1001px) and (max-width: 1199px) {
+  #sidebar {
+    flex-flow: row;
+  }
+
+  .grid-item {
+    flex-basis: 30%;
+  }
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 1000px) {
+  #sidebar {
+    flex-flow: row;
+  }
+
+  .grid-item {
+    flex-basis: 40%;
+  }
+}
+
+/* Landscape phone to portrait tablet */
+@media (min-width: 481px) and (max-width: 767px) {
+  .grid-item {
+    flex-basis: 80%;
+  }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  #layout {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-remplate-rows: 10% 10% 10% 10%;
+    grid-gap: 2%;
     grid-template-areas: "header" "sidebar" "content" "footer";
   }
 
@@ -101,5 +146,9 @@ html {
 
   #sidebar {
     flex-flow: row;
+  }
+
+  #content {
+    flex-flow: column;
   }
 }
