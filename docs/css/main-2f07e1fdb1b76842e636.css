@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);/* index.css */
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400);/* index.css */
 * {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif; }
@@ -16,33 +16,79 @@ body,
 html {
   scroll-behavior: smooth;
   height: 100%;
-  width: 100%; }
+  width: 95%;
+  margin: 0 auto; }
 
 #layout {
   height: 100vh;
-  padding: 40px;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-remplate-rows: 5% 90%;
+  grid-template-columns: repeat(100%);
+  grid-template-rows: auto;
   grid-gap: 10px;
-  grid-template-areas: "....... header header" "sidebar content content" "footer  footer  footer"; }
+  grid-template-areas: ". header header" "sidebar content content" "footer footer footer"; }
 
 #header {
   grid-area: header;
   display: flex;
   flex-flow: row;
   align-content: center;
-  justify-content: center; }
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto; }
 
 #content {
   grid-area: content;
-  display: flex; }
+  width: 100%;
+  height: 90vh;
+  margin: 0 auto;
+  flex-grow: 2; }
+
+#component {
+  display: flex;
+  height: 100%;
+  flex-flow: wrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  overflow-y: scroll;
+  padding: 10px; }
+
+.grid-item {
+  flex-grow: 1;
+  width: 400px;
+  padding: 10px;
+  margin: 10px; }
 
 #sidebar {
-  grid-area: sidebar; }
+  grid-area: sidebar;
+  display: flex;
+  flex-flow: column;
+  flex-grow: 1;
+  justify-content: flex-start;
+  align-content: stretch; }
+
+.sidebarBtn {
+  width: 100%;
+  height: 40px; }
 
 #footer {
-  grid-area: footer; }
+  grid-area: footer;
+  margin: 0 auto; }
+
+.colorContainer {
+  display: flex;
+  align-content: flex-start;
+  justify-content: stretch;
+  flex-flow: wrap;
+  width: 100%; }
+
+.color {
+  width: 40px;
+  height: 40px;
+  flex-basis: 20%; }
 
 .row {
   display: flex;
@@ -52,33 +98,64 @@ html {
 .column {
   flex-basis: 100%; }
 
-@media (max-width: 1333px) {
+/* Large desktop */
+@media (min-width: 1200px) {
   .grid-item {
-    flex-basis: 33.33%; } }
-
-@media (max-width: 1073px) {
-  .grid-item {
-    flex-basis: 33.33%; } }
-
-@media (max-width: 815px) {
-  .grid-item {
-    flex-basis: 50%; } }
-
-@media (max-width: 555px) {
-  .grid-item {
-    flex-basis: 100%; }
+    flex-basis: 20%; }
   #layout {
     height: 100vh;
-    padding: 40px;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-remplate-rows: 10% 10% 70% 10%;
-    grid-gap: 10px;
+    grid-template-columns: 100%;
+    grid-remplate-rows: 10% 10% 10% 10%;
+    grid-gap: 2%;
+    grid-template-areas: "header" "sidebar" "content" "footer"; } }
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 1001px) and (max-width: 1199px) {
+  #layout {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-remplate-rows: 10% 10% 10% 10%;
+    grid-gap: 2%;
+    grid-template-areas: "header" "sidebar" "content" "footer"; }
+  #sidebar {
+    flex-flow: row; }
+  .grid-item {
+    flex-basis: 30%; } }
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 1000px) {
+  #sidebar {
+    flex-flow: column; }
+  .grid-item {
+    flex-basis: 40%; } }
+
+/* Landscape phone to portrait tablet */
+@media (min-width: 481px) and (max-width: 767px) {
+  .grid-item {
+    flex-basis: 80%; }
+  .colorContainer {
+    justify-content: flex-start;
+    flex-flow: column; }
+  .color {
+    width: 100%; } }
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  #layout {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-remplate-rows: 10% 10% 10% 10%;
+    grid-gap: 2%;
     grid-template-areas: "header" "sidebar" "content" "footer"; }
   #header {
     flex-flow: column; }
   #sidebar {
-    flex-flow: row; } }
+    flex-flow: row; }
+  #content {
+    flex-flow: column; } }
 /*
 ==============================================
 CSS3 ANIMATION CHEAT SHEET
@@ -1025,4 +1102,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-7e4877b58947fb569c6b.css.map*/
+/*# sourceMappingURL=main-2f07e1fdb1b76842e636.css.map*/
