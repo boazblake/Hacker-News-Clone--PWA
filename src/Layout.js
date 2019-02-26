@@ -72,10 +72,16 @@ const Color = () => {
   }
 }
 
+const darken = ({ r, g, b }) => `rgba(${r / 2},${g / 2},${b / 2},1)`
+
 const Colors = () => {
   return {
     view: ({ attrs: { model } }) => {
-      return m('.colorContainer', model.pallette.map(color => m(Color, { model, color })))
+      return m(
+        '.colorContainer',
+        { style: { backgroundColor: darken(model.mode) } },
+        model.pallette.map((color, idx) => m(Color, { key: idx, model, color }))
+      )
     },
   }
 }
@@ -84,9 +90,25 @@ const changeTheme = model =>
   m(
     'button.sidebarBtn',
     {
-      onclick: () => model.changeMode(),
+      onclick: () => (model.showModes = !model.showModes),
     },
     'Change Theme'
+  )
+
+const changeLimit = model =>
+  m(
+    'button.sidebarBtn',
+    {
+      onclick: () => (model.showLimits = !model.showLimits),
+    },
+    'Change Limit'
+  )
+
+const limitSelector = model =>
+  m(
+    'select',
+    { id: 'url-limit', onchange: ({ target }) => (model.state.limit = target.value) },
+    model.limits.map((limit, idx) => m('option', { value: limit, key: idx }, limit))
   )
 
 const Sidebar = ({ attrs: { model } }) => {
@@ -100,7 +122,12 @@ const Sidebar = ({ attrs: { model } }) => {
             backgroundColor: model.themes(model.mode).sidebar,
           },
         },
-        [ changeTheme(model), model.showModes ? m(Colors, { model }) : '' ]
+        [
+          changeTheme(model),
+          model.showModes ? m(Colors, { model }) : '',
+          changeLimit(model),
+          model.showLimits ? limitSelector(model) : '',
+        ]
       ),
   }
 }

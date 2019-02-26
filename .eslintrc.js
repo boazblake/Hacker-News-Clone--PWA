@@ -16,7 +16,7 @@ module.exports = {
   rules: {
     'comma-dangle': [ 'warn', 'always-multiline' ],
     indent: [ 'warn', 2 ],
-    'linebreak-style': [ 'warn', 'unix' ],
+    'linebreak-style': [ 'warn', 'windows' ],
     quotes: [ 'warn', 'single' ],
     semi: [ 'warn', 'never' ],
     'no-unused-vars': [ 'warn' ],

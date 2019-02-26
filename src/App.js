@@ -1,32 +1,10 @@
 import m from 'mithril'
 import Layout from './Layout.js'
+import { isEmpty, getData } from './helpers.js'
 
 const IsLoading = m('.holder', { style: { width: '100%', height: '100%' } }, [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
 ])
-const isEmpty = data => data.length == 0
-
-const loadData = model => url => route =>
-  m
-    .request({
-      url,
-      method: 'GET',
-      extract: xhr => {
-        model.data[route].limit = parseInt(xhr.getResponseHeader('x-total-count'))
-        return JSON.parse(xhr.responseText)
-      },
-    })
-    .then(data => {
-      model.data[route].data = model.data[route].data.concat(data)
-      return model
-    })
-
-const getData = model => path => {
-  model.state.route = path
-  model.data[path] ? model.data[path] : (model.data[path] = { data: [], limit: 1 })
-  let start = model.data[path].data.length
-  loadData(model)(model.reqs.urls[path](start, model.state.limit))(path)
-}
 
 const itemStyle = theme => ({
   backgroundColor: theme,
@@ -188,8 +166,8 @@ const Component = () => {
 
   const scrolling = model => e => {
     let route = model.state.route
-    console.log(state.pos, e.target.scrollTop)
-    if (e.target.scrollTop - state.pos >= 700) {
+
+    if (e.target.scrollTop - state.pos >= 10 * model.state.limit) {
       state.pos = e.target.scrollTop
       if (model.data[route].data.length < model.data[route].limit) {
         getData(model)(route)
@@ -197,7 +175,8 @@ const Component = () => {
     }
   }
   return {
-    view: ({ attrs: { model } }) => {
+    view: ({ attrs: { model, pos } }) => {
+      state.pos = pos
       let Component = toComponent(model.state.route)
       let data = model.data[model.state.route]['data']
       let componentStyles = componentStyle(model.themes(model.mode).component)
@@ -234,6 +213,7 @@ export const App = model => {
           },
           m(Component, {
             model,
+            pos: 0,
           })
         ),
     },
@@ -247,6 +227,7 @@ export const App = model => {
           },
           m(Component, {
             model,
+            pos: 0,
           })
         ),
     },
@@ -260,6 +241,7 @@ export const App = model => {
           },
           m(Component, {
             model,
+            pos: 0,
           })
         ),
     },
@@ -273,6 +255,7 @@ export const App = model => {
           },
           m(Component, {
             model,
+            pos: 0,
           })
         ),
     },
@@ -286,6 +269,7 @@ export const App = model => {
           },
           m(Component, {
             model,
+            pos: 0,
           })
         )
       },
@@ -300,6 +284,7 @@ export const App = model => {
           },
           m(Component, {
             model,
+            pos: 0,
           })
         ),
     },

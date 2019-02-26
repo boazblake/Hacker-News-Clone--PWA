@@ -36,15 +36,13 @@ const pallette = [
 
 export const model = {
   sidebar: { isOpen: true, modify: sb => !sb.isOpen },
-  numItems: 1,
+  limits: [ 30, 40, 50, 60, 70, 80, 90, 100 ],
   data: {},
-  state: { url: '', route: '', pos: 0, limit: 60 },
+  state: { url: '', route: '', pos: 0, limit: 10 },
   reqs,
   mode: pallette[0].color,
   themes,
   showModes: false,
-  changeMode: () => {
-    model.showModes = !model.showModes
-  },
+  showLimits: false,
   pallette,
 }
