@@ -1,7 +1,7 @@
 import m from 'mithril'
 import Layout from './Layout.js'
 
-const IsLoading = m('.holder', [
+const IsLoading = m('.holder', { style: { width: '100%', height: '100%' } }, [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
 ])
 const isEmpty = data => data.length == 0
@@ -11,34 +11,28 @@ const loadData = model => url => route =>
     .request({
       url,
       method: 'GET',
+      extract: xhr => {
+        model.data[route].limit = parseInt(xhr.getResponseHeader('x-total-count'))
+        return JSON.parse(xhr.responseText)
+      },
     })
     .then(data => {
-      model.data[route] = data
+      model.data[route].data = model.data[route].data.concat(data)
+      return model
     })
 
 const getData = model => path => {
   model.state.route = path
-  model.data[path] ? model.data[path] : (model.data[path] = [])
-  if (isEmpty(model.data[path])) loadData(model)(model.reqs.urls[path])(path)
-  return model
+  model.data[path] ? model.data[path] : (model.data[path] = { data: [], limit: 1 })
+  let start = model.data[path].data.length
+  loadData(model)(model.reqs.urls[path](start, model.state.limit))(path)
 }
 
 const itemStyle = theme => ({
-  flexGrow: 1,
-  width: '400px',
-  padding: '10px',
-  margin: '10px',
   backgroundColor: theme,
 })
 
 const componentStyle = theme => ({
-  position: 'relative',
-  display: 'flex',
-  flexFlow: 'row wrap',
-  justifyContent: 'space-around',
-  overflowY: 'scroll',
-  overflowX: 'hidden',
-  padding: '10px',
   backgroundColor: theme,
 })
 
@@ -190,14 +184,27 @@ const toComponent = type => {
 }
 
 const Component = () => {
+  const state = { pos: 0 }
+
+  const scrolling = model => e => {
+    let route = model.state.route
+    console.log(state.pos, e.target.scrollTop)
+    if (e.target.scrollTop - state.pos >= 700) {
+      state.pos = e.target.scrollTop
+      if (model.data[route].data.length < model.data[route].limit) {
+        getData(model)(route)
+      }
+    }
+  }
   return {
     view: ({ attrs: { model } }) => {
       let Component = toComponent(model.state.route)
-      let data = model.data[model.state.route]
+      let data = model.data[model.state.route]['data']
       let componentStyles = componentStyle(model.themes(model.mode).component)
       return m(
         'section.component',
         {
+          onscroll: scrolling(model),
           id: 'component',
           style: componentStyles,
         },

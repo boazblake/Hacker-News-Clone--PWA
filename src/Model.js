@@ -1,4 +1,4 @@
-const url = item => `https://jsonplaceholder.typicode.com${item}`
+const url = item => (start, limit) => `https://jsonplaceholder.typicode.com${item}?_start=${start}&_limit=${limit}`
 
 const http = url => method => (data = null) => m.request({ url, method, data })
 
@@ -38,7 +38,7 @@ export const model = {
   sidebar: { isOpen: true, modify: sb => !sb.isOpen },
   numItems: 1,
   data: {},
-  state: { url: '', route: '' },
+  state: { url: '', route: '', pos: 0, limit: 60 },
   reqs,
   mode: pallette[0].color,
   themes,
@@ -47,7 +47,4 @@ export const model = {
     model.showModes = !model.showModes
   },
   pallette,
-  // changeMode: () => {
-  //   model.mode == 'light' ? (model.mode = 'dark') : (model.mode = 'light')
-  // },
 }

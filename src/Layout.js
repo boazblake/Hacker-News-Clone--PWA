@@ -1,11 +1,5 @@
 import m from 'mithril'
 
-const adjust = m(
-  'svg',
-  { style: { width: '10px', height: '10px' }, xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 20 20' },
-  [ m('path', { d: 'M10 2v16a8 8 0 1 0 0-16zm0 18a10 10 0 1 1 0-20 10 10 0 0 1 0 20z' }) ]
-)
-
 const Tab = () => {
   const state = { onhover: false }
   const hover = e => {
@@ -24,13 +18,14 @@ const Tab = () => {
           onmouseover: hover,
           onmouseout: hover,
           style: {
+            paddingTop: '30px',
             display: 'flex',
             textDecoration: 'none',
             flexBasis: '20%',
             borderTop: active ? activeBorder : '',
             borderBottom: !active && state.onhover ? inactiveBorder : '',
-            justifyContent: 'center',
-            alignContent: 'center',
+            justifyContent: 'flex-start',
+            alignContent: 'flex-end',
           },
         },
         tab.split('/')[1]
@@ -43,7 +38,7 @@ const Heading = ({ attrs: { model } }) => {
   return {
     view: ({ attrs: { model } }) =>
       m(
-        'header.heading.grid-item',
+        'header.heading',
         {
           id: 'header',
         },
@@ -63,7 +58,7 @@ const Heading = ({ attrs: { model } }) => {
 
 const Footer = () => {
   return {
-    view: () => m('footer.footer.grid-item', { id: 'footer' }, 'Footer'),
+    view: () => m('footer.footer', { id: 'footer' }, 'Footer'),
   }
 }
 
@@ -71,76 +66,48 @@ const Color = () => {
   return {
     view: ({ attrs: { model, color: { color: { r, g, b } } } }) =>
       m('.color', {
-        id: 'color',
         onclick: () => (model.mode = { r, g, b }),
-        style: { width: '40px', height: '40px', flexBasis: '20%', backgroundColor: `rgb(${r},${g},${b})` },
+        style: { backgroundColor: `rgb(${r},${g},${b})` },
       }),
   }
 }
 
-const Colors = ({ attrs: { model: { sidebar } } }) => {
-  const getCol = () => (sidebar.isOpen ? 'column' : '')
+const Colors = () => {
   return {
-    onupdate: () => getCol(),
     view: ({ attrs: { model } }) => {
-      return m(
-        '.colors',
-        {
-          style: {
-            display: 'flex',
-            alignContent: 'flex-start',
-            flexFlow: `${getCol()} wrap`,
-            width: '100%',
-            // height: '100px',
-          },
-        },
-        model.pallette.map(color => m(Color, { model, color }))
-      )
+      return m('.colorContainer', model.pallette.map(color => m(Color, { model, color })))
     },
   }
 }
 
-const openCloseSideBar = model =>
+const changeTheme = model =>
   m(
-    'button',
+    'button.sidebarBtn',
     {
-      style: { width: '100%', height: '40px' },
-      onclick: () => {
-        model.sidebar.isOpen = !model.sidebar.isOpen
-      },
-    },
-    model.sidebar.isOpen ? '<<' : '>>'
-  )
-
-const showModes = model =>
-  m(
-    'button',
-    {
-      style: { margin: ', auto', width: '100%', height: '40px' },
       onclick: () => model.changeMode(),
     },
-    model.sidebar.isOpen ? 'Mode' : adjust
+    'Change Theme'
   )
 
 const Sidebar = ({ attrs: { model } }) => {
   return {
     view: () =>
       m(
-        'aside.sidebar.grid-item slide-left',
+        'aside.sidebar slide-left',
         {
           id: 'sidebar',
           style: {
             backgroundColor: model.themes(model.mode).sidebar,
           },
         },
-        [ openCloseSideBar(model), showModes(model), model.showModes ? m(Colors, { model }) : '' ]
+        [ changeTheme(model), model.showModes ? m(Colors, { model }) : '' ]
       ),
   }
 }
 
 const Body = () => {
   return {
-    view: ({ attrs: { children } }) => m('section.content.grid-item', { id: 'content' }, children),
+    view: ({ attrs: { children } }) => m('section.content', { id: 'content' }, children),
   }
 }
 
