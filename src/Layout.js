@@ -8,24 +8,18 @@ const Tab = () => {
   }
 
   return {
-    view: ({ attrs: { active, tab, idx, activeBorder, inactiveBorder } }) =>
+    view: ({ attrs: { active, tab, activeBorder, inactiveBorder } }) =>
       m(
         'a.tab',
         {
-          id: idx,
+          id: `${tab}`,
           href: `${tab}`,
           oncreate: m.route.link,
           onmouseover: hover,
           onmouseout: hover,
           style: {
-            paddingTop: '30px',
-            display: 'flex',
-            textDecoration: 'none',
-            flexBasis: '20%',
             borderTop: active ? activeBorder : '',
             borderBottom: !active && state.onhover ? inactiveBorder : '',
-            justifyContent: 'flex-start',
-            alignContent: 'flex-end',
           },
         },
         tab.split('/')[1]
@@ -34,25 +28,38 @@ const Tab = () => {
 }
 
 const Heading = ({ attrs: { model } }) => {
+  const showTabs = () => {
+    model.showTabs = !model.showTabs
+    console.log(model)
+  }
+
   let tabs = Object.keys(model.reqs.urls)
   return {
-    view: ({ attrs: { model } }) =>
-      m(
+    view: ({ attrs: { model } }) => {
+      return m(
         'header.heading',
         {
           id: 'header',
         },
-        tabs.map((tab, idx) =>
-          m(Tab, {
-            key: idx,
-            active: model.state.route == tab,
-            tab,
-            idx,
-            activeBorder: model.themes(model.mode).tab.activeBorder,
-            inactiveBorder: model.themes(model.mode).tab.inactiveBorder,
-          })
-        )
-      ),
+        model.state.profile != 'phone' || model.showTabs
+          ? tabs.map((tab, idx) =>
+            m(Tab, {
+              key: idx,
+              active: model.state.route == tab,
+              tab,
+              activeBorder: model.themes(model.mode).tab.activeBorder,
+              inactiveBorder: model.themes(model.mode).tab.inactiveBorder,
+            })
+          )
+          : m(
+            'button.sidebarBtn',
+            {
+              onclick: showTabs,
+            },
+            'show tabs'
+          )
+      )
+    },
   }
 }
 

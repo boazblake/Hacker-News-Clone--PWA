@@ -17,4 +17,26 @@ import './index.css'
 import './animations.css'
 import './loader.css'
 
+function getProfile(w) {
+  if (w < 768) return 'phone'
+  if (w < 1024) return 'tablet'
+  return 'desktop'
+}
+
+let winW = window.innerWidth
+model.state.profile = getProfile(winW)
+
+function checkWidth() {
+  const w = window.innerWidth
+  if (winW !== w) {
+    winW = w
+    var lastProfile = model.state.profile
+    model.state.profile = getProfile(w)
+    if (lastProfile != model.state.profile) m.redraw()
+  }
+  requestAnimationFrame(checkWidth)
+}
+
+checkWidth()
+
 m.route(root, '/posts', App(model))

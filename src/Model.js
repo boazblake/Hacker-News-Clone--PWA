@@ -38,11 +38,12 @@ export const model = {
   sidebar: { isOpen: true, modify: sb => !sb.isOpen },
   limits: [ 30, 40, 50, 60, 70, 80, 90, 100 ],
   data: {},
-  state: { url: '', route: '', pos: 0, limit: 10 },
+  state: { url: '', route: '', scrollPos: 1, limit: 30, profile: '' },
   reqs,
   mode: pallette[0].color,
   themes,
   showModes: false,
   showLimits: false,
+  showTabs: false,
   pallette,
 }

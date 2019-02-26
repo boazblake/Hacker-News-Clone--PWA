@@ -162,28 +162,28 @@ const toComponent = type => {
 }
 
 const Component = () => {
-  const state = { pos: 0 }
-
-  const scrolling = model => e => {
+  const infiniteScroll = model => e => {
     let route = model.state.route
-
-    if (e.target.scrollTop - state.pos >= 10 * model.state.limit) {
-      state.pos = e.target.scrollTop
-      if (model.data[route].data.length < model.data[route].limit) {
+    let length = model.data[route].data.length
+    let setpoint = 10 * length * model.state.scrollPos
+    if (e.target.scrollTop - model.state.scrollPos >= setpoint) {
+      model.state.scrollPos++ + e.target.scrollTop
+      if (length < model.data[route].limit) {
         getData(model)(route)
       }
     }
   }
+
   return {
-    view: ({ attrs: { model, pos } }) => {
-      state.pos = pos
-      let Component = toComponent(model.state.route)
-      let data = model.data[model.state.route]['data']
+    view: ({ attrs: { model } }) => {
+      let route = model.state.route
+      let Component = toComponent(route)
+      let data = model.data[route].data
       let componentStyles = componentStyle(model.themes(model.mode).component)
       return m(
         'section.component',
         {
-          onscroll: scrolling(model),
+          onscroll: infiniteScroll(model),
           id: 'component',
           style: componentStyles,
         },
@@ -201,10 +201,17 @@ const Component = () => {
   }
 }
 
+const init = model => path => {
+  model.state.scrollPos = 1
+  model.showTabs = false
+  console.log(model.showTabs)
+  return getData(model)(path)
+}
+
 export const App = model => {
   return {
     '/posts': {
-      onmatch: (_, path) => getData(model)(path),
+      onmatch: (_, path) => init(model)(path),
       render: () =>
         m(
           Layout,
@@ -213,12 +220,11 @@ export const App = model => {
           },
           m(Component, {
             model,
-            pos: 0,
           })
         ),
     },
     '/comments': {
-      onmatch: (_, path) => getData(model)(path),
+      onmatch: (_, path) => init(model)(path),
       render: () =>
         m(
           Layout,
@@ -227,12 +233,11 @@ export const App = model => {
           },
           m(Component, {
             model,
-            pos: 0,
           })
         ),
     },
     '/albums': {
-      onmatch: (_, path) => getData(model)(path),
+      onmatch: (_, path) => init(model)(path),
       render: () =>
         m(
           Layout,
@@ -241,12 +246,11 @@ export const App = model => {
           },
           m(Component, {
             model,
-            pos: 0,
           })
         ),
     },
     '/photos': {
-      onmatch: (_, path) => getData(model)(path),
+      onmatch: (_, path) => init(model)(path),
       render: () =>
         m(
           Layout,
@@ -255,12 +259,11 @@ export const App = model => {
           },
           m(Component, {
             model,
-            pos: 0,
           })
         ),
     },
     '/todos': {
-      onmatch: (_, path) => getData(model)(path),
+      onmatch: (_, path) => init(model)(path),
       render: () => {
         return m(
           Layout,
@@ -269,13 +272,12 @@ export const App = model => {
           },
           m(Component, {
             model,
-            pos: 0,
           })
         )
       },
     },
     '/users': {
-      onmatch: (_, path) => getData(model)(path),
+      onmatch: (_, path) => init(model)(path),
       render: () =>
         m(
           Layout,
@@ -284,7 +286,6 @@ export const App = model => {
           },
           m(Component, {
             model,
-            pos: 0,
           })
         ),
     },

@@ -44,6 +44,15 @@ html {
   margin: 0 auto;
 }
 
+.tab {
+  padding-top: 30px;
+  display: flex;
+  text-decoration: none;
+  flex-basis: 20%;
+  justify-content: flex-start;
+  align-content: flex-end;
+}
+
 #content {
   grid-area: content;
   width: 100%;
@@ -122,18 +131,7 @@ html {
   .grid-item {
     flex-basis: 20%;
   }
-  #layout {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 100%;
-    grid-remplate-rows: 10% 10% 10% 10%;
-    grid-gap: 2%;
-    grid-template-areas: "header" "sidebar" "content" "footer";
-  }
-}
 
-/* Portrait tablet to landscape and desktop */
-@media (min-width: 1001px) and (max-width: 1199px) {
   #layout {
     height: 100vh;
     display: grid;
@@ -146,6 +144,18 @@ html {
   #sidebar {
     flex-flow: row;
   }
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 1001px) and (max-width: 1199px) {
+  #layout {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(1fr);
+    grid-remplate-rows: 10% 10% 10%;
+    grid-gap: 2%;
+    grid-template-areas: ". header header" "sidebar content content" "footer footer footer";
+  }
 
   .grid-item {
     flex-basis: 30%;
@@ -153,7 +163,7 @@ html {
 }
 
 /* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 1000px) {
+@media (min-width: 668px) and (max-width: 1000px) {
   #sidebar {
     flex-flow: column;
   }
@@ -164,7 +174,28 @@ html {
 }
 
 /* Landscape phone to portrait tablet */
-@media (min-width: 481px) and (max-width: 767px) {
+@media (min-width: 481px) and (max-width: 667px) {
+  #layout {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-remplate-rows: 10% 10% 10% 10%;
+    grid-gap: 2%;
+    grid-template-areas: "header" "sidebar" "content" "footer";
+  }
+
+  #header {
+    flex-flow: column;
+  }
+
+  #sidebar {
+    flex-flow: row;
+  }
+
+  #content {
+    flex-flow: column;
+  }
+
   .grid-item {
     flex-basis: 80%;
   }
