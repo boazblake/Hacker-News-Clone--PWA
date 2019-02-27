@@ -1,12 +1,14 @@
 import m from 'mithril'
 import Layout from './Layout.js'
 import { isEmpty, getData } from './helpers.js'
+import { animateChildrenFadeIn } from './animations.js'
 
 const IsLoading = m('.holder', { style: { width: '100%', height: '100%' } }, [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
 ])
 
 const itemStyle = theme => ({
+  flexFlow: 'column wrap',
   backgroundColor: theme,
 })
 
@@ -91,9 +93,16 @@ const Photos = ({ attrs: { model, item: { thumbnailUrl, title, url } } }) => {
   }
 }
 
-const Todos = ({ attrs: { model, item: { completed, title } } }) => {
+const Todos = ({ attrs: { item: { completed } } }) => {
+  const state = {
+    completed: completed,
+  }
+  const checked = () => {
+    state.completed = !state.completed
+  }
+
   return {
-    view: () => {
+    view: ({ attrs: { key, model, item: { title } } }) => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
         '.grid-item',
@@ -102,8 +111,16 @@ const Todos = ({ attrs: { model, item: { completed, title } } }) => {
           style: itemStyles,
         },
         [
+          m(
+            'input[type=checkbox].fancyCheckBox',
+            {
+              key,
+              onclick: checked,
+              checked: state.completed,
+            },
+            'Done'
+          ),
           m('h1', title),
-          m('input[type=checkbox]', { onclick: () => (completed = !completed), checked: completed }, 'Done'),
         ]
       )
     },
@@ -118,6 +135,7 @@ const Users = ({ attrs: { model, item: { address, company, email, name, phone, u
       return m(
         '.grid-item',
         {
+          onclick: () => (state.isOpen = !state.isOpen),
           id: 'users',
           style: {
             ...itemStyles,
@@ -128,11 +146,6 @@ const Users = ({ attrs: { model, item: { address, company, email, name, phone, u
         [
           m('h1', name),
           m('p', email),
-          m(
-            'button',
-            { style: { height: '50px', width: '100%' }, onclick: () => (state.isOpen = !state.isOpen) },
-            state.isOpen ? 'Close' : 'More...'
-          ),
           m('pre', JSON.stringify(address, null, 2)),
           m('pre', JSON.stringify(company, null, 2)),
           m('p', phone),
@@ -176,6 +189,7 @@ const Component = () => {
 
   return {
     view: ({ attrs: { model } }) => {
+      console.log('component view ', model)
       let route = model.state.route
       let Component = toComponent(route)
       let data = model.data[route].data
@@ -183,19 +197,21 @@ const Component = () => {
       return m(
         'section.component',
         {
+          oncreate: animateChildrenFadeIn,
+          onupdate: animateChildrenFadeIn,
           onscroll: infiniteScroll(model),
           id: 'component',
           style: componentStyles,
         },
         isEmpty(data)
           ? m('', { style: { width: '80vw' } }, IsLoading)
-          : data.map((item, idx) => {
-            return m(Component, {
+          : data.map((item, idx) =>
+            m(Component, {
               key: idx,
               item: item,
               model,
             })
-          })
+          )
       )
     },
   }
@@ -204,7 +220,6 @@ const Component = () => {
 const init = model => path => {
   model.state.scrollPos = 1
   model.showTabs = false
-  console.log(model.showTabs)
   return getData(model)(path)
 }
 
@@ -212,8 +227,9 @@ export const App = model => {
   return {
     '/posts': {
       onmatch: (_, path) => init(model)(path),
-      render: () =>
-        m(
+      render: () => {
+        console.log('app', model)
+        return m(
           Layout,
           {
             model,
@@ -221,7 +237,8 @@ export const App = model => {
           m(Component, {
             model,
           })
-        ),
+        )
+      },
     },
     '/comments': {
       onmatch: (_, path) => init(model)(path),

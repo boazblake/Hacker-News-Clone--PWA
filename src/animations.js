@@ -33,32 +33,32 @@ export const animateChildrenEntrance = ({ dom }) => {
   })
 }
 
-export const animateExit = (dom) => {
+export const animateExit = dom => {
   let anim = animate([ { transform: 'none', opacity: 1 }, { transform: 'translate3d(25%,100%,0)', opacity: 0 } ])
 
   let waapi = dom.animate(anim, {
     duration: 850,
   })
 
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     waapi.onfinish = function() {
       resolve()
     }
   })
 }
 
-export const animateChildrenExit = (dom) => {
+export const animateChildrenExit = dom => {
   let children = [ ...dom.children ]
 
   let anim = animate([ { transform: 'none', opacity: 1 }, { transform: 'translate3d(25%,100%,0)', opacity: 0 } ])
 
-  let waapi = children.map((child) =>
+  let waapi = children.map(child =>
     child.animate(anim, {
       duration: 850,
     })
   )
 
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     waapi.onfinish = function() {
       resolve()
     }
@@ -105,7 +105,7 @@ export const animateChildrenFadeIn = ({ dom }) => {
 
     return setTimeout(() => {
       child.style.opacity = 1
-    }, (idx + 1) * 850)
+    }, (idx + 1) * 250)
   })
 }
 
@@ -119,7 +119,7 @@ export const animateFadeOut = ({ dom }) => {
     duration: 850,
   })
 
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     waapi.onfinish = function() {
       resolve()
     }

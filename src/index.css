@@ -12,9 +12,9 @@
   box-sizing: border-box;
 }
 
-h1,
-p {
-  margin: 0 0 1em 0;
+h1 ~ p {
+  padding: 10px;
+  margin: 0, auto;
 }
 
 body,
@@ -70,12 +70,13 @@ html {
   position: relative;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
   overflow-y: scroll;
   padding: 10px;
 }
 
 .grid-item {
+  display: flex;
+  justify-content: space-around;
   flex-grow: 1;
   width: 400px;
   padding: 10px;
@@ -91,9 +92,16 @@ html {
   align-content: stretch;
 }
 
-.sidebarBtn {
+.btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   width: 100%;
   height: 40px;
+  cursor: pointer;
+}
+
+.sidebarBtn {
+  composes: btn;
 }
 
 #footer {
@@ -113,6 +121,7 @@ html {
   width: 40px;
   height: 40px;
   flex-basis: 20%;
+  cursor: pointer;
 }
 
 ///Flexbox Grids
@@ -144,6 +153,79 @@ html {
   #sidebar {
     flex-flow: row;
   }
+}
+
+/* fancy checkboxes */
+.fancyCheckBox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-right: auto;
+  position: relative;
+  background-color: #f1f1f1;
+  color: #666;
+  top: 10px;
+  height: 30px;
+  min-width: 30px;
+  max-width: 30px;
+  order: 2;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 7px;
+  outline: none;
+}
+.fancyCheckBox:checked::before {
+  position: absolute;
+  font: 20px/1 'Open Sans', sans-serif;
+  left: 8px;
+  top: 5px;
+  content: '\2713';
+  transform: rotate(0deg);
+}
+.fancyCheckBox:hover {
+  background-color: #f7f7f7;
+}
+.fancyCheckBox:checked {
+  background-color: #f1f1f1;
+}
+
+/* fancy radios */
+.fancyRadio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  position: relative;
+  background-color: #f1f1f1;
+  color: #666;
+  top: 10px;
+  height: 30px;
+  width: 30px;
+  border: 0;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-right: 7px;
+  outline: none;
+}
+.fancyRadio:checked::before {
+  position: absolute;
+  font: 13px/1 'Open Sans', sans-serif;
+  left: 11px;
+  top: 7px;
+  content: '\02143';
+  transform: rotate(40deg);
+}
+.fancyRadio:hover {
+  background-color: #f7f7f7;
+}
+.fancyRadio:checked {
+  background-color: #f1f1f1;
+}
+label {
+  font: 300 16px/1.7 'Open Sans', sans-serif;
+  color: #666;
+  cursor: pointer;
 }
 
 /* Portrait tablet to landscape and desktop */

@@ -1,10 +1,11 @@
 import m from 'mithril'
 
-const Tab = () => {
+const Tab = ({ attrs: { key } }) => {
   const state = { onhover: false }
   const hover = e => {
-    e.stopPropagation()
     state.onhover = !state.onhover
+    console.log('on hover tab', state)
+    return false
   }
 
   return {
@@ -12,6 +13,7 @@ const Tab = () => {
       m(
         'a.tab',
         {
+          key,
           id: `${tab}`,
           href: `${tab}`,
           oncreate: m.route.link,
@@ -30,7 +32,7 @@ const Tab = () => {
 const Heading = ({ attrs: { model } }) => {
   const showTabs = () => {
     model.showTabs = !model.showTabs
-    console.log(model)
+    console.log('heading show tabs', model)
   }
 
   let tabs = Object.keys(model.reqs.urls)
@@ -52,7 +54,7 @@ const Heading = ({ attrs: { model } }) => {
             })
           )
           : m(
-            'button.sidebarBtn',
+            'button.Btn',
             {
               onclick: showTabs,
             },
@@ -95,7 +97,7 @@ const Colors = () => {
 
 const changeTheme = model =>
   m(
-    'button.sidebarBtn',
+    'button.Btn',
     {
       onclick: () => (model.showModes = !model.showModes),
     },
@@ -104,7 +106,7 @@ const changeTheme = model =>
 
 const changeLimit = model =>
   m(
-    'button.sidebarBtn',
+    'button.Btn',
     {
       onclick: () => (model.showLimits = !model.showLimits),
     },
@@ -139,8 +141,10 @@ const Sidebar = ({ attrs: { model } }) => {
   }
 }
 
-const Body = () => {
+const Body = ({ attrs: { children } }) => {
+  console.log('Body', children)
   return {
+    onupdate: vnode => vnode,
     view: ({ attrs: { children } }) => m('section.content', { id: 'content' }, children),
   }
 }
