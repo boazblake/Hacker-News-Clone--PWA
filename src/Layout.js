@@ -4,7 +4,9 @@ import { darken } from './helpers.js'
 
 const Tab = ({ attrs: { key } }) => {
   const state = { onhover: false }
-  const hover = () => (state.onhover = !state.onhover)
+  const hover = () => {
+    state.onhover = !state.onhover
+  }
 
   return {
     view: ({ attrs: { active, tab, activeBorder, inactiveBorder } }) =>

@@ -66,6 +66,7 @@ html {
 .grid-item {
   display: flex;
   justify-content: space-around;
+  align-content: center;
   flex-grow: 1;
   width: 400px;
   padding: 10px;
@@ -1202,4 +1203,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-9901037bd04907df0d0a.css.map*/
+/*# sourceMappingURL=main-2fd3fadfb2773f1f285f.css.map*/

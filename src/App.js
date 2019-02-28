@@ -1,7 +1,7 @@
 import m from 'mithril'
 import Layout from './Layout.js'
 import { isEmpty, init, infiniteScroll } from './helpers.js'
-import { animateEntrance, animateExit } from './animations.js'
+import { animateEntrance } from './animations.js'
 
 const IsLoading = m('.holder', { style: { width: '100%', height: '100%' } }, [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
@@ -83,7 +83,9 @@ const Photos = ({ attrs: { item: { thumbnailUrl, url } } }) => {
         [
           m('h1', { style: { padding: '4px', right: 'auto', flex: 3 } }, title),
           m('img', {
-            onclick: () => (state.isSmall = !state.isSmall),
+            onclick: () => {
+              state.isSmall = !state.isSmall
+            },
             style: { left: 'auto', flex: '1 150px' },
             src: state.isSmall ? state.small : state.large,
           }),
@@ -108,7 +110,9 @@ const Todos = ({ attrs: { key, model, item: { title, completed } } }) => {
           m(
             'input[type=checkbox].fancyCheckBox',
             {
-              onclick: (completed = !completed),
+              onclick: () => {
+                completed = !completed
+              },
               checked: completed,
             },
             'Done'
@@ -121,31 +125,23 @@ const Todos = ({ attrs: { key, model, item: { title, completed } } }) => {
 }
 
 const Users = () => {
-  const state = { isOpen: false }
   return {
-    view: ({ attrs: { key, model, item: { address, company, email, name, phone, username, website } } }) => {
+    view: ({ attrs: { key, model, item: { email, name, phone, username, website } } }) => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
         '.grid-item',
         {
-          onclick: () => (state.isOpen = !state.isOpen),
           id: 'users',
           key,
-          style: {
-            ...itemStyles,
-            overflow: state.isOpen ? 'auto' : 'hidden',
-            height: state.isOpen ? 'auto' : '150px',
-          },
+          style: itemStyles,
         },
-        [
-          m('h1', name),
-          m('p', email),
-          m('pre', JSON.stringify(address, null, 2)),
-          m('pre', JSON.stringify(company, null, 2)),
-          m('p', phone),
-          m('p', username),
-          m('p', website),
-        ]
+        m('code', [
+          m('.grid-item', {}, [ m('label', { for: 'name' }, 'name'), m('h1', { name: 'name' }, name) ]),
+          m('.grid-item', {}, [ m('label', { for: 'email' }, 'email'), m('p', { name: 'email' }, email) ]),
+          m('.grid-item', {}, [ m('label', { for: 'phone' }, 'phone'), m('p', { name: 'phone' }, phone) ]),
+          m('.grid-item', {}, [ m('label', { for: 'username' }, 'username'), m('p', { name: 'username' }, username) ]),
+          m('.grid-item', {}, [ m('label', { for: 'website' }, 'website'), m('p', { name: 'website' }, website) ]),
+        ])
       )
     },
   }
@@ -170,17 +166,15 @@ const toComponent = type => {
 
 const Component = () => {
   return {
-    onbeforeremove: animateExit,
     view: ({ attrs: { model } }) => {
       let route = model.state.route
       let Current = toComponent(route)
       let data = model.data[route].data
-      let componentStyles = componentStyle(model.themes(model.mode).component)
       return m(
         'section.component',
         {
           id: 'component',
-          style: componentStyles,
+          style: componentStyle(model.themes(model.mode).component),
           route: model.state.route,
           onscroll: infiniteScroll(model),
         },
@@ -188,11 +182,6 @@ const Component = () => {
           ? m('', { style: { width: '80vw' } }, IsLoading)
           : data.map((item, idx) =>
             m(Current, {
-              onbeforeupdate: (v, old) => {
-                // console.log(v, old)
-                return v.attrs.model.state.route == old.attrs.model.state.route ? false : true
-              },
-              onupdate: animateEntrance(idx),
               oncreate: animateEntrance(idx),
               key: idx,
               item: item,
