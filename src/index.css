@@ -113,7 +113,7 @@ html {
 .colorContainer {
   display: flex;
   align-content: flex-start;
-  justify-content: stretch;
+  justify-content: flex-start;
   flex-flow: wrap;
   width: 100%;
 }
@@ -154,6 +154,11 @@ html {
   #sidebar {
     flex-flow: row;
     height: 80px;
+  }
+
+  .colorContainer {
+    flex-flow: wrap;
+    justify-content: flex-start;
   }
 }
 
@@ -287,7 +292,7 @@ label {
 
   .colorContainer {
     justify-content: flex-start;
-    flex-flow: column;
+    flex-flow: wrap;
   }
 
   .color {

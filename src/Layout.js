@@ -111,9 +111,9 @@ const limitSelector = model =>
     model.limits.map((limit, idx) => m('option', { value: limit, key: idx }, limit))
   )
 
-const Sidebar = ({ attrs: { model, color: { r, g, b } } }) => {
+const Sidebar = () => {
   return {
-    view: () =>
+    view: ({ attrs: { model, color: { r, g, b } } }) =>
       m(
         'aside.sidebar slide-left',
         {

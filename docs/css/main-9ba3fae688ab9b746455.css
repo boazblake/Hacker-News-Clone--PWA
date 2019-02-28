@@ -97,7 +97,7 @@ html {
 .colorContainer {
   display: flex;
   align-content: flex-start;
-  justify-content: stretch;
+  justify-content: flex-start;
   flex-flow: wrap;
   width: 100%; }
 
@@ -127,7 +127,11 @@ html {
     grid-gap: 2%;
     grid-template-areas: "header" "sidebar" "content" "footer"; }
   #sidebar {
-    flex-flow: row; } }
+    flex-flow: row;
+    height: 80px; }
+  .colorContainer {
+    flex-flow: wrap;
+    justify-content: flex-start; } }
 
 /* fancy checkboxes */
 .fancyCheckBox {
@@ -231,14 +235,15 @@ label {
   #header {
     flex-flow: column; }
   #sidebar {
-    flex-flow: row; }
+    flex-flow: row;
+    min-height: 80px; }
   #content {
     flex-flow: column; }
   .grid-item {
     flex-basis: 80%; }
   .colorContainer {
     justify-content: flex-start;
-    flex-flow: column; }
+    flex-flow: wrap; }
   .color {
     width: 100%; } }
 
@@ -254,7 +259,8 @@ label {
   #header {
     flex-flow: column; }
   #sidebar {
-    flex-flow: row; }
+    flex-flow: row;
+    min-height: 80px; }
   #content {
     flex-flow: column; } }
 /*
@@ -1203,4 +1209,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-587082a15d66bc065e9f.css.map*/
+/*# sourceMappingURL=main-9ba3fae688ab9b746455.css.map*/
