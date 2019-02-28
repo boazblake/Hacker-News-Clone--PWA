@@ -66,26 +66,22 @@ const Footer = () => {
   }
 }
 
-const Color = () => {
-  return {
-    view: ({ attrs: { model, color: { color: { r, g, b } } } }) =>
-      m('.color', {
-        onclick: () => (model.mode = { r, g, b }),
-        style: { backgroundColor: `rgb(${r},${g},${b})` },
-      }),
-  }
+const Color = {
+  view: ({ attrs: { model, color: { color: { r, g, b } } } }) =>
+    m('.color', {
+      onclick: () => (model.mode = { r, g, b }),
+      style: { backgroundColor: `rgb(${r},${g},${b})` },
+    }),
 }
 
-const Colors = () => {
-  return {
-    view: ({ attrs: { model } }) => {
-      return m(
-        '.colorContainer',
-        { style: { backgroundColor: darken(model.mode) } },
-        model.pallette.map((color, idx) => m(Color, { key: idx, model, color }))
-      )
-    },
-  }
+const Colors = {
+  view: ({ attrs: { model } }) => {
+    return m(
+      '.colorContainer',
+      { style: { backgroundColor: darken(model.mode) } },
+      model.pallette.map((color, idx) => m(Color, { key: idx, model, color }))
+    )
+  },
 }
 
 const changeTheme = model =>

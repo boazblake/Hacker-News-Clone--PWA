@@ -93,16 +93,9 @@ const Photos = ({ attrs: { item: { thumbnailUrl, url } } }) => {
   }
 }
 
-const Todos = ({ attrs: { item: { completed } } }) => {
-  const state = {
-    completed: completed,
-  }
-  const checked = () => {
-    state.completed = !state.completed
-  }
-
+const Todos = ({ attrs: { key, model, item: { title, completed } } }) => {
   return {
-    view: ({ attrs: { key, model, item: { title } } }) => {
+    view: () => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
         '.grid-item',
@@ -115,9 +108,8 @@ const Todos = ({ attrs: { item: { completed } } }) => {
           m(
             'input[type=checkbox].fancyCheckBox',
             {
-              key,
-              onclick: checked,
-              checked: state.completed,
+              onclick: (completed = !completed),
+              checked: completed,
             },
             'Done'
           ),
@@ -128,10 +120,10 @@ const Todos = ({ attrs: { item: { completed } } }) => {
   }
 }
 
-const Users = ({ attrs: { key, model, item: { address, company, email, name, phone, username, website } } }) => {
+const Users = () => {
   const state = { isOpen: false }
   return {
-    view: () => {
+    view: ({ attrs: { key, model, item: { address, company, email, name, phone, username, website } } }) => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
         '.grid-item',
@@ -197,6 +189,7 @@ const Component = () => {
           : data.map((item, idx) =>
             m(Current, {
               onbeforeupdate: (v, old) => {
+                // console.log(v, old)
                 return v.attrs.model.state.route == old.attrs.model.state.route ? false : true
               },
               onupdate: animateEntrance(idx),
