@@ -1,21 +1,21 @@
 import animate from 'animejs'
 
-export const animateEntrance = ({ dom }) =>
+export const animateEntrance = i => ({ dom }) =>
   dom.animate(
     [
       {
-        backgroundPosition: '0%50%',
+        transform: 'translateY(-10px)',
         opacity: 0,
         // transform: 'rotate(30deg)',
       },
       {
-        backgroundPosition: '0%50%',
+        transform: 'translateY(0)',
         opacity: 1,
         // transform: 'rotate(0) ',
       },
     ],
     {
-      duration: 850,
+      duration: (i + 1) * 100,
     }
   )
 
@@ -37,7 +37,7 @@ export const animateExit = dom => {
   let anim = animate([ { transform: 'none', opacity: 1 }, { transform: 'translate3d(25%,100%,0)', opacity: 0 } ])
 
   let waapi = dom.animate(anim, {
-    duration: 850,
+    duration: 1850,
   })
 
   return new Promise(resolve => {
@@ -75,26 +75,22 @@ export const animateFadeIn = ({ dom }) => {
 }
 
 export const slideIn = ({ dom }) => {
-  let children = [ ...dom.children ]
-  console.log(children)
-  return children.map((child, idx) => {
-    return setTimeout(() => {
-      console.log('dom', child)
-      child.style.transition = '0.5s ease-out'
-      child.animate([
-        {
-          // transformOrigin: 'top',
-          opacity: 0,
-          transform: 'translateY(-20%)',
-        },
-        {
-          opacity: 1,
-          transform: 'translateY(0%)',
-        },
-      ])
-      // child.style.opacity = 1
-    }, (idx + 1) * 805)
-  })
+  return setTimeout(() => {
+    dom.style.transition = '0.5s ease-out'
+    console.log(dom)
+    return dom.animate([
+      {
+        // transformOrigin: 'top',
+        opacity: 0,
+        transform: 'translateY(-20%)',
+      },
+      {
+        opacity: 1,
+        transform: 'translateY(0%)',
+      },
+    ])
+    // child.style.opacity = 1
+  }, 850)
 }
 
 export const animateChildrenFadeIn = ({ dom }) => {

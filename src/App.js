@@ -1,7 +1,7 @@
 import m from 'mithril'
 import Layout from './Layout.js'
-import { isEmpty, getData } from './helpers.js'
-import { animateChildrenFadeIn } from './animations.js'
+import { isEmpty, init, infiniteScroll } from './helpers.js'
+import { animateEntrance, animateExit } from './animations.js'
 
 const IsLoading = m('.holder', { style: { width: '100%', height: '100%' } }, [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
@@ -16,9 +16,9 @@ const componentStyle = theme => ({
   backgroundColor: theme,
 })
 
-const Posts = ({ attrs: { model, item: { title, body } } }) => {
+const Posts = () => {
   return {
-    view: () => {
+    view: ({ attrs: { model, item: { title, body } } }) => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
         '.grid-item',
@@ -32,9 +32,9 @@ const Posts = ({ attrs: { model, item: { title, body } } }) => {
   }
 }
 
-const Comments = ({ attrs: { model, item: { email, name, body } } }) => {
+const Comments = () => {
   return {
-    view: () => {
+    view: ({ attrs: { model, item: { email, name, body } } }) => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
         '.grid-item',
@@ -48,9 +48,9 @@ const Comments = ({ attrs: { model, item: { email, name, body } } }) => {
   }
 }
 
-const Albums = ({ attrs: { model, item: { title } } }) => {
+const Albums = () => {
   return {
-    view: () => {
+    view: ({ attrs: { model, item: { title } } }) => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
         '.grid-item',
@@ -64,7 +64,7 @@ const Albums = ({ attrs: { model, item: { title } } }) => {
   }
 }
 
-const Photos = ({ attrs: { model, item: { thumbnailUrl, title, url } } }) => {
+const Photos = ({ attrs: { item: { thumbnailUrl, url } } }) => {
   let state = {
     isSmall: true,
     small: thumbnailUrl,
@@ -72,7 +72,7 @@ const Photos = ({ attrs: { model, item: { thumbnailUrl, title, url } } }) => {
   }
 
   return {
-    view: () => {
+    view: ({ attrs: { model, item: { title } } }) => {
       let itemStyles = itemStyle(model.themes(model.mode).item)
       return m(
         '.grid-item',
@@ -109,6 +109,7 @@ const Todos = ({ attrs: { item: { completed } } }) => {
         {
           id: 'todos',
           style: itemStyles,
+          key,
         },
         [
           m(
@@ -127,7 +128,7 @@ const Todos = ({ attrs: { item: { completed } } }) => {
   }
 }
 
-const Users = ({ attrs: { model, item: { address, company, email, name, phone, username, website } } }) => {
+const Users = ({ attrs: { key, model, item: { address, company, email, name, phone, username, website } } }) => {
   const state = { isOpen: false }
   return {
     view: () => {
@@ -137,6 +138,7 @@ const Users = ({ attrs: { model, item: { address, company, email, name, phone, u
         {
           onclick: () => (state.isOpen = !state.isOpen),
           id: 'users',
+          key,
           style: {
             ...itemStyles,
             overflow: state.isOpen ? 'auto' : 'hidden',
@@ -175,38 +177,30 @@ const toComponent = type => {
 }
 
 const Component = () => {
-  const infiniteScroll = model => e => {
-    let route = model.state.route
-    let length = model.data[route].data.length
-    let setpoint = 10 * length * model.state.scrollPos
-    if (e.target.scrollTop - model.state.scrollPos >= setpoint) {
-      model.state.scrollPos++ + e.target.scrollTop
-      if (length < model.data[route].limit) {
-        getData(model)(route)
-      }
-    }
-  }
-
   return {
+    onbeforeremove: animateExit,
     view: ({ attrs: { model } }) => {
-      console.log('component view ', model)
       let route = model.state.route
-      let Component = toComponent(route)
+      let Current = toComponent(route)
       let data = model.data[route].data
       let componentStyles = componentStyle(model.themes(model.mode).component)
       return m(
         'section.component',
         {
-          oncreate: animateChildrenFadeIn,
-          onupdate: animateChildrenFadeIn,
-          onscroll: infiniteScroll(model),
           id: 'component',
           style: componentStyles,
+          route: model.state.route,
+          onscroll: infiniteScroll(model),
         },
         isEmpty(data)
           ? m('', { style: { width: '80vw' } }, IsLoading)
           : data.map((item, idx) =>
-            m(Component, {
+            m(Current, {
+              onbeforeupdate: (v, old) => {
+                return v.attrs.model.state.route == old.attrs.model.state.route ? false : true
+              },
+              onupdate: animateEntrance(idx),
+              oncreate: animateEntrance(idx),
               key: idx,
               item: item,
               model,
@@ -217,19 +211,12 @@ const Component = () => {
   }
 }
 
-const init = model => path => {
-  model.state.scrollPos = 1
-  model.showTabs = false
-  return getData(model)(path)
-}
-
 export const App = model => {
   return {
     '/posts': {
       onmatch: (_, path) => init(model)(path),
-      render: () => {
-        console.log('app', model)
-        return m(
+      render: () =>
+        m(
           Layout,
           {
             model,
@@ -237,8 +224,7 @@ export const App = model => {
           m(Component, {
             model,
           })
-        )
-      },
+        ),
     },
     '/comments': {
       onmatch: (_, path) => init(model)(path),

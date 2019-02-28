@@ -1,12 +1,10 @@
 import m from 'mithril'
 
+import { darken } from './helpers.js'
+
 const Tab = ({ attrs: { key } }) => {
   const state = { onhover: false }
-  const hover = e => {
-    state.onhover = !state.onhover
-    console.log('on hover tab', state)
-    return false
-  }
+  const hover = () => (state.onhover = !state.onhover)
 
   return {
     view: ({ attrs: { active, tab, activeBorder, inactiveBorder } }) =>
@@ -30,10 +28,7 @@ const Tab = ({ attrs: { key } }) => {
 }
 
 const Heading = ({ attrs: { model } }) => {
-  const showTabs = () => {
-    model.showTabs = !model.showTabs
-    console.log('heading show tabs', model)
-  }
+  const showTabs = () => (model.showTabs = !model.showTabs)
 
   let tabs = Object.keys(model.reqs.urls)
   return {
@@ -80,8 +75,6 @@ const Color = () => {
       }),
   }
 }
-
-const darken = ({ r, g, b }) => `rgba(${r / 2},${g / 2},${b / 2},1)`
 
 const Colors = () => {
   return {
@@ -141,10 +134,8 @@ const Sidebar = ({ attrs: { model } }) => {
   }
 }
 
-const Body = ({ attrs: { children } }) => {
-  console.log('Body', children)
+const Body = () => {
   return {
-    onupdate: vnode => vnode,
     view: ({ attrs: { children } }) => m('section.content', { id: 'content' }, children),
   }
 }
