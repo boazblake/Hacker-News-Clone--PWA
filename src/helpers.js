@@ -27,7 +27,6 @@ export const getData = model => path => {
 }
 
 export const infiniteScroll = model => e => {
-  console.log(e)
   let route = model.state.route
   let length = model.data[route].data.length
   let setpoint = 10 * length * model.state.scrollPos

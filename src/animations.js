@@ -34,7 +34,6 @@ export const animateChildrenEntrance = ({ dom }) => {
 }
 
 export const animateExit = ({ dom }) => {
-  console.log(dom)
   let anim = animate([ { transform: 'none', opacity: 1 }, { transform: 'translate3d(25%,100%,0)', opacity: 0 } ])
 
   let waapi = dom.animate(anim, {
@@ -78,7 +77,6 @@ export const animateFadeIn = ({ dom }) => {
 export const slideIn = ({ dom }) => {
   return setTimeout(() => {
     dom.style.transition = '0.5s ease-out'
-    console.log(dom)
     return dom.animate([
       {
         // transformOrigin: 'top',
