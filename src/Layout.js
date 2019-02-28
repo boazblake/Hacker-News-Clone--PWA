@@ -9,7 +9,7 @@ const Tab = ({ attrs: { key } }) => {
   }
 
   return {
-    view: ({ attrs: { active, tab, activeBorder, inactiveBorder } }) =>
+    view: ({ attrs: { active, tab, color: { r, g, b } } }) =>
       m(
         'a.tab',
         {
@@ -20,8 +20,9 @@ const Tab = ({ attrs: { key } }) => {
           onmouseover: hover,
           onmouseout: hover,
           style: {
-            borderTop: active ? activeBorder : '',
-            borderBottom: !active && state.onhover ? inactiveBorder : '',
+            borderTop: active ? `4px solid rgba(${r},${g},${b} ,1)` : '',
+            borderBottom: !active && state.onhover ? `4px solid rgba(${r},${g},${b} ,.5)` : '',
+            color: active ? `rgba(${r},${g},${b} ,1)` : `rgba(${r},${g},${b} ,.5)`,
           },
         },
         tab.split('/')[1]
@@ -46,8 +47,7 @@ const Heading = ({ attrs: { model } }) => {
               key: idx,
               active: model.state.route == tab,
               tab,
-              activeBorder: model.themes(model.mode).tab.activeBorder,
-              inactiveBorder: model.themes(model.mode).tab.inactiveBorder,
+              color: model.mode,
             })
           )
           : m(
@@ -111,7 +111,7 @@ const limitSelector = model =>
     model.limits.map((limit, idx) => m('option', { value: limit, key: idx }, limit))
   )
 
-const Sidebar = ({ attrs: { model } }) => {
+const Sidebar = ({ attrs: { model, color: { r, g, b } } }) => {
   return {
     view: () =>
       m(
@@ -119,7 +119,7 @@ const Sidebar = ({ attrs: { model } }) => {
         {
           id: 'sidebar',
           style: {
-            backgroundColor: model.themes(model.mode).sidebar,
+            backgroundColor: `rgba(${r},${g},${b} ,.9)`,
           },
         },
         [
@@ -147,7 +147,12 @@ const Layout = ({ attrs: { model } }) => {
           id: 'layout',
         },
         children
-          ? [ m(Heading, { model }), m(Sidebar, { model }), m(Body, { model, children }), m(Footer, { model }) ]
+          ? [
+            m(Heading, { model }),
+            m(Sidebar, { model, color: model.mode }),
+            m(Body, { model, children }),
+            m(Footer, { model }),
+          ]
           : []
       ),
   }

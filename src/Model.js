@@ -15,11 +15,6 @@ const reqs = {
 }
 
 const themes = ({ r, g, b }) => ({
-  sidebar: `rgba(${r},${g},${b} ,.9)`,
-  tab: {
-    activeBorder: `4px solid rgba(${r},${g},${b} ,1)`,
-    inactiveBorder: `4px solid rgba(${r},${g},${b} ,.5)`,
-  },
   item: `rgba(${r},${g},${b} ,.2)`,
   component: `rgba(${r},${g},${b} ,.1)`,
 })

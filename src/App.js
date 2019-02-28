@@ -7,19 +7,19 @@ const IsLoading = m('.holder', { style: { width: '100%', height: '100%' } }, [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
 ])
 
-const itemStyle = theme => ({
+const itemStyle = ({ r, g, b }) => ({
   flexFlow: 'column wrap',
-  backgroundColor: theme,
+  backgroundColor: `rgba(${r},${g},${b} ,.2)`,
 })
 
-const componentStyle = theme => ({
-  backgroundColor: theme,
+const componentStyle = ({ r, g, b }) => ({
+  backgroundColor: `rgba(${r},${g},${b} ,.1)`,
 })
 
 const Posts = () => {
   return {
     view: ({ attrs: { model, item: { title, body } } }) => {
-      let itemStyles = itemStyle(model.themes(model.mode).item)
+      let itemStyles = itemStyle(model.mode)
       return m(
         '.grid-item',
         {
@@ -35,7 +35,7 @@ const Posts = () => {
 const Comments = () => {
   return {
     view: ({ attrs: { model, item: { email, name, body } } }) => {
-      let itemStyles = itemStyle(model.themes(model.mode).item)
+      let itemStyles = itemStyle(model.mode)
       return m(
         '.grid-item',
         {
@@ -51,7 +51,7 @@ const Comments = () => {
 const Albums = () => {
   return {
     view: ({ attrs: { model, item: { title } } }) => {
-      let itemStyles = itemStyle(model.themes(model.mode).item)
+      let itemStyles = itemStyle(model.mode)
       return m(
         '.grid-item',
         {
@@ -73,7 +73,7 @@ const Photos = ({ attrs: { item: { thumbnailUrl, url } } }) => {
 
   return {
     view: ({ attrs: { model, item: { title } } }) => {
-      let itemStyles = itemStyle(model.themes(model.mode).item)
+      let itemStyles = itemStyle(model.mode)
       return m(
         '.grid-item',
         {
@@ -98,7 +98,7 @@ const Photos = ({ attrs: { item: { thumbnailUrl, url } } }) => {
 const Todos = ({ attrs: { key, model, item: { title, completed } } }) => {
   return {
     view: () => {
-      let itemStyles = itemStyle(model.themes(model.mode).item)
+      let itemStyles = itemStyle(model.mode)
       return m(
         '.grid-item',
         {
@@ -127,7 +127,7 @@ const Todos = ({ attrs: { key, model, item: { title, completed } } }) => {
 const Users = () => {
   return {
     view: ({ attrs: { key, model, item: { email, name, phone, username, website } } }) => {
-      let itemStyles = itemStyle(model.themes(model.mode).item)
+      let itemStyles = itemStyle(model.mode)
       return m(
         '.grid-item',
         {
@@ -174,7 +174,7 @@ const Component = () => {
         'section.component',
         {
           id: 'component',
-          style: componentStyle(model.themes(model.mode).component),
+          style: componentStyle(model.mode),
           route: model.state.route,
           onscroll: infiniteScroll(model),
         },

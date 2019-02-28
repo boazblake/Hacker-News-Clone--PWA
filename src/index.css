@@ -153,6 +153,7 @@ html {
 
   #sidebar {
     flex-flow: row;
+    height: 80px;
   }
 }
 
@@ -273,6 +274,7 @@ label {
 
   #sidebar {
     flex-flow: row;
+    min-height: 80px;
   }
 
   #content {
@@ -310,6 +312,7 @@ label {
 
   #sidebar {
     flex-flow: row;
+    min-height: 80px;
   }
 
   #content {

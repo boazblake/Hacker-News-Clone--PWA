@@ -1,5 +1,5 @@
 {
-  "name": "flexbox",
+  "name": "placeholder",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -46,6 +46,6 @@
     "build": "webpack --progress --config webpack.prod.js",
     "lint": "eslint src/ webpack.*.js --cache --fix"
   },
-  "description": "flexbox",
+  "description": "placeholder",
   "author": "boazblake <boazblake@gmail.com>"
 }
