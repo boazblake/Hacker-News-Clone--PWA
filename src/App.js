@@ -16,14 +16,14 @@ const componentStyle = ({ r, g, b }) => ({
   backgroundColor: `rgba(${r},${g},${b} ,.1)`,
 })
 
-const Posts = () => {
+const Post = () => {
   return {
-    view: ({ attrs: { model, item: { title, body } } }) => {
+    view: ({ attrs: { key, model, item: { title, body } } }) => {
       let itemStyles = itemStyle(model.mode)
       return m(
-        '.grid-item',
+        '.grid-item.post',
         {
-          id: 'posts',
+          id: `post-${key}`,
           style: itemStyles,
         },
         [ m('h1', title), m('p', body) ]
@@ -32,14 +32,14 @@ const Posts = () => {
   }
 }
 
-const Comments = () => {
+const Comment = () => {
   return {
-    view: ({ attrs: { model, item: { email, name, body } } }) => {
+    view: ({ attrs: { model, key, item: { email, name, body } } }) => {
       let itemStyles = itemStyle(model.mode)
       return m(
-        '.grid-item',
+        '.grid-item.comment',
         {
-          id: 'comments',
+          id: `comment-${key}`,
           style: itemStyles,
         },
         [ m('h1', name), m('p', email), m('p', body) ]
@@ -48,14 +48,14 @@ const Comments = () => {
   }
 }
 
-const Albums = () => {
+const Album = () => {
   return {
-    view: ({ attrs: { model, item: { title } } }) => {
+    view: ({ attrs: { key, model, item: { title } } }) => {
       let itemStyles = itemStyle(model.mode)
       return m(
-        '.grid-item',
+        '.grid-item.album',
         {
-          id: 'albums',
+          id: `album-${key}`,
           style: itemStyles,
         },
         [ m('h1', title) ]
@@ -64,30 +64,25 @@ const Albums = () => {
   }
 }
 
-const Photos = ({ attrs: { item: { thumbnailUrl, url } } }) => {
-  let state = {
-    isSmall: true,
-    small: thumbnailUrl,
-    large: url,
-  }
-
+const Photo = () => {
   return {
-    view: ({ attrs: { model, item: { title } } }) => {
+    view: ({ attrs: { key, model, item: { title, thumbnailUrl, url } } }) => {
       let itemStyles = itemStyle(model.mode)
+      let src = thumbnailUrl
       return m(
-        '.grid-item',
+        '.grid-item.photo',
         {
-          id: 'photos',
+          id: `photo-${key}`,
           style: { ...itemStyles, display: 'flex' },
         },
         [
           m('h1', { style: { padding: '4px', right: 'auto', flex: 3 } }, title),
           m('img', {
             onclick: () => {
-              state.isSmall = !state.isSmall
+              src = url
             },
             style: { left: 'auto', flex: '1 150px' },
-            src: state.isSmall ? state.small : state.large,
+            src,
           }),
         ]
       )
@@ -95,14 +90,14 @@ const Photos = ({ attrs: { item: { thumbnailUrl, url } } }) => {
   }
 }
 
-const Todos = ({ attrs: { key, model, item: { title, completed } } }) => {
+const Todo = ({ attrs: { item: { completed } } }) => {
   return {
-    view: () => {
+    view: ({ attrs: { key, model, item: { title } } }) => {
       let itemStyles = itemStyle(model.mode)
       return m(
-        '.grid-item',
+        '.grid-item.todo',
         {
-          id: 'todos',
+          id: `todo-${key}`,
           style: itemStyles,
           key,
         },
@@ -124,24 +119,24 @@ const Todos = ({ attrs: { key, model, item: { title, completed } } }) => {
   }
 }
 
-const Users = () => {
+const User = () => {
   return {
     view: ({ attrs: { key, model, item: { email, name, phone, username, website } } }) => {
       let itemStyles = itemStyle(model.mode)
       return m(
-        '.grid-item',
+        '.grid-item.user',
         {
-          id: 'users',
+          id: `user-${key}`,
           key,
           style: itemStyles,
         },
-        m('code', [
-          m('.grid-item', {}, [ m('label', { for: 'name' }, 'name'), m('h1', { name: 'name' }, name) ]),
-          m('.grid-item', {}, [ m('label', { for: 'email' }, 'email'), m('p', { name: 'email' }, email) ]),
-          m('.grid-item', {}, [ m('label', { for: 'phone' }, 'phone'), m('p', { name: 'phone' }, phone) ]),
-          m('.grid-item', {}, [ m('label', { for: 'username' }, 'username'), m('p', { name: 'username' }, username) ]),
-          m('.grid-item', {}, [ m('label', { for: 'website' }, 'website'), m('p', { name: 'website' }, website) ]),
-        ])
+        [
+          m('.', [ m('label.left', { for: 'name' }, 'name'), m('p.right', { name: 'name' }, name) ]),
+          m('.', [ m('label.left', { for: 'email' }, 'email'), m('p.right', { name: 'email' }, email) ]),
+          m('.', [ m('label.left', { for: 'phone' }, 'phone'), m('p.right', { name: 'phone' }, phone) ]),
+          m('.', [ m('label.left', { for: 'username' }, 'username'), m('p.right', { name: 'username' }, username) ]),
+          m('.', [ m('label.left', { for: 'website' }, 'website'), m('p.right', { name: 'website' }, website) ]),
+        ]
       )
     },
   }
@@ -150,17 +145,17 @@ const Users = () => {
 const toComponent = type => {
   switch (type) {
   case '/posts':
-    return Posts
+    return Post
   case '/comments':
-    return Comments
+    return Comment
   case '/albums':
-    return Albums
+    return Album
   case '/photos':
-    return Photos
+    return Photo
   case '/todos':
-    return Todos
+    return Todo
   case '/users':
-    return Users
+    return User
   }
 }
 

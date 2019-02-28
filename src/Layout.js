@@ -88,7 +88,7 @@ const Colors = {
 
 const changeTheme = model =>
   m(
-    'button.Btn',
+    'button.btn',
     {
       onclick: () => (model.showModes = !model.showModes),
     },
@@ -97,7 +97,7 @@ const changeTheme = model =>
 
 const changeLimit = model =>
   m(
-    'button.Btn',
+    'button.btn',
     {
       onclick: () => (model.showLimits = !model.showLimits),
     },
