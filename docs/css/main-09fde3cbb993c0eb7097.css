@@ -234,6 +234,10 @@ label {
   .grid-item {
     flex-basis: 80%; } }
 
+@media (max-width: 920px) {
+  #header {
+    flex-flow: column; } }
+
 /* Landscape phone to portrait tablet */
 @media (min-width: 481px) and (max-width: 667px) {
   #layout {
@@ -243,8 +247,6 @@ label {
     grid-remplate-rows: 10% 10% 10% 10%;
     grid-gap: 2%;
     grid-template-areas: "header" "sidebar" "content" "footer"; }
-  #header {
-    flex-flow: column; }
   #sidebar {
     flex-flow: row;
     min-height: 80px; }
@@ -1218,4 +1220,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-17b4d19bf0f0a51cb567.css.map*/
+/*# sourceMappingURL=main-09fde3cbb993c0eb7097.css.map*/
