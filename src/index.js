@@ -18,8 +18,8 @@ import './animations.css'
 import './loader.css'
 
 function getProfile(w) {
-  if (w < 768) return 'phone'
-  if (w < 1024) return 'tablet'
+  if (w < 668) return 'phone'
+  if (w < 920) return 'tablet'
   return 'desktop'
 }
 

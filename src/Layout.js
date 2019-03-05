@@ -1,5 +1,5 @@
 import m from 'mithril'
-
+import { animateChildrenEntrance } from './animations.js'
 import { darken } from './helpers.js'
 
 const Tab = ({ attrs: { key } }) => {
@@ -41,7 +41,7 @@ const Heading = ({ attrs: { model } }) => {
         {
           id: 'header',
         },
-        model.state.profile != 'phone' || model.showTabs
+        model.state.profile == 'desktop' || model.showTabs
           ? tabs.map((tab, idx) =>
             m(Tab, {
               key: idx,
@@ -140,6 +140,7 @@ const Body = () => {
 
 const Layout = ({ attrs: { model } }) => {
   return {
+    oncreate: animateChildrenEntrance,
     view: ({ children }) =>
       m(
         'section.layout',

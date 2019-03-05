@@ -284,6 +284,12 @@ label {
   }
 }
 
+@media (max-width: 920px) {
+  #header {
+    flex-flow: column;
+  }
+}
+
 /* Landscape phone to portrait tablet */
 @media (min-width: 481px) and (max-width: 667px) {
   #layout {
@@ -293,10 +299,6 @@ label {
     grid-remplate-rows: 10% 10% 10% 10%;
     grid-gap: 2%;
     grid-template-areas: "header" "sidebar" "content" "footer";
-  }
-
-  #header {
-    flex-flow: column;
   }
 
   #sidebar {
