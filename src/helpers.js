@@ -40,6 +40,6 @@ export const infiniteScroll = model => e => {
 
 export const init = model => path => {
   model.state.scrollPos = 1
-  model.showTabs = false
+  model.tabsShowing = false
   return getData(model)(path)
 }

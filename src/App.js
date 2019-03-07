@@ -7,24 +7,13 @@ const IsLoading = m('.holder', { style: { width: '100%', height: '100%' } }, [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
 ])
 
-const itemStyle = ({ r, g, b }) => ({
-  flexFlow: 'column wrap',
-  backgroundColor: `rgba(${r},${g},${b} ,.2)`,
-})
-
-const componentStyle = ({ r, g, b }) => ({
-  backgroundColor: `rgba(${r},${g},${b} ,.1)`,
-})
-
 const Post = () => {
   return {
-    view: ({ attrs: { key, model, item: { title, body } } }) => {
-      let itemStyles = itemStyle(model.mode)
+    view: ({ attrs: { key, item: { title, body } } }) => {
       return m(
         '.grid-item.post',
         {
           id: `post-${key}`,
-          style: itemStyles,
         },
         [ m('h1', title), m('p', body) ]
       )
@@ -34,13 +23,11 @@ const Post = () => {
 
 const Comment = () => {
   return {
-    view: ({ attrs: { model, key, item: { email, name, body } } }) => {
-      let itemStyles = itemStyle(model.mode)
+    view: ({ attrs: { key, item: { email, name, body } } }) => {
       return m(
         '.grid-item.comment',
         {
           id: `comment-${key}`,
-          style: itemStyles,
         },
         [ m('h1', name), m('p', email), m('p', body) ]
       )
@@ -50,13 +37,11 @@ const Comment = () => {
 
 const Album = () => {
   return {
-    view: ({ attrs: { key, model, item: { title } } }) => {
-      let itemStyles = itemStyle(model.mode)
+    view: ({ attrs: { key, item: { title } } }) => {
       return m(
         '.grid-item.album',
         {
           id: `album-${key}`,
-          style: itemStyles,
         },
         [ m('h1', title) ]
       )
@@ -66,23 +51,17 @@ const Album = () => {
 
 const Photo = () => {
   return {
-    view: ({ attrs: { key, model, item: { title, thumbnailUrl, url } } }) => {
-      let itemStyles = itemStyle(model.mode)
-      let src = thumbnailUrl
+    view: ({ attrs: { key, item: { title, thumbnailUrl } } }) => {
       return m(
         '.grid-item.photo',
         {
           id: `photo-${key}`,
-          style: { ...itemStyles, display: 'flex' },
         },
         [
           m('h1', { style: { padding: '4px', right: 'auto', flex: 3 } }, title),
           m('img', {
-            onclick: () => {
-              src = url
-            },
             style: { left: 'auto', flex: '1 150px' },
-            src,
+            src: thumbnailUrl,
           }),
         ]
       )
@@ -92,13 +71,11 @@ const Photo = () => {
 
 const Todo = ({ attrs: { item: { completed } } }) => {
   return {
-    view: ({ attrs: { key, model, item: { title } } }) => {
-      let itemStyles = itemStyle(model.mode)
+    view: ({ attrs: { key, item: { title } } }) => {
       return m(
         '.grid-item.todo',
         {
           id: `todo-${key}`,
-          style: itemStyles,
           key,
         },
         [
@@ -121,14 +98,12 @@ const Todo = ({ attrs: { item: { completed } } }) => {
 
 const User = () => {
   return {
-    view: ({ attrs: { key, model, item: { email, name, phone, username, website } } }) => {
-      let itemStyles = itemStyle(model.mode)
+    view: ({ attrs: { key, item: { email, name, phone, username, website } } }) => {
       return m(
         '.grid-item.user',
         {
           id: `user-${key}`,
           key,
-          style: itemStyles,
         },
         [
           m('.', [ m('label.left', { for: 'name' }, 'name'), m('p.right', { name: 'name' }, name) ]),
@@ -169,12 +144,11 @@ const Component = () => {
         'section.component',
         {
           id: 'component',
-          style: componentStyle(model.mode),
           route: model.state.route,
           onscroll: infiniteScroll(model),
         },
         isEmpty(data)
-          ? m('', { style: { width: '80vw' } }, IsLoading)
+          ? m('.loader', IsLoading)
           : data.map((item, idx) =>
             m(Current, {
               oncreate: animateEntrance(idx),
