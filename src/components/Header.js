@@ -49,12 +49,7 @@ const Header = () => {
         {
           id: 'header',
         },
-        [
-          [ 'desktop', 'tablet' ].includes(model.state.profile) || model.tabsShowing
-            ? [ model.state.profile == 'phone' ? m(Hamburger, { model }) : null ]
-            : [ m(Hamburger, { model }) ],
-          m(ChangeLimits, { model }),
-        ]
+        [ m(Hamburger, { model }), m(ChangeLimits, { model }) ]
       ),
   }
 }
