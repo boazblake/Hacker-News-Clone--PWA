@@ -22,11 +22,12 @@ export const animateEntrance = i => ({ dom }) =>
 export const animateChildrenEntrance = ({ dom }) => {
   let children = [ ...dom.children ]
 
-  let side = { 0: '-90%', 1: '-90%', 2: '90%', 3: '-90%' }
+  let side = { 0: '-90%', 1: '-90%', 2: '90%', 3: '90%' }
 
   return children.map((child, idx) => {
     setTimeout(() => {
       child.animate([ { transform: `translate3d(${side[idx]},0,0)`, opacity: 0 }, { transform: 'none', opacity: 1 } ], {
+        fill: 'forwards',
         duration: 850,
       })
     }, (idx + 1) * 200)
