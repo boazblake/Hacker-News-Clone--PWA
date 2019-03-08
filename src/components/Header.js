@@ -1,21 +1,45 @@
 import m from 'mithril'
 import Hamburger from './Hamburger.js'
+import { animateChildrenLimitsEntrance } from '../animations.js'
 
-const changeLimit = model =>
-  m(
-    'button.btn',
-    {
-      onclick: () => (model.showLimits = !model.showLimits),
-    },
-    'Change Limit'
-  )
+const Selector = {
+  view: ({ attrs: { model } }) =>
+    m(
+      '.limits',
+      {
+        oncreate: animateChildrenLimitsEntrance,
+      },
+      model.limits.map((limit, idx) =>
+        m(
+          'button.btn.limit',
+          {
+            onclick: () => {
+              model.state.limit = limit
+              model.showLimits = false
+            },
+            key: idx,
+          },
+          limit
+        )
+      )
+    ),
+}
 
-const limitSelector = model =>
-  m(
-    'select',
-    { id: 'url-limit', onchange: ({ target }) => (model.state.limit = target.value) },
-    model.limits.map((limit, idx) => m('option', { value: limit, key: idx }, limit))
-  )
+const ChangeLimits = () => ({
+  view: ({ attrs: { model } }) =>
+    m('.changeLimits', [
+      m(
+        'button.changeLimitBtn',
+        {
+          onclick: () => {
+            model.showLimits = !model.showLimits
+          },
+        },
+        'Change Limit'
+      ),
+      model.showLimits && m(Selector, { model }),
+    ]),
+})
 
 const Header = () => {
   return {
@@ -25,13 +49,12 @@ const Header = () => {
         {
           id: 'header',
         },
-        [ 'desktop', 'tablet' ].includes(model.state.profile) || model.tabsShowing
-          ? [
-            model.state.profile == 'phone' ? m(Hamburger, { model }) : '',
-            changeLimit(model),
-            model.showLimits ? limitSelector(model) : '',
-          ]
-          : [ m(Hamburger, { model }) ]
+        [
+          [ 'desktop', 'tablet' ].includes(model.state.profile) || model.tabsShowing
+            ? [ model.state.profile == 'phone' ? m(Hamburger, { model }) : null ]
+            : [ m(Hamburger, { model }) ],
+          m(ChangeLimits, { model }),
+        ]
       ),
   }
 }

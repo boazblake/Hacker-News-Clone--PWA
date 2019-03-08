@@ -7,28 +7,25 @@ const Hamburger = ({ attrs: { model } }) => {
     open: 'M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z',
   }
 
+  const render = dom =>
+    m.render(
+      dom,
+      m('path', {
+        xmlns: 'http://www.w3.org/2000/svg',
+        d: model.tabsShowing ? state.close : state.open,
+      })
+    )
+
   return {
-    oncreate: ({ dom, attrs: { model } }) => {
+    oncreate: ({ dom }) => {
       let _dom = dom
-      return m.render(
-        _dom,
-        m('path', {
-          xmlns: 'http://www.w3.org/2000/svg',
-          d: model.tabsShowing ? state.close : state.open,
-        })
-      )
+      return render(_dom)
     },
-    onupdate: ({ dom, attrs: { model } }) => {
+    onupdate: ({ dom }) => {
       let _dom = dom
-      return m.render(
-        _dom,
-        m('path', {
-          xmlns: 'http://www.w3.org/2000/svg',
-          d: model.tabsShowing ? state.close : state.open,
-        })
-      )
+      return render(_dom)
     },
-    view: () =>
+    view: ({ attrs: { model } }) =>
       m('svg.hamburger', {
         onclick: () => {
           model.showTabs(model)

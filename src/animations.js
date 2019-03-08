@@ -22,7 +22,7 @@ export const animateEntrance = i => ({ dom }) =>
 export const animateChildrenEntrance = ({ dom }) => {
   let children = [ ...dom.children ]
 
-  let side = { 0: '-90%', 1: '-90%', 2: '90%', 3: '0' }
+  let side = { 0: '-90%', 1: '-90%', 2: '90%', 3: '-90%' }
 
   return children.map((child, idx) => {
     setTimeout(() => {
@@ -30,6 +30,39 @@ export const animateChildrenEntrance = ({ dom }) => {
         duration: 850,
       })
     }, (idx + 1) * 200)
+  })
+}
+
+export const animateChildrenLimitsEntrance = ({ dom }) => {
+  let children = [ ...dom.children ]
+
+  return children.map((child, idx) => {
+    if (child) {
+      return setTimeout(() => {
+        child.animate([ { transform: 'translate3d(0,-180%,0)', opacity: 0 }, { transform: 'none', opacity: 1 } ], {
+          fill: 'forwards',
+          duration: 250,
+        })
+      }, (idx + 1) * 200)
+    }
+  })
+}
+
+export const animateChildrenLimitsExit = ({ dom }) => {
+  let children = [ ...dom.children ]
+
+  let anim = animate([ { transform: 'none', opacity: 1 }, { transform: 'translate3d(25%,100%,0)', opacity: 0 } ])
+
+  let waapi = children.map(child =>
+    child.animate(anim, {
+      duration: 850,
+    })
+  )
+
+  return new Promise(resolve => {
+    waapi.onfinish = function() {
+      resolve()
+    }
   })
 }
 
