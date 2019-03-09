@@ -9,26 +9,6 @@
 *:after {
   box-sizing: border-box; }
 
-p {
-  margin: 0 auto;
-  font-size: 20px;
-  line-height: 30px;
-  max-width: 600px; }
-
-p + p {
-  text-indent: 1em; }
-
-blockquote p {
-  hanging-punctuation: first; }
-
-blockquote p {
-  text-indent: -0.5em; }
-
-ul,
-ol {
-  padding-left: 0;
-  list-style-position: outside; }
-
 body,
 html {
   scroll-behavior: smooth;
@@ -97,11 +77,16 @@ html {
   padding: 10px; }
 
 .grid-item {
+  padding: 4px 10px;
   border: 0.2px dashed black;
   display: flex;
   flex-grow: 1;
   width: 50vw;
   margin: 10px; }
+  .grid-item.user {
+    flex-flow: column wrap;
+    width: 90vw;
+    display: flex; }
 
 .tab {
   padding-left: 4px;
@@ -215,7 +200,9 @@ html {
     flex-flow: column;
     justify-content: flex-start;
     align-content: flex-start;
-    scroll: no; } }
+    scroll: no; }
+  .grid-item.user {
+    width: 60vw; } }
 /*
 ==============================================
 CSS3 ANIMATION CHEAT SHEET
@@ -1162,4 +1149,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-d9e2eb427aa451842122.css.map*/
+/*# sourceMappingURL=main-99f6f3ea4c59d96b0965.css.map*/

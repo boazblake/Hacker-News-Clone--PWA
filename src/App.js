@@ -10,11 +10,12 @@ const IsLoading = m('.holder', { style: { width: '100%', height: '100%' } }, [
 const Post = {
   view: ({ attrs: { key, item: { title, body } } }) => {
     return m(
-      '.grid-item.post',
+      '.grid-item.row.post',
       {
+        style: { flexFlow: 'row wrap', width: '60vw', display: 'flex' },
         id: `post-${key}`,
       },
-      [ m('h1', title), m('p', body) ]
+      [ m('h1.left', title), m('p.right', body) ]
     )
   },
 }
@@ -22,11 +23,12 @@ const Post = {
 const Comment = {
   view: ({ attrs: { key, item: { email, name, body } } }) => {
     return m(
-      '.grid-item.comment',
+      '.grid-item.row.comment',
       {
         id: `comment-${key}`,
+        style: { flexFlow: 'column wrap', width: '60vw', display: 'flex' },
       },
-      [ m('h1', name), m('p', email), m('p', body) ]
+      [ m('h1.left', name), m('p.left', email), m('p.left', body) ]
     )
   },
 }
@@ -49,11 +51,11 @@ const Photo = {
       '.grid-item.photo',
       {
         id: `photo-${key}`,
+        style: { flexFlow: 'row wrap', width: '60vw', display: 'flex' },
       },
       [
         m('h1', { style: { padding: '4px', right: 'auto', flex: 3 } }, title),
-        m('img', {
-          style: { left: 'auto', flex: '1 150px' },
+        m('img.left', {
           src: thumbnailUrl,
         }),
       ]
@@ -71,8 +73,9 @@ const Todo = ({ attrs: { item: { completed } } }) => {
           key,
         },
         [
+          m('h1.left', title),
           m(
-            'input[type=checkbox].fancyCheckBox',
+            'input[type=checkbox].right',
             {
               onclick: () => {
                 completed = !completed
@@ -81,7 +84,6 @@ const Todo = ({ attrs: { item: { completed } } }) => {
             },
             'Done'
           ),
-          m('h1', title),
         ]
       )
     },
@@ -89,20 +91,24 @@ const Todo = ({ attrs: { item: { completed } } }) => {
 }
 
 const User = {
-  view: ({ attrs: { key, item: { email, name, phone, username, website } } }) => {
-    return m(
-      '.grid-item.user',
-      {
-        id: `user-${key}`,
-        key,
-      },
-      [
-        m('.', [ m('label.left', { for: 'name' }, 'name'), m('p.right', { name: 'name' }, name) ]),
-        m('.', [ m('label.left', { for: 'email' }, 'email'), m('p.right', { name: 'email' }, email) ]),
-        m('.', [ m('label.left', { for: 'phone' }, 'phone'), m('p.right', { name: 'phone' }, phone) ]),
-        m('.', [ m('label.left', { for: 'username' }, 'username'), m('p.right', { name: 'username' }, username) ]),
-        m('.', [ m('label.left', { for: 'website' }, 'website'), m('p.right', { name: 'website' }, website) ]),
-      ]
+  view: () => m(''),
+  oncreate: ({ dom, attrs: { key, item: { email, name, phone, username, website } } }) => {
+    m.render(
+      dom,
+      m(
+        '.grid-item.user',
+        {
+          id: `user-${key}`,
+          key,
+        },
+        [
+          m('.row', [ m('p.left', { for: 'name' }, 'name'), m('p.right', { name: 'name' }, name) ]),
+          m('.row', [ m('p.left', { for: 'email' }, 'email'), m('p.right', { name: 'email' }, email) ]),
+          m('.row', [ m('p.left', { for: 'phone' }, 'phone'), m('p.right', { name: 'phone' }, phone) ]),
+          m('.row', [ m('p.left', { for: 'username' }, 'username'), m('p.right', { name: 'username' }, username) ]),
+          m('.row', [ m('p.left', { for: 'website' }, 'website'), m('p.right', { name: 'website' }, website) ]),
+        ]
+      )
     )
   },
 }

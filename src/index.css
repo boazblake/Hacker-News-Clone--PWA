@@ -13,31 +13,6 @@
   box-sizing: border-box;
 }
 
-p {
-  margin: 0 auto;
-  font-size: 20px;
-  line-height: 30px;
-  max-width: 600px;
-}
-
-p + p {
-  text-indent: 1em;
-}
-
-blockquote p {
-  hanging-punctuation: first;
-}
-
-blockquote p {
-  text-indent: -0.5em;
-}
-
-ul,
-ol {
-  padding-left: 0;
-  list-style-position: outside;
-}
-
 body,
 html {
   scroll-behavior: smooth;
@@ -114,11 +89,18 @@ html {
 }
 
 .grid-item {
+  padding: 4px 10px;
   border: 0.2px dashed black;
   display: flex;
   flex-grow: 1;
   width: 50vw;
   margin: 10px;
+
+  &.user {
+    flex-flow: column wrap;
+    width: 90vw;
+    display: flex;
+  }
 }
 
 .tab {
@@ -258,5 +240,9 @@ html {
     justify-content: flex-start;
     align-content: flex-start;
     scroll: no;
+  }
+
+  .grid-item.user {
+    width: 60vw;
   }
 }
