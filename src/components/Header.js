@@ -6,13 +6,12 @@ const Selector = {
   view: ({ attrs: { model } }) =>
     m(
       '.limits',
-      {
-        oncreate: animateChildrenLimitsEntrance,
-      },
+      {},
       model.limits.map((limit, idx) =>
         m(
           'button.btn.limit',
           {
+            oncreate: animateChildrenLimitsEntrance(idx),
             onclick: () => {
               model.state.limit = limit
               model.showLimits = false

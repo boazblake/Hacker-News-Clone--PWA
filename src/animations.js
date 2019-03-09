@@ -1,23 +1,45 @@
 import animate from 'animejs'
 
-export const animateEntrance = i => ({ dom }) =>
-  dom.animate(
-    [
-      {
-        transform: 'translateY(-10px)',
-        opacity: 0,
-        // transform: 'rotate(30deg)',
-      },
-      {
-        transform: 'translateY(0)',
-        opacity: 1,
-        // transform: 'rotate(0) ',
-      },
-    ],
-    {
-      duration: (i + 1) * 100,
-    }
-  )
+// export const animateEntrance = i => ({ dom }) =>
+//   dom.animate(
+//     [
+//       {
+//         transform: 'translateY(-10px)',
+//         opacity: 0,
+//         // transform: 'rotate(30deg)',
+//       },
+//       {
+//         transform: 'translateY(0)',
+//         opacity: 1,
+//         // transform: 'rotate(0) ',
+//       },
+//     ],
+//     {
+//       duration: (i + 1) * 100,
+//     }
+//   )
+
+export const animateEntrance = idx => ({ dom }) => {
+  dom.style.opacity = 0
+  return setTimeout(() => {
+    dom.classList.toggle('stretchLeft')
+    dom.style.opacity = 1
+  }, 200)
+}
+
+// export const animateChildrenEntrance = ({ dom }) => {
+//   let children = [ ...dom.children ]
+
+//   return children.map((child, idx) => {
+//     child.style.opacity = 0
+//     setTimeout(() => {
+//       child.animate([ { transform: 'translate3d(-90%,0,0)', opacity: 0 }, { transform: 'none', opacity: 1 } ], {
+//         fill: 'forwards',
+//         duration: 250,
+//       })
+//     }, (idx + 1) * 10)
+//   })
+// }
 
 export const animateChildrenEntrance = ({ dom }) => {
   let children = [ ...dom.children ]
@@ -25,45 +47,41 @@ export const animateChildrenEntrance = ({ dom }) => {
   return children.map((child, idx) => {
     child.style.opacity = 0
     setTimeout(() => {
-      child.animate([ { transform: 'translate3d(-90%,0,0)', opacity: 0 }, { transform: 'none', opacity: 1 } ], {
-        fill: 'forwards',
-        duration: 250,
-      })
+      child.classList.toggle('slideRight')
+      child.style.opacity = 1
     }, (idx + 1) * 10)
   })
 }
 
-export const animateChildrenLimitsEntrance = ({ dom }) => {
-  let children = [ ...dom.children ]
+// export const animateChildrenLimitsEntrance = ({ dom }) => {
+//   let children = [ ...dom.children ]
 
-  return children.map((child, idx) => {
-    if (child) {
-      child.style.opacity = 0
-      return setTimeout(() => {
-        child.animate([ { transform: 'translate3d(0,-180%,0)', opacity: 0 }, { transform: 'none', opacity: 1 } ], {
-          fill: 'forwards',
-          duration: 250,
-        })
-      }, (idx + 1) * 200)
-    }
-  })
+//   return children.map((child, idx) => {
+//     if (child) {
+//       child.style.opacity = 0
+//       return setTimeout(() => {
+//         child.animate([ { transform: 'translate3d(0,-180%,0)', opacity: 0 }, { transform: 'none', opacity: 1 } ], {
+//           fill: 'forwards',
+//           duration: 250,
+//         })
+//       }, (idx + 1) * 200)
+//     }
+//   })
+// }
+
+export const animateChildrenLimitsEntrance = idx => ({ dom }) => {
+  dom.style.opacity = 0
+  // console.log(dom)
+  setTimeout(() => {
+    dom.classList.toggle('slideDown')
+    dom.style.opacity = 1
+  }, (idx + 1) * 200)
 }
 
 export const animateChildrenLimitsExit = ({ dom }) => {
-  let children = [ ...dom.children ]
-
-  let anim = animate([ { transform: 'none', opacity: 1 }, { transform: 'translate3d(25%,100%,0)', opacity: 0 } ])
-
-  let waapi = children.map(child =>
-    child.animate(anim, {
-      duration: 850,
-    })
-  )
-
   return new Promise(resolve => {
-    waapi.onfinish = function() {
-      resolve()
-    }
+    dom.classList.toggle('slideUp')
+    resolve()
   })
 }
 
