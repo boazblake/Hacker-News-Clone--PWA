@@ -1,6 +1,6 @@
 import m from 'mithril'
 import Hamburger from './Hamburger.js'
-import { animateChildrenLimitsEntrance, animateChildrenLimitsExit } from '../animations.js'
+import { animateChildrenLimitsEntrance, animateChildrenLimitsExit, animate } from '../animations.js'
 
 const Selector = {
   onbeforeremove: animateChildrenLimitsExit,
@@ -39,6 +39,7 @@ const ChangeLimits = {
 }
 
 const Header = {
+  oncreate: animate('slideDown'),
   view: ({ attrs: { model } }) =>
     m(
       'header.header',

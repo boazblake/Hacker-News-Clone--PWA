@@ -1,7 +1,3 @@
-import animate from 'animejs'
-
-animate
-
 export const animateComponentEntrance = idx => ({ dom }) => {
   dom.style.opacity = 0
   return setTimeout(() => {
@@ -34,6 +30,14 @@ export const animateChildrenLimitsEntrance = idx => ({ dom }) => {
     dom.classList.toggle('slideDown')
     dom.style.opacity = 1
   }, (idx + 1) * 200)
+}
+
+export const animate = dir => ({ dom }) => {
+  dom.style.opacity = 0
+  setTimeout(() => {
+    dom.classList.toggle(dir)
+    dom.style.opacity = 1
+  },  200)
 }
 
 export const animateChildrenLimitsExit = ({ dom }) => {

@@ -2,6 +2,9 @@ const { resolve } = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+
 
 module.exports = {
   context: resolve(__dirname, 'src'),
@@ -80,6 +83,18 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({ // <-- key to reducing React's size
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+      },
+    }),
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
     new CopyWebpackPlugin([ { from: 'assets' } ]),
     new HtmlWebpackPlugin({
       favicon: './assets/favicon.png',
@@ -89,6 +104,14 @@ module.exports = {
       m: 'mithril', //Global access
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.optimize\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: ['default', { discardComments: { removeAll: true } }],
+      },
+      canPrint: true,
+    }),
   ],
   optimization: {
     runtimeChunk: true,

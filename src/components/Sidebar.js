@@ -3,6 +3,7 @@ import { animateSidebarEntrance } from '../animations.js'
 
 const Tab = ({ attrs: { key } }) => {
   return {
+    oncreate: animateSidebarEntrance,
     view: ({ attrs: { tab } }) =>
       m(
         'a.tab',
