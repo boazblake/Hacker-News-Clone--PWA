@@ -7,10 +7,7 @@ const Selector = {
     m(
       '.limits',
       {
-        oncreate: ({ dom }) => {
-          console.log(dom)
-          animateChildrenLimitsEntrance({ dom })
-        },
+        oncreate: animateChildrenLimitsEntrance,
       },
       model.limits.map((limit, idx) =>
         m(

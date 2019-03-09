@@ -21,7 +21,6 @@ export const animateEntrance = i => ({ dom }) =>
 
 export const animateChildrenEntrance = ({ dom }) => {
   let children = [ ...dom.children ]
-  console.log(children)
 
   return children.map((child, idx) => {
     child.style.opacity = 0
