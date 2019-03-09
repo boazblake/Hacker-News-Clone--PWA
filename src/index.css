@@ -3,7 +3,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat+Alternatives', sans-serif;
   font-size: 16px;
 }
 
@@ -40,7 +40,7 @@ html {
 #header {
   grid-area: header;
   padding-top: 10px;
-  border-bottom: 1px dashed black;
+  border-bottom: 1px dashed grey;
   display: flex;
   flex-flow: row;
   width: 100%;
@@ -51,20 +51,18 @@ html {
 
 #content {
   grid-area: content;
-  padding: 0 10px;
-  margin: 0 auto;
+  display: flex;
 }
 
 #component {
   display: flex;
-  flex-flow: wrap;
   justify-content: flex-start;
-  align-content: stretch;
-  display: flex;
-  flex-flow: row wrap;
+  align-content: center;
+  flex-flow: column;
   overflow-y: scroll;
   padding: 4px;
   max-height: 100%;
+  width: 100%;
 }
 
 .navigationModal {
@@ -72,20 +70,20 @@ html {
   top: 5vh;
   left: 3vw;
   width: 90vw;
-  height: 200vw;
   min-width: 400px;
   min-height: 800px;
-  background: rgba(52, 73, 94, .5);
+  background: rgba(20,29,37,.9);
   z-index: 1;
   padding: 30px;
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
+  line-height: 6rem;
   align-content: flex-start;
 }
 
 #footer {
-  border-top: 1px dashed black;
+  border-top: 1px dashed grey;
   grid-area: footer;
   display: flex;
   flex-flow: wrap;
@@ -93,12 +91,24 @@ html {
 }
 
 .grid-item {
+  grid-column: 2 / 3;
+  min-height:fit-content;
   padding: 4px 10px;
-  border: 0.2px dashed black;
+  border: 1.5px dashed grey;
   display: flex;
   flex-grow: 1;
-  width: 50vw;
-  margin: 10px;
+  margin: 10px auto;
+  transition-duration: .3s;
+  min-width: 70vw;
+
+  &:hover {
+    border: 1.5px dashed #2980b9;
+    box-shadow: 0px 2px 4px 0px rgba(20,29,37, 0.2);
+
+    h1 {
+      color: #2980b9;
+    }
+  }
 
   &.user {
     flex-flow: column wrap;
@@ -108,20 +118,21 @@ html {
 }
 
 .tab {
-  padding-left: 4px;
+  padding-left: 20px;
   flex-basis: 20%;
-  line-height: 6rem;
-  font-size: 3rem;
   display: flex;
   text-decoration: none;
   justify-content: flex-start;
   align-content: flex-end;
+  align-items: center;
+  font-size: 3rem;
   color: white;
+  letter-spacing: 1px;
+  transition:.2s;
 
   &:hover {
-    font-weight: 900;
-    padding-left: 12px;
-    text-decoration: underline;
+    color:rgba(173,185,193,1);
+    letter-spacing: 2px;
   }
 }
 
@@ -147,6 +158,8 @@ html {
   border-radius: 5px;
   display: flex;
   flex-flow: column;
+  button:focus {outline:0;}
+  button:active {color: #2980b9;}
 }
 
 .changeLimitBtn {
@@ -154,6 +167,17 @@ html {
   -moz-appearance: none;
   cursor: pointer;
   border-radius: 5px;
+  width:200px;
+  height:40px;
+  transition-duration: .2s;
+  letter-spacing: 1px;
+
+
+    &:hover {
+    box-shadow: 0px 1px 2px 0px rgba(20,29,37, 0.2);
+      letter-spacing: 2px;
+      color: #2980b9;
+  }
 }
 
 .limits {
@@ -169,17 +193,17 @@ html {
 .limit {
   z-index: 1;
   padding: 4px;
-  box-shadow: 0px 8px 16px 0px rgba(52, 73, 94, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(20,29,37, 0.2);
   width: 100%;
   flex-basis: 20%;
   font-size: 24px;
   align-items: center;
-  background-color: white;
   grid-area: 1 / 3;
 
   &:hover {
-    background-color: rgba(52, 73, 94, .8);
-    color: white;
+    /* background-color: rgba(20,29,37, .2); */
+    box-shadow: 0px 1px 2px 0px rgba(20,29,37, 0.2);
+    color: #2980b9;
   }
 }
 
@@ -212,7 +236,7 @@ html {
   #layout {
     height: 100vh;
     display: grid;
-    grid-template-columns: repeat(1fr);
+    grid-template-columns: .1fr 3fr 1fr;
     grid-gap: 10px;
     grid-template-areas: ". header header" "sidebar content content" "footer footer footer";
   }
@@ -229,24 +253,20 @@ html {
 
   #sidebar {
     grid-area: sidebar;
-    position: inherit;
-    top: inherit;
-    left: inherit;
-    width: inherit;
-    min-width: inherit;
+    min-width: 225px;
     min-height: inherit;
     height: 80vh;
     background: inherit;
-    border-right: 1px dashed black;
+    border-right: 1px dashed grey;
     padding: 30px;
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
     align-content: flex-start;
-    scroll: no;
+    transition:.2s;
   }
 
   .grid-item.user {
-    width: 60vw;
+    width: 70vw;
   }
 }

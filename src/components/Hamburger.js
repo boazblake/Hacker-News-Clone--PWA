@@ -26,7 +26,7 @@ const Hamburger = ({ attrs: { model } }) => {
       return render(_dom)
     },
     view: ({ attrs: { model } }) =>
-      m('svg.hamburger', {
+      m('svg.btn.hamburger', {
         onclick: () => model.showTabs(model),
       }),
   }
