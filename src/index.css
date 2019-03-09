@@ -122,6 +122,7 @@ html {
 }
 
 .tab {
+  padding-left: 4px;
   flex-basis: 20%;
   line-height: 6rem;
   font-size: 3rem;
@@ -132,8 +133,9 @@ html {
   color: white;
 
   &:hover {
-    background-color: rgba(52, 73, 94, .5);
-    color: white;
+    font-weight: 900;
+    padding-left: 12px;
+    text-decoration: underline;
   }
 }
 

@@ -2,11 +2,6 @@ import m from 'mithril'
 import { animateSidebarEntrance } from '../animations.js'
 
 const Tab = ({ attrs: { key } }) => {
-  const state = { onhover: false }
-  const hover = () => {
-    state.onhover = !state.onhover
-  }
-
   return {
     view: ({ attrs: { tab } }) =>
       m(
@@ -16,8 +11,6 @@ const Tab = ({ attrs: { key } }) => {
           id: `${tab}`,
           href: `${tab}`,
           oncreate: m.route.link,
-          onmouseover: hover,
-          onmouseout: hover,
         },
         tab.split('/')[1]
       ),
