@@ -1,45 +1,20 @@
 import animate from 'animejs'
 
-// export const animateEntrance = i => ({ dom }) =>
-//   dom.animate(
-//     [
-//       {
-//         transform: 'translateY(-10px)',
-//         opacity: 0,
-//         // transform: 'rotate(30deg)',
-//       },
-//       {
-//         transform: 'translateY(0)',
-//         opacity: 1,
-//         // transform: 'rotate(0) ',
-//       },
-//     ],
-//     {
-//       duration: (i + 1) * 100,
-//     }
-//   )
+animate
 
-export const animateEntrance = idx => ({ dom }) => {
+export const animateComponentEntrance = idx => ({ dom }) => {
   dom.style.opacity = 0
   return setTimeout(() => {
     dom.classList.toggle('stretchLeft')
     dom.style.opacity = 1
-  }, 200)
+  }, idx * 100 + 20)
 }
 
-// export const animateChildrenEntrance = ({ dom }) => {
-//   let children = [ ...dom.children ]
-
-//   return children.map((child, idx) => {
-//     child.style.opacity = 0
-//     setTimeout(() => {
-//       child.animate([ { transform: 'translate3d(-90%,0,0)', opacity: 0 }, { transform: 'none', opacity: 1 } ], {
-//         fill: 'forwards',
-//         duration: 250,
-//       })
-//     }, (idx + 1) * 10)
-//   })
-// }
+export const animateSidebarEntrance = ({ dom }) => {
+  dom.style.opacity = 0
+  dom.classList.toggle('slideRight')
+  dom.style.opacity = 1
+}
 
 export const animateChildrenEntrance = ({ dom }) => {
   let children = [ ...dom.children ]
@@ -53,25 +28,8 @@ export const animateChildrenEntrance = ({ dom }) => {
   })
 }
 
-// export const animateChildrenLimitsEntrance = ({ dom }) => {
-//   let children = [ ...dom.children ]
-
-//   return children.map((child, idx) => {
-//     if (child) {
-//       child.style.opacity = 0
-//       return setTimeout(() => {
-//         child.animate([ { transform: 'translate3d(0,-180%,0)', opacity: 0 }, { transform: 'none', opacity: 1 } ], {
-//           fill: 'forwards',
-//           duration: 250,
-//         })
-//       }, (idx + 1) * 200)
-//     }
-//   })
-// }
-
 export const animateChildrenLimitsEntrance = idx => ({ dom }) => {
   dom.style.opacity = 0
-  // console.log(dom)
   setTimeout(() => {
     dom.classList.toggle('slideDown')
     dom.style.opacity = 1
@@ -79,97 +37,11 @@ export const animateChildrenLimitsEntrance = idx => ({ dom }) => {
 }
 
 export const animateChildrenLimitsExit = ({ dom }) => {
-  return new Promise(resolve => {
-    dom.classList.toggle('slideUp')
-    resolve()
-  })
-}
-
-export const animateExit = ({ dom }) => {
-  console.log(dom)
-
-  let anim = animate([ { transform: 'none', opacity: 1 }, { transform: 'translate3d(25%,100%,0)', opacity: 0 } ])
-
-  let waapi = dom.animate(anim, {
-    duration: 1850,
-  })
-
-  return new Promise(resolve => {
-    waapi.onfinish = function() {
-      resolve()
-    }
-  })
-}
-
-export const animateChildrenExit = ({ dom }) => {
-  let children = [ ...dom.children ]
-  let anim = animate([ { transform: 'none', opacity: 1 }, { transform: 'translate3d(25%,100%,0)', opacity: 0 } ])
-
-  let waapi = children.map(child =>
-    child.animate(anim, {
-      duration: 850,
+  return new Promise(() => {
+    [ ...dom.children ].reverse().map((child, idx) => {
+      return setTimeout(() => {
+        child.style.opacity = 0
+      }, idx * 100)
     })
-  )
-
-  return new Promise(resolve => {
-    waapi.onfinish = function() {
-      resolve()
-    }
-  })
-}
-
-export const animateFadeIn = ({ dom }) => {
-  dom.style.opacity = 0
-  dom.style.transition = 'opacity .4s ease-in-out'
-
-  return setTimeout(() => {
-    dom.style.opacity = 1
-  })
-}
-
-export const slideIn = ({ dom }) => {
-  return setTimeout(() => {
-    dom.style.transition = '0.5s ease-out'
-    return dom.animate([
-      {
-        // transformOrigin: 'top',
-        opacity: 0,
-        transform: 'translateY(-20%)',
-      },
-      {
-        opacity: 1,
-        transform: 'translateY(0%)',
-      },
-    ])
-    // child.style.opacity = 1
-  }, 850)
-}
-
-export const animateChildrenFadeIn = ({ dom }) => {
-  let children = [ ...dom.children ]
-  return children.map((child, idx) => {
-    child.style.opacity = 0
-    child.style.transition = 'opacity .2s ease-in-out'
-
-    return setTimeout(() => {
-      child.style.opacity = 1
-    }, (idx + 1) * 250)
-  })
-}
-
-export const animateFadeOut = ({ dom }) => {
-  let anim = [
-    { transition: 'opacity .4s ease-in-out' },
-    { transform: 'none', opacity: 1 },
-    { transform: 'translate3d(25%,100%,0)', opacity: 0 },
-  ]
-  let waapi = dom.animate(anim, {
-    duration: 850,
-  })
-
-  return new Promise(resolve => {
-    waapi.onfinish = function() {
-      resolve()
-    }
   })
 }

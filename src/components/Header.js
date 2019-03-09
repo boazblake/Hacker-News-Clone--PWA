@@ -1,8 +1,9 @@
 import m from 'mithril'
 import Hamburger from './Hamburger.js'
-import { animateChildrenLimitsEntrance } from '../animations.js'
+import { animateChildrenLimitsEntrance, animateChildrenLimitsExit } from '../animations.js'
 
 const Selector = {
+  onbeforeremove: animateChildrenLimitsExit,
   view: ({ attrs: { model } }) =>
     m(
       '.limits',
