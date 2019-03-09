@@ -9,6 +9,26 @@
 *:after {
   box-sizing: border-box; }
 
+p {
+  margin: 0 auto;
+  font-size: 20px;
+  line-height: 30px;
+  max-width: 600px; }
+
+p + p {
+  text-indent: 1em; }
+
+blockquote p {
+  hanging-punctuation: first; }
+
+blockquote p {
+  text-indent: -0.5em; }
+
+ul,
+ol {
+  padding-left: 0;
+  list-style-position: outside; }
+
 body,
 html {
   scroll-behavior: smooth;
@@ -1140,4 +1160,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-7de5013201b72d0fa4a4.css.map*/
+/*# sourceMappingURL=main-4f9a8ec3341232c93a3d.css.map*/

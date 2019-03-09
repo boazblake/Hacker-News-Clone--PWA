@@ -68,6 +68,8 @@ export const animateChildrenLimitsExit = ({ dom }) => {
 }
 
 export const animateExit = ({ dom }) => {
+  console.log(dom)
+
   let anim = animate([ { transform: 'none', opacity: 1 }, { transform: 'translate3d(25%,100%,0)', opacity: 0 } ])
 
   let waapi = dom.animate(anim, {
@@ -83,7 +85,6 @@ export const animateExit = ({ dom }) => {
 
 export const animateChildrenExit = ({ dom }) => {
   let children = [ ...dom.children ]
-
   let anim = animate([ { transform: 'none', opacity: 1 }, { transform: 'translate3d(25%,100%,0)', opacity: 0 } ])
 
   let waapi = children.map(child =>

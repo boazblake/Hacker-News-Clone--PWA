@@ -13,6 +13,31 @@
   box-sizing: border-box;
 }
 
+p {
+  margin: 0 auto;
+  font-size: 20px;
+  line-height: 30px;
+  max-width: 600px;
+}
+
+p + p {
+  text-indent: 1em;
+}
+
+blockquote p {
+  hanging-punctuation: first;
+}
+
+blockquote p {
+  text-indent: -0.5em;
+}
+
+ul,
+ol {
+  padding-left: 0;
+  list-style-position: outside;
+}
+
 body,
 html {
   scroll-behavior: smooth;
