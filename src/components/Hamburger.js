@@ -27,9 +27,7 @@ const Hamburger = ({ attrs: { model } }) => {
     },
     view: ({ attrs: { model } }) =>
       m('svg.hamburger', {
-        onclick: () => {
-          model.showTabs(model)
-        },
+        onclick: () => model.showTabs(model),
       }),
   }
 }

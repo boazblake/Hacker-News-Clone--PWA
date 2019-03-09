@@ -7,66 +7,58 @@ const IsLoading = m('.holder', { style: { width: '100%', height: '100%' } }, [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
 ])
 
-const Post = () => {
-  return {
-    view: ({ attrs: { key, item: { title, body } } }) => {
-      return m(
-        '.grid-item.post',
-        {
-          id: `post-${key}`,
-        },
-        [ m('h1', title), m('p', body) ]
-      )
-    },
-  }
+const Post = {
+  view: ({ attrs: { key, item: { title, body } } }) => {
+    return m(
+      '.grid-item.post',
+      {
+        id: `post-${key}`,
+      },
+      [ m('h1', title), m('p', body) ]
+    )
+  },
 }
 
-const Comment = () => {
-  return {
-    view: ({ attrs: { key, item: { email, name, body } } }) => {
-      return m(
-        '.grid-item.comment',
-        {
-          id: `comment-${key}`,
-        },
-        [ m('h1', name), m('p', email), m('p', body) ]
-      )
-    },
-  }
+const Comment = {
+  view: ({ attrs: { key, item: { email, name, body } } }) => {
+    return m(
+      '.grid-item.comment',
+      {
+        id: `comment-${key}`,
+      },
+      [ m('h1', name), m('p', email), m('p', body) ]
+    )
+  },
 }
 
-const Album = () => {
-  return {
-    view: ({ attrs: { key, item: { title } } }) => {
-      return m(
-        '.grid-item.album',
-        {
-          id: `album-${key}`,
-        },
-        [ m('h1', title) ]
-      )
-    },
-  }
+const Album = {
+  view: ({ attrs: { key, item: { title } } }) => {
+    return m(
+      '.grid-item.album',
+      {
+        id: `album-${key}`,
+      },
+      [ m('h1', title) ]
+    )
+  },
 }
 
-const Photo = () => {
-  return {
-    view: ({ attrs: { key, item: { title, thumbnailUrl } } }) => {
-      return m(
-        '.grid-item.photo',
-        {
-          id: `photo-${key}`,
-        },
-        [
-          m('h1', { style: { padding: '4px', right: 'auto', flex: 3 } }, title),
-          m('img', {
-            style: { left: 'auto', flex: '1 150px' },
-            src: thumbnailUrl,
-          }),
-        ]
-      )
-    },
-  }
+const Photo = {
+  view: ({ attrs: { key, item: { title, thumbnailUrl } } }) => {
+    return m(
+      '.grid-item.photo',
+      {
+        id: `photo-${key}`,
+      },
+      [
+        m('h1', { style: { padding: '4px', right: 'auto', flex: 3 } }, title),
+        m('img', {
+          style: { left: 'auto', flex: '1 150px' },
+          src: thumbnailUrl,
+        }),
+      ]
+    )
+  },
 }
 
 const Todo = ({ attrs: { item: { completed } } }) => {
@@ -96,25 +88,23 @@ const Todo = ({ attrs: { item: { completed } } }) => {
   }
 }
 
-const User = () => {
-  return {
-    view: ({ attrs: { key, item: { email, name, phone, username, website } } }) => {
-      return m(
-        '.grid-item.user',
-        {
-          id: `user-${key}`,
-          key,
-        },
-        [
-          m('.', [ m('label.left', { for: 'name' }, 'name'), m('p.right', { name: 'name' }, name) ]),
-          m('.', [ m('label.left', { for: 'email' }, 'email'), m('p.right', { name: 'email' }, email) ]),
-          m('.', [ m('label.left', { for: 'phone' }, 'phone'), m('p.right', { name: 'phone' }, phone) ]),
-          m('.', [ m('label.left', { for: 'username' }, 'username'), m('p.right', { name: 'username' }, username) ]),
-          m('.', [ m('label.left', { for: 'website' }, 'website'), m('p.right', { name: 'website' }, website) ]),
-        ]
-      )
-    },
-  }
+const User = {
+  view: ({ attrs: { key, item: { email, name, phone, username, website } } }) => {
+    return m(
+      '.grid-item.user',
+      {
+        id: `user-${key}`,
+        key,
+      },
+      [
+        m('.', [ m('label.left', { for: 'name' }, 'name'), m('p.right', { name: 'name' }, name) ]),
+        m('.', [ m('label.left', { for: 'email' }, 'email'), m('p.right', { name: 'email' }, email) ]),
+        m('.', [ m('label.left', { for: 'phone' }, 'phone'), m('p.right', { name: 'phone' }, phone) ]),
+        m('.', [ m('label.left', { for: 'username' }, 'username'), m('p.right', { name: 'username' }, username) ]),
+        m('.', [ m('label.left', { for: 'website' }, 'website'), m('p.right', { name: 'website' }, website) ]),
+      ]
+    )
+  },
 }
 
 const toComponent = type => {
@@ -134,114 +124,53 @@ const toComponent = type => {
   }
 }
 
-const Component = () => {
-  return {
-    view: ({ attrs: { model } }) => {
-      let route = model.state.route
-      let Current = toComponent(route)
-      let data = model.data[route].data
-      return m(
-        'section.component',
-        {
-          id: 'component',
-          route: model.state.route,
-          onscroll: infiniteScroll(model),
-        },
-        isEmpty(data)
-          ? m('.loader', IsLoading)
-          : data.map((item, idx) =>
-            m(Current, {
-              oncreate: animateComponentEntrance(idx),
-              key: idx,
-              item: item,
-              model,
-            })
-          )
-      )
-    },
-  }
-}
-
-export const App = model => {
-  return {
-    '/posts': {
-      onmatch: (_, path) => init(model)(path),
-      render: () =>
-        m(
-          Layout,
-          {
-            model,
-          },
-          m(Component, {
-            model,
-          })
-        ),
-    },
-    '/comments': {
-      onmatch: (_, path) => init(model)(path),
-      render: () =>
-        m(
-          Layout,
-          {
-            model,
-          },
-          m(Component, {
-            model,
-          })
-        ),
-    },
-    '/albums': {
-      onmatch: (_, path) => init(model)(path),
-      render: () =>
-        m(
-          Layout,
-          {
-            model,
-          },
-          m(Component, {
-            model,
-          })
-        ),
-    },
-    '/photos': {
-      onmatch: (_, path) => init(model)(path),
-      render: () =>
-        m(
-          Layout,
-          {
-            model,
-          },
-          m(Component, {
-            model,
-          })
-        ),
-    },
-    '/todos': {
-      onmatch: (_, path) => init(model)(path),
-      render: () => {
-        return m(
-          Layout,
-          {
-            model,
-          },
-          m(Component, {
+const Component = {
+  view: ({ attrs: { model } }) => {
+    let route = model.state.route
+    let Current = toComponent(route)
+    let data = model.data[route].data
+    return m(
+      'section.component',
+      {
+        id: 'component',
+        route: model.state.route,
+        onscroll: infiniteScroll(model),
+      },
+      isEmpty(data)
+        ? m('.loader', IsLoading)
+        : data.map((item, idx) =>
+          m(Current, {
+            oncreate: animateComponentEntrance(idx),
+            key: idx,
+            item: item,
             model,
           })
         )
+    )
+  },
+}
+
+const toRoute = model => ({
+  onmatch: (_, path) => init(model)(path),
+  render: () =>
+    m(
+      Layout,
+      {
+        model,
       },
-    },
-    '/users': {
-      onmatch: (_, path) => init(model)(path),
-      render: () =>
-        m(
-          Layout,
-          {
-            model,
-          },
-          m(Component, {
-            model,
-          })
-        ),
-    },
+      m(Component, {
+        model,
+      })
+    ),
+})
+
+export const App = model => {
+  return {
+    '/posts': toRoute(model),
+    '/comments': toRoute(model),
+    '/albums': toRoute(model),
+    '/photos': toRoute(model),
+    '/todos': toRoute(model),
+    '/users': toRoute(model),
   }
 }

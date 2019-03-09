@@ -7,7 +7,6 @@ const Selector = {
   view: ({ attrs: { model } }) =>
     m(
       '.limits',
-      {},
       model.limits.map((limit, idx) =>
         m(
           'button.btn.limit',
@@ -25,33 +24,29 @@ const Selector = {
     ),
 }
 
-const ChangeLimits = () => ({
+const ChangeLimits = {
   view: ({ attrs: { model } }) =>
     m('.changeLimits', [
       m(
         'button.changeLimitBtn',
         {
-          onclick: () => {
-            model.showLimits = !model.showLimits
-          },
+          onclick: () => (model.showLimits = !model.showLimits),
         },
         'Change Limit'
       ),
       model.showLimits && m(Selector, { model }),
     ]),
-})
+}
 
-const Header = () => {
-  return {
-    view: ({ attrs: { model } }) =>
-      m(
-        'header.header',
-        {
-          id: 'header',
-        },
-        [ m(Hamburger, { model }), m(ChangeLimits, { model }) ]
-      ),
-  }
+const Header = {
+  view: ({ attrs: { model } }) =>
+    m(
+      'header.header',
+      {
+        id: 'header',
+      },
+      [ m(Hamburger, { model }), m(ChangeLimits, { model }) ]
+    ),
 }
 
 export default Header
