@@ -35,7 +35,6 @@ html {
 
 #header {
   grid-area: header;
-  opacity: 0;
   padding-top: 10px;
   border-bottom: 1px dashed black;
   display: flex;
@@ -50,7 +49,6 @@ html {
   grid-area: content;
   padding: 0 10px;
   margin: 0 auto;
-  opacity: 0;
 }
 
 #component {
@@ -84,7 +82,6 @@ html {
 
 #footer {
   border-top: 1px dashed black;
-  opacity: 0;
   grid-area: footer;
   display: flex;
   flex-flow: wrap;
@@ -111,6 +108,7 @@ html {
 
   &:hover {
     background-color: rgba(52, 73, 94, .5);
+    color: white;
   }
 }
 
@@ -158,8 +156,7 @@ html {
 .limit {
   z-index: 1;
   padding: 4px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  opacity: 0;
+  box-shadow: 0px 8px 16px 0px rgba(52, 73, 94, 0.2);
   width: 100%;
   flex-basis: 20%;
   font-size: 24px;
@@ -168,7 +165,8 @@ html {
   grid-area: 1 / 3;
 
   &:hover {
-    background-color: rgba(52, 73, 94, 5);
+    background-color: rgba(52, 73, 94, .8);
+    color: white;
   }
 }
 

@@ -1,4 +1,5 @@
 import m from 'mithril'
+import { animateChildrenEntrance } from '../animations.js'
 
 const Tab = ({ attrs: { key } }) => {
   const state = { onhover: false }
@@ -27,6 +28,7 @@ const Sidebar = ({ attrs: { model } }) => {
   let tabs = Object.keys(model.reqs.urls)
 
   return {
+    oncreate: animateChildrenEntrance,
     view: ({ attrs: { model } }) =>
       m(
         'aside.sidebar slide-left',

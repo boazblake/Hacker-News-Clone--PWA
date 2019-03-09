@@ -21,16 +21,16 @@ export const animateEntrance = i => ({ dom }) =>
 
 export const animateChildrenEntrance = ({ dom }) => {
   let children = [ ...dom.children ]
-
-  let side = { 0: '-90%', 1: '-90%', 2: '90%', 3: '90%' }
+  console.log(children)
 
   return children.map((child, idx) => {
+    child.style.opacity = 0
     setTimeout(() => {
-      child.animate([ { transform: `translate3d(${side[idx]},0,0)`, opacity: 0 }, { transform: 'none', opacity: 1 } ], {
+      child.animate([ { transform: 'translate3d(-90%,0,0)', opacity: 0 }, { transform: 'none', opacity: 1 } ], {
         fill: 'forwards',
-        duration: 850,
+        duration: 250,
       })
-    }, (idx + 1) * 200)
+    }, (idx + 1) * 10)
   })
 }
 
@@ -39,6 +39,7 @@ export const animateChildrenLimitsEntrance = ({ dom }) => {
 
   return children.map((child, idx) => {
     if (child) {
+      child.style.opacity = 0
       return setTimeout(() => {
         child.animate([ { transform: 'translate3d(0,-180%,0)', opacity: 0 }, { transform: 'none', opacity: 1 } ], {
           fill: 'forwards',

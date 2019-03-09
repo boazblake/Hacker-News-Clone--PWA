@@ -1,5 +1,4 @@
 import m from 'mithril'
-import { animateChildrenEntrance } from './animations.js'
 import Header from './components/Header.js'
 import Footer from './components/Footer.js'
 import Body from './components/Body.js'
@@ -8,7 +7,6 @@ import Modal from './components/Modal.js'
 
 const Layout = ({ attrs: { model } }) => {
   return {
-    oncreate: animateChildrenEntrance,
     view: ({ children }) =>
       m(
         'section.layout',
@@ -19,7 +17,7 @@ const Layout = ({ attrs: { model } }) => {
           ? [
             m(Header, { model }),
             model.state.profile == 'phone'
-              ? model.tabsShowing ? m(Modal, m(Sidebar, { model })) : ''
+              ? model.tabsShowing ? m(Modal, m(Sidebar, { model })) : null
               : m(Sidebar, { model }),
             m(Body, { model, children }),
             m(Footer, { model }),
