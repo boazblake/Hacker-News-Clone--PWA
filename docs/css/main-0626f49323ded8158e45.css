@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400);/* index.css */
+@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,900);/* index.css */
 * {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
@@ -8,6 +8,9 @@
 *:before,
 *:after {
   box-sizing: border-box; }
+
+.bold {
+  font-weight: 900; }
 
 body,
 html {
@@ -1149,4 +1152,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-99f6f3ea4c59d96b0965.css.map*/
+/*# sourceMappingURL=main-0626f49323ded8158e45.css.map*/

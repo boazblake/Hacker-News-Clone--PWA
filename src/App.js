@@ -102,11 +102,14 @@ const User = {
           key,
         },
         [
-          m('.row', [ m('p.left', { for: 'name' }, 'name'), m('p.right', { name: 'name' }, name) ]),
-          m('.row', [ m('p.left', { for: 'email' }, 'email'), m('p.right', { name: 'email' }, email) ]),
-          m('.row', [ m('p.left', { for: 'phone' }, 'phone'), m('p.right', { name: 'phone' }, phone) ]),
-          m('.row', [ m('p.left', { for: 'username' }, 'username'), m('p.right', { name: 'username' }, username) ]),
-          m('.row', [ m('p.left', { for: 'website' }, 'website'), m('p.right', { name: 'website' }, website) ]),
+          m('.row', [ m('p.left', { for: 'name' }, 'name'), m('p.right.bold', { name: 'name' }, name) ]),
+          m('.row', [ m('p.left', { for: 'email' }, 'email'), m('p.right.bold', { name: 'email' }, email) ]),
+          m('.row', [ m('p.left', { for: 'phone' }, 'phone'), m('p.right.bold', { name: 'phone' }, phone) ]),
+          m('.row', [
+            m('p.left', { for: 'username' }, 'username'),
+            m('p.right.bold', { name: 'username' }, username),
+          ]),
+          m('.row', [ m('p.left', { for: 'website' }, 'website'), m('p.right.bold', { name: 'website' }, website) ]),
         ]
       )
     )

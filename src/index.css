@@ -1,5 +1,5 @@
 /* index.css */
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400");
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,900');
 
 * {
   box-sizing: border-box;
@@ -11,6 +11,10 @@
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+.bold {
+  font-weight: 900;
 }
 
 body,
