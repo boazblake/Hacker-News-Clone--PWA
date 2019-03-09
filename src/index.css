@@ -67,8 +67,8 @@ html {
 
 .navigationModal {
   position: absolute;
-  top: 5vh;
-  left: 3vw;
+  top: 1vh;
+  left: 1vw;
   width: 90vw;
   min-width: 400px;
   min-height: 800px;
@@ -140,8 +140,12 @@ html {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  z-index: 1;
+  z-index: 2;
   margin-left: 10px;
+
+  &:hover > * {
+    fill:#2980b9;
+  }
 }
 
 .btn {

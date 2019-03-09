@@ -27,6 +27,7 @@ const Hamburger = ({ attrs: { model } }) => {
     },
     view: ({ attrs: { model } }) =>
       m('svg.btn.hamburger', {
+        style:{fill: model.tabsShowing? 'white': 'inherit'},
         onclick: () => model.showTabs(model),
       }),
   }

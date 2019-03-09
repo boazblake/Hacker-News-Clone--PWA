@@ -56,8 +56,8 @@ html {
 
 .navigationModal {
   position: absolute;
-  top: 5vh;
-  left: 3vw;
+  top: 1vh;
+  left: 1vw;
   width: 90vw;
   min-width: 400px;
   min-height: 800px;
@@ -117,8 +117,10 @@ html {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  z-index: 1;
+  z-index: 2;
   margin-left: 10px; }
+  .hamburger:hover > * {
+    fill: #2980b9; }
 
 .btn {
   -webkit-appearance: none;
@@ -1170,4 +1172,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-219017c37d9feaf22cf3.css.map*/
+/*# sourceMappingURL=main-e30202422013dd41ca0f.css.map*/
