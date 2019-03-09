@@ -5,7 +5,7 @@ animate
 export const animateComponentEntrance = idx => ({ dom }) => {
   dom.style.opacity = 0
   return setTimeout(() => {
-    dom.classList.toggle('stretchLeft')
+    dom.classList.toggle('stretchRight')
     dom.style.opacity = 1
   }, idx * 100 + 20)
 }
@@ -40,7 +40,7 @@ export const animateChildrenLimitsExit = ({ dom }) => {
   return new Promise(() => {
     [ ...dom.children ].reverse().map((child, idx) => {
       return setTimeout(() => {
-        child.style.opacity = 0
+        child.style.display = 'none'
       }, idx * 100)
     })
   })
