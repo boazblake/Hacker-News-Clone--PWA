@@ -32,7 +32,6 @@ html {
 #header {
   grid-area: header;
   padding-top: 10px;
-  border-bottom: 1px dashed grey;
   display: flex;
   flex-flow: row;
   width: 100%;
@@ -71,7 +70,6 @@ html {
   align-content: flex-start; }
 
 #footer {
-  border-top: 1px dashed grey;
   grid-area: footer;
   display: flex;
   flex-flow: wrap;
@@ -218,7 +216,6 @@ html {
     min-height: inherit;
     height: 80vh;
     background: inherit;
-    border-right: 1px dashed grey;
     padding: 30px;
     display: flex;
     flex-flow: column;
@@ -1177,4 +1174,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-7ed31c0496d3ea676e33.css.map*/
+/*# sourceMappingURL=main-74dce329d24344f2cce7.css.map*/
