@@ -99,7 +99,7 @@ html {
   flex-grow: 1;
   margin: 10px auto;
   transition-duration: .3s;
-  min-width: 70vw;
+  min-width: 50vw;
 
   &:hover {
     border: 1.5px dashed #2980b9;
@@ -112,7 +112,7 @@ html {
 
   &.user {
     flex-flow: column wrap;
-    width: 90vw;
+    /* width: 90vw; */
     display: flex;
   }
 }
@@ -275,6 +275,6 @@ html {
   }
 
   .grid-item.user {
-    width: 70vw;
+    max-width: 50vw;
   }
 }

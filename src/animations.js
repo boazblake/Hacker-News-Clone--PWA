@@ -40,12 +40,22 @@ export const animate = dir => ({ dom }) => {
   },  200)
 }
 
-export const animateChildrenLimitsExit = ({ dom }) => {
+export const slideModalOut = ({ dom }) => {
   return new Promise(() => {
+    dom.classList.remove('slideRight')
+    return setTimeout(()=> {
+      dom.classList.add('reverseAnimation', 'slideRight')
+    } , 200)
+  })
+}
+
+
+export const animateChildrenLimitsExit = ({ dom }) =>
+  new Promise(() => {
     [ ...dom.children ].reverse().map((child, idx) => {
       return setTimeout(() => {
         child.style.display = 'none'
       }, idx * 100)
     })
   })
-}
+

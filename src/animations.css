@@ -18,6 +18,11 @@ slideDown
 ==============================================
 */
 
+.reverseAnimation {
+  animation-direction: reverse;
+  animation-fill-mode: both;
+}
+
 .slideDown {
   animation-name: slideDown;
   -webkit-animation-name: slideDown;
