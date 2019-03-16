@@ -1,4 +1,5 @@
-import { animateSidebarEntrance,slideModalOut } from '../animations.js'
+import m from 'mithril'
+import { animateSidebarEntrance,slideModalOut } from '../utils/animations.js'
 
 const Modal = {
   oncreate: animateSidebarEntrance,

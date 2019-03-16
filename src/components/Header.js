@@ -1,6 +1,7 @@
 import m from 'mithril'
 import Hamburger from './Hamburger.js'
-import { animateChildrenLimitsEntrance, animateChildrenLimitsExit, animate } from '../animations.js'
+import { animateChildrenLimitsEntrance, animateChildrenLimitsExit, animate } from '../utils/animations.js'
+
 
 const Selector = {
   onbeforeremove: animateChildrenLimitsExit,

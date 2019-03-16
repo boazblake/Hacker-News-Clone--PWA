@@ -1,9 +1,9 @@
 import m from 'mithril'
-import Header from './components/Header.js'
-import Footer from './components/Footer.js'
-import Body from './components/Body.js'
-import Sidebar from './components/Sidebar.js'
-import Modal from './components/Modal.js'
+import Header from './Header.js'
+import Footer from './Footer.js'
+import Body from './Body.js'
+import Sidebar from './Sidebar.js'
+import Modal from './Modal.js'
 
 const Layout = ({ attrs: { model } }) => {
   return {

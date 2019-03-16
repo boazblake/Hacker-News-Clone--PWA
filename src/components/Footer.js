@@ -1,5 +1,5 @@
 import m from 'mithril'
-import { animate, animateChildrenLimitsEntrance } from '../animations.js'
+import { animate, animateChildrenLimitsEntrance } from '../utils/animations.js'
 
 const Footer = {
   oncreate: animate('slideUp'),

@@ -1,7 +1,6 @@
 import m from 'mithril'
-import Layout from './Layout.js'
-import { isEmpty, init, infiniteScroll } from './helpers.js'
-import { animateComponentEntrance } from './animations.js'
+import Layout from './components/Layout.js'
+import { isEmpty, init, infiniteScroll, animateComponentEntrance } from './utils/index.js'
 
 const IsLoading = m('.holder', { style: { width: '100%', height: '100%' } }, [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),

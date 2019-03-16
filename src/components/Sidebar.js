@@ -1,5 +1,5 @@
 import m from 'mithril'
-import { animateSidebarEntrance } from '../animations.js'
+import { animateSidebarEntrance } from '../utils/animations.js'
 
 const Tab = ({ attrs: { key } }) => {
   return {

@@ -2,7 +2,9 @@
 import m from 'mithril'
 const root = document.body
 import { model } from './Model.js'
+
 import { App } from './App.js'
+
 
 if (module.hot) {
   module.hot.accept()
@@ -14,8 +16,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Styles
 import './index.css'
-import './animations.css'
-import './loader.css'
+import './utils/animations.css'
+import './utils/loader.css'
 
 function getProfile(w) {
   if (w < 668) return 'phone'

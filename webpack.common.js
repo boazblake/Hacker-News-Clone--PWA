@@ -102,6 +102,7 @@ module.exports = {
     }),
     new webpack.ProvidePlugin({
       m: 'mithril', //Global access
+      utils: resolve(__dirname, './src/utils/index.js'),
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new OptimizeCssAssetsPlugin({
