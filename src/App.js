@@ -2,7 +2,7 @@ import m from 'mithril'
 import Layout from './components/Layout.js'
 import { isEmpty, init, infiniteScroll, animateComponentEntrance } from './utils/index.js'
 
-const IsLoading = m('.holder', { style: { width: '100%', height: '100%' } }, [
+const IsLoading = m('.holder',  [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
 ])
 
@@ -11,7 +11,6 @@ const Post = {
     return m(
       '.grid-item.row.post',
       {
-        style: { flexFlow: 'row wrap', width: '60vw', display: 'flex' },
         id: `post-${key}`,
       },
       [ m('h1.left', title), m('p.right', body) ]
@@ -25,7 +24,6 @@ const Comment = {
       '.grid-item.row.comment',
       {
         id: `comment-${key}`,
-        style: { flexFlow: 'column wrap', width: '60vw', display: 'flex' },
       },
       [ m('h1.left', name), m('p.left', email), m('p.left', body) ]
     )
@@ -50,7 +48,6 @@ const Photo = {
       '.grid-item.photo',
       {
         id: `photo-${key}`,
-        style: { flexFlow: 'row wrap', width: '60vw', display: 'flex' },
       },
       [
         m('h1', { style: { padding: '4px', right: 'auto', flex: 3 } }, title),

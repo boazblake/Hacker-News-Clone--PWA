@@ -12,7 +12,7 @@ const Hamburger = ({ attrs: { model } }) => {
       dom,
       m('path', {
         xmlns: 'http://www.w3.org/2000/svg',
-        d: model.tabsShowing ? state.close : state.open,
+        d: model.state.tabsShowing ? state.close : state.open,
       })
     )
 
@@ -27,7 +27,7 @@ const Hamburger = ({ attrs: { model } }) => {
     },
     view: ({ attrs: { model } }) =>
       m('svg.btn.hamburger', {
-        style:{fill: model.tabsShowing? 'white': 'inherit'},
+        style:{fill: model.state.tabsShowing? 'white': 'inherit'},
         onclick: () => model.showTabs(model),
       }),
   }

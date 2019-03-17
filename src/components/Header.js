@@ -15,7 +15,7 @@ const Selector = {
             oncreate: animateChildrenLimitsEntrance(idx),
             onclick: () => {
               model.state.limit = limit
-              model.showLimits = false
+              model.state.showLimits = false
             },
             key: idx,
           },
@@ -31,11 +31,11 @@ const ChangeLimits = {
       m(
         'button.changeLimitBtn',
         {
-          onclick: () => (model.showLimits = !model.showLimits),
+          onclick: () => model.toggleLimits(model),
         },
         'Change Limit'
       ),
-      model.showLimits && m(Selector, { model }),
+      model.state.showLimits && m(Selector, { model }),
     ]),
 }
 

@@ -14,8 +14,8 @@ $color: rgba(41, 128, 185, 1);
     width: $size + px;
     height: $size + px;
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 35%;
+    top: 35%;
     transform: translateX(-25%) translateY(-50%);
     animation: rotatePreloader $time + s infinite ease-in;
   }
