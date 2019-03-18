@@ -75,7 +75,8 @@ html {
   grid-area: footer;
   display: flex;
   flex-flow: wrap;
-  padding: 10px; }
+  padding: 10px;
+  justify-content: center; }
 
 .grid-item {
   min-height: fit-content;
@@ -1235,4 +1236,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-92e34227242656e3a0be.css.map*/
+/*# sourceMappingURL=main-63d37809da73c4ae6bdc.css.map*/
