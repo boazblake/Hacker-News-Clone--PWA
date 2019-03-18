@@ -23,7 +23,6 @@ const Hamburger = ({ attrs: { model } }) => {
     },
     onupdate: ({ dom }) => {
       let _dom = dom
-      // console.log(dom.children[0].classList.add())
       return render(_dom)
     },
     view: ({ attrs: { model } }) =>
