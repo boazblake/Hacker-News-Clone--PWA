@@ -3,6 +3,7 @@ import Header from './Header.js'
 import Footer from './Footer.js'
 import Sidebar from './Sidebar.js'
 import Modal from './Modal.js'
+import Body from './Body.js'
 
 const Layout = ({ attrs: { model } }) => {
   return {
@@ -18,7 +19,7 @@ const Layout = ({ attrs: { model } }) => {
             model.state.profile == 'phone'
               ? model.state.tabsShowing ? m(Modal, m(Sidebar, { model })) : null
               : m(Sidebar, { model }),
-            m('section.content', { id: 'content' }, children),
+            m(Body, { model, children}),
             m(Footer, { model }),
           ]
           : []

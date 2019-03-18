@@ -7,14 +7,14 @@ const Hamburger = ({ attrs: { model } }) => {
     open: 'M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z',
   }
 
-  const render = dom =>
-    m.render(
+  const render = dom =>{
+    return m.render(
       dom,
       m('path', {
         xmlns: 'http://www.w3.org/2000/svg',
         d: model.state.tabsShowing ? state.close : state.open,
       })
-    )
+    )}
 
   return {
     oncreate: ({ dom }) => {
@@ -23,6 +23,7 @@ const Hamburger = ({ attrs: { model } }) => {
     },
     onupdate: ({ dom }) => {
       let _dom = dom
+      // console.log(dom.children[0].classList.add())
       return render(_dom)
     },
     view: ({ attrs: { model } }) =>

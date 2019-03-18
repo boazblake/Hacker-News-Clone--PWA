@@ -1,7 +1,7 @@
 $count: 7;
 $time: 2; //in seconds
-$size: 100;
-$color: rgba(41, 128, 185, 1);
+$size: 150;
+$color: #2980b9;
 
 .holder {
   position: absolute;

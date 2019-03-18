@@ -66,8 +66,8 @@ html {
 
 .navigationModal {
   position: absolute;
-  top: 1vh;
-  left: 1vw;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   min-width: 400px;
@@ -91,7 +91,6 @@ html {
 }
 
 .grid-item {
-  grid-column: 2 / 3;
   min-height: fit-content;
   padding: 4px 10px;
   border: 1.5px dashed grey;
@@ -99,7 +98,8 @@ html {
   flex-grow: 1;
   margin: 10px auto;
   transition-duration: .3s;
-  width: 90vw;
+  width: 60vw;
+  min-width: 60vw;
 
   &:hover {
     border: 1.5px dashed #2980b9;

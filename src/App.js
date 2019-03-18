@@ -87,32 +87,27 @@ const Todo = ({ attrs: { item: { completed } } }) => {
 }
 
 const User = {
-  view: () => m(''),
-  oncreate: ({ dom, attrs: { key, item: { email, name, phone, username, website } } }) => {
-    m.render(
-      dom,
-      m(
-        '.grid-item.user',
-        {
-          id: `user-${key}`,
-          key,
-        },
-        [
-          m('.row', [ m('p.left', { for: 'name' }, 'name'), m('p.right.bold', { name: 'name' }, name) ]),
-          m('.row', [ m('p.left', { for: 'email' }, 'email'), m('p.right.bold', { name: 'email' }, email) ]),
-          m('.row', [ m('p.left', { for: 'phone' }, 'phone'), m('p.right.bold', { name: 'phone' }, phone) ]),
-          m('.row', [
-            m('p.left', { for: 'username' }, 'username'),
-            m('p.right.bold', { name: 'username' }, username),
-          ]),
-          m('.row', [ m('p.left', { for: 'website' }, 'website'), m('p.right.bold', { name: 'website' }, website) ]),
-        ]
-      )
-    )
-  },
+  view: ({  attrs: { key, item: { email, name, phone, username, website } } }) =>
+    m(
+      '.grid-item.user',
+      {
+        id: `user-${key}`,
+        key,
+      },
+      [
+        m('.row', [ m('p.left', { for: 'name' }, 'name'), m('p.right.bold', { name: 'name' }, name) ]),
+        m('.row', [ m('p.left', { for: 'email' }, 'email'), m('p.right.bold', { name: 'email' }, email) ]),
+        m('.row', [ m('p.left', { for: 'phone' }, 'phone'), m('p.right.bold', { name: 'phone' }, phone) ]),
+        m('.row', [
+          m('p.left', { for: 'username' }, 'username'),
+          m('p.right.bold', { name: 'username' }, username),
+        ]),
+        m('.row', [ m('p.left', { for: 'website' }, 'website'), m('p.right.bold', { name: 'website' }, website) ]),
+      ]
+    ),
 }
 
-const toComponent = type => {
+const makeItem = type => {
   switch (type) {
   case '/posts':
     return Post
@@ -129,11 +124,14 @@ const toComponent = type => {
   }
 }
 
+
+
 const Component = {
   view: ({ attrs: { model } }) => {
     let route = model.state.route
-    let Current = toComponent(route)
+    let Item = makeItem(route)
     let data = model.data[route].data
+
     return m(
       'section.component',
       {
@@ -143,11 +141,11 @@ const Component = {
       },
       isEmpty(data)
         ? m('.loader', IsLoading)
-        : data.map((item, idx) =>
-          m(Current, {
+        : data.map((_item, idx) =>
+          m(Item, {
             oncreate: animateComponentEntrance(idx),
             key: idx,
-            item: item,
+            item: _item,
             model,
           })
         )
@@ -155,8 +153,10 @@ const Component = {
   },
 }
 
+
 const toRoute = model => ({
-  onmatch: (_, path) => init(model)(path),
+  onmatch: (_, path) =>
+    init(model)(path),
   render: () =>
     m(
       Layout,
