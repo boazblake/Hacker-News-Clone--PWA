@@ -99,6 +99,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Mithril-JSONPlaceholder-PWA',
       favicon: './assets/favicon.png',
+      manifest:'./src/manifets.json',
       template: '../index.html',
     }),
     new WorkboxPlugin.GenerateSW({
