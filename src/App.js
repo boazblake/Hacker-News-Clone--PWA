@@ -50,8 +50,8 @@ const Photo = {
         id: `photo-${key}`,
       },
       [
-        m('h1', { style: { padding: '4px', right: 'auto', flex: 3 } }, title),
-        m('img.left', {
+        m('h1.left', title),
+        m('img.right', {
           src: thumbnailUrl,
         }),
       ]

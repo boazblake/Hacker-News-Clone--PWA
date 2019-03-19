@@ -111,6 +111,19 @@ html {
     }
   }
 
+  .photo {
+    h1:{
+      padding: 4px;
+      flex: 3;
+      left:auto;
+    }
+
+    img {
+    max-width: 150px;
+    min-width: 150px;
+    }
+  }
+
   &.user {
     flex-flow: column wrap;
     /* width: 90vw; */
