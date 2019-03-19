@@ -6,6 +6,8 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+const glob = require('glob')
 
 module.exports = {
   context: resolve(__dirname, 'src'),
@@ -128,6 +130,9 @@ module.exports = {
     new webpack.ProvidePlugin({
       m: 'mithril', //Global access
       utils: resolve(__dirname, './src/utils/index.js'),
+    }),
+    new PurgecssPlugin({
+      paths: glob.sync(`${join(__dirname, 'src')}/**/*`, { nodir: true }),
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new OptimizeCssAssetsPlugin({

@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "mithril": "^2.0.0-rc.4",
+    "purgecss-webpack-plugin": "^1.4.0",
     "ramda": "^0.26.0"
   },
   "scripts": {
