@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 module.exports = {
   context: resolve(__dirname, 'src'),
@@ -97,8 +97,15 @@ module.exports = {
     }),
     new CopyWebpackPlugin([ { from: 'assets' } ]),
     new HtmlWebpackPlugin({
+      title: 'Mithril-JSONPlaceholder-PWA',
       favicon: './assets/favicon.png',
       template: '../index.html',
+    }),
+    new WorkboxPlugin.GenerateSW({
+      // these options encourage the ServiceWorkers to get in there fast
+      // and not allow any straggling "old" SWs to hang around
+      clientsClaim: true,
+      skipWaiting: true,
     }),
     new webpack.ProvidePlugin({
       m: 'mithril', //Global access
