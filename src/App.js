@@ -52,7 +52,7 @@ const Photo = {
       [
         m('h1.left', title),
         m('img.right', {
-          src: thumbnailUrl,
+          src: thumbnailUrl, alt: 'img',
         }),
       ]
     )
