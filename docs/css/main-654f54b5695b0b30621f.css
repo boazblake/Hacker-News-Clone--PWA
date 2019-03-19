@@ -93,6 +93,13 @@ html {
     box-shadow: 0px 2px 4px 0px rgba(20, 29, 37, 0.2); }
     .grid-item:hover h1 {
       color: #2980b9; }
+  .grid-item .photo {
+    h1-padding: 4px;
+    h1-flex: 3;
+    h1-left: auto; }
+    .grid-item .photo img {
+      max-width: 150px;
+      min-width: 150px; }
   .grid-item.user {
     flex-flow: column wrap;
     /* width: 90vw; */
@@ -1236,4 +1243,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-63d37809da73c4ae6bdc.css.map*/
+/*# sourceMappingURL=main-654f54b5695b0b30621f.css.map*/
