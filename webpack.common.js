@@ -1,10 +1,11 @@
-const { resolve } = require('path')
+const { resolve, join } = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
+const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 module.exports = {
   context: resolve(__dirname, 'src'),
@@ -107,6 +108,22 @@ module.exports = {
       // and not allow any straggling "old" SWs to hang around
       clientsClaim: true,
       skipWaiting: true,
+    }),
+    new WebpackPwaManifest({
+      name: 'JSONplaceholder-mithril',
+      short_name: 'Demo',
+      description: 'Demo!',
+      background_color: '#01579b',
+      theme_color: '#01579b',
+      'theme-color': '#01579b',
+      start_url: '/',
+      icons: [
+        {
+          src: resolve('src/assets/favicon.png'),
+          sizes: [96, 128, 192, 256, 384, 512],
+          destination: join('assets', 'icons'),
+        },
+      ],
     }),
     new webpack.ProvidePlugin({
       m: 'mithril', //Global access
