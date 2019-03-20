@@ -66,7 +66,7 @@ body {
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
-  line-height: 6rem;
+  line-height: 5rem;
   align-content: flex-start;
   transition: .5s; }
 
@@ -86,7 +86,7 @@ body {
   margin: 10px auto;
   transition-duration: .3s;
   width: 60vw;
-  min-width: 60vw; }
+  min-width: 280px; }
   .grid-item:hover {
     border: 1.5px dashed #2980b9;
     box-shadow: 0px 2px 4px 0px rgba(20, 29, 37, 0.2); }
@@ -1071,4 +1071,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-fcc19556e6e830c80360.css.map*/
+/*# sourceMappingURL=main-caa3f89808b6a9762624.css.map*/

@@ -78,7 +78,7 @@ html {
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
-  line-height: 6rem;
+  line-height: 5rem;
   align-content: flex-start;
   transition: .5s;
 }
@@ -100,7 +100,7 @@ html {
   margin: 10px auto;
   transition-duration: .3s;
   width: 60vw;
-  min-width: 60vw;
+  min-width: 280px;
 
   &:hover {
     border: 1.5px dashed #2980b9;
