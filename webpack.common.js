@@ -118,7 +118,7 @@ module.exports = {
       background_color: '#01579b',
       theme_color: '#01579b',
       'theme-color': '#01579b',
-      start_url: 'https://boazblake.github.io/',
+      start_url: 'https://boazblake.github.io/mithril-placeholder',
       icons: [
         {
           src: resolve('src/assets/favicon.png'),
