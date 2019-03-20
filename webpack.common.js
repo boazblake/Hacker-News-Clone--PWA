@@ -112,13 +112,16 @@ module.exports = {
       skipWaiting: true,
     }),
     new WebpackPwaManifest({
+      lang: 'en-US',
       name: 'JSONplaceholder-mithril',
       short_name: 'Demo',
+      display: 'standalone',
       description: 'Demo!',
       background_color: '#01579b',
       theme_color: '#01579b',
       'theme-color': '#01579b',
-      start_url: 'https://boazblake.github.io/mithril-placeholder',
+      start_url: '/',
+      scope: '/',
       icons: [
         {
           src: resolve('src/assets/favicon.png'),
