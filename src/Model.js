@@ -1,9 +1,11 @@
-const routes = ['/posts', '/comments', '/albums', '/photos', '/todos', '/users']
+import { getData} from './utils/helpers.js'
 
-const url = item => (start, limit) => `https://jsonplaceholder.typicode.com${item}?_start=${start}&_limit=${limit}`
+const routes = ['news', 'newest', 'ask', 'show', 'jobs', 'item', 'user']
 
-const urls = routes.reduce((req, item) => {
-  req[item] = url(item)
+const url = route => page => `https://api.hnpwa.com/v0/${route}/${page}.json`
+
+const urls = routes.reduce((req, route) => {
+  req[route] = url(route)
   return req
 }, {})
 
@@ -11,13 +13,9 @@ const http = model => url => route => m
   .request({
     url,
     method: 'GET',
-    extract: xhr => {
-      model.data[route].limit = parseInt(xhr.getResponseHeader('x-total-count'))
-      return JSON.parse(xhr.responseText)
-    },
   })
   .then(data => {
-    model.data[route].data = model.data[route].data.concat(data)
+    model.data[route].data = data
     return model
   })
 
@@ -26,14 +24,18 @@ const reqs = {
   http,
 }
 
+const getPath = route => route.split('/')[1]
+
 export const model = {
   routes,
+  getPath,
   reqs,
-  limits: [ 30, 40, 50, 60, 70, 80, 90, 100 ],
   data: {},
-  state: { url: '', route: '', scrollPos: 1, limit: 30, profile: '', tabsShowing: false, showLimits: false },
-  toggleLimits: model =>
-    model.state.showLimits = !model.state.showLimits,
+  state: { url: '', route: '', scrollPos: 1, page: 1, profile: '', tabsShowing: false, showPages: false },
+  changePage: delta => model => {
+    model.state.page = model.state.page + delta
+    getData(model)(model.state.route)
+  },
   showTabs: model =>
     model.state.tabsShowing = !model.state.tabsShowing,
 }

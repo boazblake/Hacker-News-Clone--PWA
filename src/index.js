@@ -51,4 +51,4 @@ if ('serviceWorker' in navigator) {
 
 checkWidth()
 
-m.route(root, '/posts', App(model))
+m.route(root, '/news', App(model))

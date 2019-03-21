@@ -1,5 +1,6 @@
 import m from 'mithril'
 import { animateSidebarEntrance } from '../utils/animations.js'
+import { without } from 'ramda'
 
 const Tab = ({ attrs: { key } }) => {
   return {
@@ -10,16 +11,17 @@ const Tab = ({ attrs: { key } }) => {
         {
           key,
           id: `${tab}`,
-          href: `${tab}`,
+          href: `/${tab}`,
           oncreate: m.route.link,
         },
-        tab.split('/')[1]
+        tab
       ),
   }
 }
 
 const Sidebar = ({ attrs: { model } }) => {
   let tabs = Object.keys(model.reqs.urls)
+  let navTabs = without(['item', 'user'], tabs)
 
   return {
     oncreate: animateSidebarEntrance,
@@ -29,7 +31,7 @@ const Sidebar = ({ attrs: { model } }) => {
         {
           id: 'sidebar',
         },
-        tabs.map((tab, idx) =>
+        navTabs.map((tab, idx) =>
           m(Tab, {
             key: idx,
             active: model.state.route == tab,

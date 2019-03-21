@@ -1,41 +1,24 @@
 import m from 'mithril'
 import Hamburger from './Hamburger.js'
-import { animateChildrenLimitsEntrance, animateChildrenLimitsExit, animate } from '../utils/animations.js'
+import { animate } from '../utils/animations.js'
 
 
-const Selector = {
-  onbeforeremove: animateChildrenLimitsExit,
+const Paginate = {
   view: ({ attrs: { model } }) =>
-    m(
-      '.limits',
-      model.limits.map((limit, idx) =>
-        m(
-          'button.btn.limit',
-          {
-            oncreate: animateChildrenLimitsEntrance(idx),
-            onclick: () => {
-              model.state.limit = limit
-              model.state.showLimits = false
-            },
-            key: idx,
-          },
-          limit
-        )
-      )
-    ),
-}
-
-const ChangeLimits = {
-  view: ({ attrs: { model } }) =>
-    m('.changeLimits', [
+    m('.paginateContainer', [
       m(
-        'button.changeLimitBtn',
+        'button.paginateBtn',
         {
-          onclick: () => model.toggleLimits(model),
+          onclick: () => model.changePage(-1)(model),
         },
-        'Change Limit'
+        'Prev'
+      ), m(
+        'button.paginateBtn',
+        {
+          onclick: () => model.changePage(+1)(model),
+        },
+        'Next'
       ),
-      model.state.showLimits && m(Selector, { model }),
     ]),
 }
 
@@ -47,7 +30,7 @@ const Header = {
       {
         id: 'header',
       },
-      [ m(Hamburger, { model }), m(ChangeLimits, { model }) ]
+      [ m(Hamburger, { model }), m(Paginate, { model }) ]
     ),
 }
 

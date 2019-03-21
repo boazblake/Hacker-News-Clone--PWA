@@ -1,10 +1,10 @@
 export const isEmpty = data => data.length == 0
 
-export const getData = model => path => {
-  model.state.route = path
-  model.data[path] ? model.data[path] : (model.data[path] = { data: [], limit: 1 })
-  let start = model.data[path].data.length
-  model.reqs.http(model)(model.reqs.urls[path](start, model.state.limit))(path)
+export const getData = model => route => {
+  model.state.route = route
+  let path = model.getPath(route)
+  model.data[route] ? model.data[route] : (model.data[route] = { data: []  })
+  model.reqs.http(model)(model.reqs.urls[path](model.state.page))(route)
 }
 
 export const infiniteScroll = model => e => {
@@ -20,12 +20,12 @@ export const infiniteScroll = model => e => {
 }
 
 export const init = model => path => {
-  model.state.scrollPos = 1
+  model.state.page = 1
   model.state.tabsShowing = false
   return getData(model)(path)
 }
 
 export const makeRoutes = model => toRoute => (routes, route) => {
-  routes[route] = toRoute(model)
+  routes[`/${route}`] = toRoute(model)
   return routes
 }

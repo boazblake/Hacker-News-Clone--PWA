@@ -100,7 +100,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([ { from: 'assets' } ]),
     new HtmlWebpackPlugin({
-      title: 'Mithril-JSONPlaceholder-PWA',
+      title: 'Mithril-HN-PWA',
       favicon: './assets/favicon.png',
       manifest:'./src/manifets.json',
       template: '../index.html',
@@ -113,10 +113,10 @@ module.exports = {
     }),
     new WebpackPwaManifest({
       lang: 'en-US',
-      name: 'JSONplaceholder-mithril',
-      short_name: 'Demo',
+      name: 'Mithril-HN-PWA',
+      short_name: 'Mithril-HN-PWA',
       display: 'standalone',
-      description: 'Demo!',
+      description: 'Mithril-HN-PWA!',
       background_color: '#01579b',
       theme_color: '#01579b',
       'theme-color': '#01579b',

@@ -1,5 +1,5 @@
 {
-  "name": "placeholder",
+  "name": "Mithril-HN-PWA",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -42,13 +42,13 @@
   },
   "dependencies": {
     "mithril": "^2.0.0-rc.4",
-    "ramda": "^0.26.0"
+    "ramda": "^0.26.1"
   },
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --progress --config webpack.prod.js",
     "lint": "eslint src/ webpack.*.js --cache --fix"
   },
-  "description": "placeholder",
+  "description": "Mithril-HN-PWA",
   "author": "boazblake <boazblake@gmail.com>"
 }

@@ -169,13 +169,13 @@ html {
   border-radius: 5px;
 }
 
-.changeLimits {
+.paginateContainer {
   position: absolute;
   right: 20px;
   cursor: pointer;
   border-radius: 5px;
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
   button:focus {
     outline: 0;
   }
@@ -184,12 +184,12 @@ html {
   }
 }
 
-.changeLimitBtn {
+.paginateBtn {
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
   border-radius: 5px;
-  width: 200px;
+  width: 100px;
   height: 40px;
   transition-duration: .2s;
   letter-spacing: 1px;
