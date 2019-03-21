@@ -1,8 +1,8 @@
-const options = ['/posts', '/comments', '/albums', '/photos', '/todos', '/users']
+const routes = ['/posts', '/comments', '/albums', '/photos', '/todos', '/users']
 
 const url = item => (start, limit) => `https://jsonplaceholder.typicode.com${item}?_start=${start}&_limit=${limit}`
 
-const urls = options.reduce((req, item) => {
+const urls = routes.reduce((req, item) => {
   req[item] = url(item)
   return req
 }, {})
@@ -27,6 +27,7 @@ const reqs = {
 }
 
 export const model = {
+  routes,
   reqs,
   limits: [ 30, 40, 50, 60, 70, 80, 90, 100 ],
   data: {},

@@ -1,6 +1,6 @@
 import m from 'mithril'
 import Layout from './components/Layout.js'
-import { isEmpty, init, infiniteScroll, animateComponentEntrance } from './utils/index.js'
+import {makeRoutes, isEmpty, init, infiniteScroll, animateComponentEntrance } from './utils/index.js'
 
 const IsLoading = m('.holder',  [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
@@ -169,13 +169,5 @@ const toRoute = model => ({
     ),
 })
 
-export const App = model => {
-  return {
-    '/posts': toRoute(model),
-    '/comments': toRoute(model),
-    '/albums': toRoute(model),
-    '/photos': toRoute(model),
-    '/todos': toRoute(model),
-    '/users': toRoute(model),
-  }
-}
+export const App = model =>
+  model.routes.reduce(makeRoutes(model)(toRoute),{})

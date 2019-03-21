@@ -24,3 +24,8 @@ export const init = model => path => {
   model.state.tabsShowing = false
   return getData(model)(path)
 }
+
+export const makeRoutes = model => toRoute => (routes, route) => {
+  routes[route] = toRoute(model)
+  return routes
+}
