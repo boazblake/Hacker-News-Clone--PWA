@@ -35,9 +35,11 @@
   "short_name": "Demo",
   "orientation": "portrait",
   "display": "standalone",
-  "start_url": "https://boazblake.github.io/mithril-placeholder",
+  "start_url": ".",
+  "lang": "en-US",
   "description": "Demo!",
   "background_color": "#01579b",
   "theme_color": "#01579b",
-  "theme-color": "#01579b"
+  "theme-color": "#01579b",
+  "scope": "/"
 }
