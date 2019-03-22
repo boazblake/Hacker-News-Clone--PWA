@@ -60,7 +60,6 @@ const Comment = ({attrs:{model}}) => {
           m('.postBottom', [
             m('.', [
               m('code', m.trust(content)), m('a', `  by ${user}`),
-
             ]),
             m('.row', [
               m('code.left', `${time_ago}`),
