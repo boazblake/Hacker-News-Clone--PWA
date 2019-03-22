@@ -1,5 +1,5 @@
 
-const routes = ['news', 'newest', 'ask', 'show', 'jobs', 'item/:key', 'user']
+const routes = ['news', 'newest', 'ask', 'show', 'jobs', 'item/:key', 'user:/key']
 
 const url = route => page => {
   let path = route.split('/')[0]
@@ -27,6 +27,7 @@ const reqs = {
 }
 
 const getData = model => route => {
+  model.state.showComment = false
   console.log(model.reqs.urls, route)
   model.state.route = route
   let path = model.getPath(route)
@@ -35,7 +36,7 @@ const getData = model => route => {
 }
 
 const getComments = model => route => id => {
-  console.log(model.reqs.urls)
+  console.log(model)
   model.state.route = route
   model.data[route] ? model.data[route] : (model.data[route] = { data: [] })
   model.reqs.http(model)(model.reqs.urls['item/:key'](id))(route)

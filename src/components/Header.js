@@ -22,21 +22,6 @@ const Paginate = {
     ]),
 }
 
-const CommentView = {
-  view: ({ attrs: { model } }) =>
-    m('.', {style:{display:'flex', flexFlow:'row'}},[
-      m(
-        'button.btn',
-        {
-          onclick: () => console.log('back to ...', model),
-        },
-        'Back'
-      ),
-      m('h1', {style:{paddingLeft:'100px'}}, model.state.title),
-    ]),
-}
-
-
 const Header = {
   oncreate: animate('slideDown'),
   view: ({ attrs: { model } }) =>
@@ -44,8 +29,12 @@ const Header = {
       'header.header',
       {
         id: 'header',
-      },
-      [m(Hamburger, { model }), (model.state.showComment ? m(CommentView, { model }) : ''), m(Paginate, { model }) ]
+      },[
+        m(Hamburger, { model }),
+        model.state.showComment
+          ? m('button.btn', {onclick: () => console.log('back to ...', model)},'Go BAck Up')
+          : m(Paginate, { model }),
+      ]
     ),
 }
 

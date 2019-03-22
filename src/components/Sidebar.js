@@ -21,7 +21,7 @@ const Tab = ({ attrs: { key } }) => {
 
 const Sidebar = ({ attrs: { model } }) => {
   let tabs = Object.keys(model.reqs.urls)
-  let navTabs = without(['item', 'user'], tabs)
+  let navTabs = without(['item/:key', 'user:/key'], tabs)
 
   return {
     oncreate: animateSidebarEntrance,

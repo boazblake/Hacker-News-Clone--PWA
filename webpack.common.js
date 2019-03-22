@@ -114,7 +114,7 @@ module.exports = {
     new WebpackPwaManifest({
       lang: 'en-US',
       name: 'Mithril-HN-PWA',
-      short_name: 'Mithril-HN-PWA',
+      short_name: 'HNPWA',
       display: 'standalone',
       description: 'Mithril-HN-PWA!',
       background_color: '#01579b',
