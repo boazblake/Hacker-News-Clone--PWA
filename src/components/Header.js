@@ -5,15 +5,15 @@ import { animate } from '../utils/animations.js'
 
 const Paginate = {
   view: ({ attrs: { model } }) =>
-    m('.paginateContainer', [
+    m('.btnContainer', [
       m(
-        'button.paginateBtn',
+        'button.btn',
         {
           onclick: () => model.changePage(-1)(model),
         },
         'Prev'
       ), m(
-        'button.paginateBtn',
+        'button.btn',
         {
           onclick: () => model.changePage(+1)(model),
         },
@@ -21,6 +21,21 @@ const Paginate = {
       ),
     ]),
 }
+
+const CommentView = {
+  view: ({ attrs: { model } }) =>
+    m('.', {style:{display:'flex', flexFlow:'row'}},[
+      m(
+        'button.btn',
+        {
+          onclick: () => console.log('back to ...', model),
+        },
+        'Back'
+      ),
+      m('h1', {style:{paddingLeft:'100px'}}, model.state.title),
+    ]),
+}
+
 
 const Header = {
   oncreate: animate('slideDown'),
@@ -30,7 +45,7 @@ const Header = {
       {
         id: 'header',
       },
-      [ m(Hamburger, { model }), m(Paginate, { model }) ]
+      [m(Hamburger, { model }), (model.state.showComment ? m(CommentView, { model }) : ''), m(Paginate, { model }) ]
     ),
 }
 

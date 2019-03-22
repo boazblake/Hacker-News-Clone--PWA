@@ -1,12 +1,5 @@
 export const isEmpty = data => data.length == 0
 
-export const getData = model => route => {
-  model.state.route = route
-  let path = model.getPath(route)
-  model.data[route] ? model.data[route] : (model.data[route] = { data: []  })
-  model.reqs.http(model)(model.reqs.urls[path](model.state.page))(route)
-}
-
 export const infiniteScroll = model => e => {
   let route = model.state.route
   let length = model.data[route].data.length
@@ -14,7 +7,7 @@ export const infiniteScroll = model => e => {
   if (e.target.scrollTop - model.state.scrollPos >= setpoint) {
     model.state.scrollPos++ + e.target.scrollTop
     if (length < model.data[route].limit) {
-      getData(model)(route)
+      model.getData(model)(route)
     }
   }
 }
@@ -22,7 +15,9 @@ export const infiniteScroll = model => e => {
 export const init = model => path => {
   model.state.page = 1
   model.state.tabsShowing = false
-  return getData(model)(path)
+  let id =  path.split('/')[2]
+  let route = path.split('/')[1]
+  return id ? model.getComments(model)(route)(id) : model.getData(model)(path)
 }
 
 export const makeRoutes = model => toRoute => (routes, route) => {

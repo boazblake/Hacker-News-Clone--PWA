@@ -7,24 +7,34 @@ const IsLoading = m('.holder',  [
 ])
 
 const Item = {
-  view: ({ attrs: { key, item: { comments_count,
+  view: ({ attrs: { model,item: { comments_count,
     domain,
     id,
     points,
-    time,
     time_ago,
     title,
-    type,
     url,
     user } } }) => {
-
     return m(
-      '.grid-item.row.post',
+      '.grid-item',
       {
         href:url,
-        id: `post-${key-id}`,
+        id: `${id}`,
       },
-      [m('h1.left', title), m('a.right',user), m('p.right', points), m('p.right', time_ago), m('p.right', domain), m('p.right', time), m('p.right', type), m('p.right', comments_count) ]
+      [
+        m('.postTop', [
+          m('h1', title), m('code.subTitle', ` from ${domain}`)]),
+        m('.postBottom', [
+          m('.',[
+            m('code.points',`${points}`), m('a', ` points by ${user}`),
+
+          ]),
+          m('.row', [
+            m('code.left', `${time_ago} |`),
+            m('a.right', { oncreate: m.route.link, href: `/item/${id}`, onclick:() => model.state.id = id},`${comments_count} comments`),
+          ]),
+        ]),
+      ]
     )
   },
 }
@@ -34,6 +44,12 @@ const Component = {
   view: ({ attrs: { model } }) => {
     let route = model.state.route
     let data = model.data[route].data
+    let showItem = (id, title = '') => {
+      console.log(id)
+      model.state.title = title
+      model.state.id = id
+      model.state.showComments = !model.state.showComments
+    }
 
     return m(
       'section.component',
@@ -44,12 +60,19 @@ const Component = {
       },
       isEmpty(data)
         ? m('.loader', IsLoading)
-        : data.map((_item, idx) =>
+        : data.map ? data.map((_item, idx) =>
           m(Item, {
             oncreate: animateComponentEntrance(idx),
             key: idx,
             item: _item,
-            model,
+            model, showItem,
+          })
+        ) : data.comments.map((_item, idx) =>
+          m(Item, {
+            oncreate: animateComponentEntrance(idx),
+            key: idx,
+            item: _item,
+            model, showItem,
           })
         )
     )
@@ -58,8 +81,9 @@ const Component = {
 
 
 const toRoute = model => ({
-  onmatch: (_, path) =>
-    init(model)(path),
+  onmatch: (_, path) => {
+    init(model)(path)
+  },
   render: () =>
     m(
       Layout,
