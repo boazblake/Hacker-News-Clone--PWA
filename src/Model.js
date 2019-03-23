@@ -28,7 +28,6 @@ const reqs = {
 
 const getData = model => route => {
   model.state.showComment = false
-  console.log(model.reqs.urls, route)
   model.state.route = route
   let path = model.getPath(route)
   model.data[route] ? model.data[route] : (model.data[route] = { data: [] })
@@ -36,7 +35,7 @@ const getData = model => route => {
 }
 
 const getComments = model => route => id => {
-  console.log(model)
+  model.state.prev = model.state.route
   model.state.route = route
   model.data[route] ? model.data[route] : (model.data[route] = { data: [] })
   model.reqs.http(model)(model.reqs.urls['item/:key'](id))(route)
@@ -51,12 +50,11 @@ export const model = {
   getPath,
   reqs,
   data: {},
-  state: { url: '', route: '', scrollPos: 1, page: 1, profile: '', tabsShowing: false, title: '', showComments: false },
+  state: { key: '', url: '', route: '', scrollPos: 1, page: 1, profile: '', tabsShowing: false, title: '', showComments: false },
   changePage: delta => model => {
     model.state.page = model.state.page + delta
     model.getData(model)(model.state.route)
   },
-  showComments: model => model.state.showComments = !model.state.showComments,
   showTabs: model =>
     model.state.tabsShowing = !model.state.tabsShowing,
 }

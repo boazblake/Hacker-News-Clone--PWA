@@ -6,7 +6,7 @@ export const animateComponentEntrance = idx => ({ dom }) => {
   }, idx * 100 + 20)
 }
 
-export const animateSidebarEntrance = ({ dom }) => {
+export const animateHeaderEntrance = ({ dom }) => {
   dom.style.opacity = 0
   dom.classList.toggle('slideRight')
   dom.style.opacity = 1

@@ -12,11 +12,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "runtime~main-bundle.js"
   },
   {
-    "revision": "0ef37e74d0517ff81282",
+    "revision": "464f89907f8fa3f77804afcae7efdbc8",
+    "url": "mithril.svg"
+  },
+  {
+    "revision": "6304dfc576f1d4c1531e",
     "url": "main-chunk.js"
   },
   {
-    "revision": "1670db1867c82d2a4b3fdcfdf4959274",
+    "revision": "00e00e043db37c1f2e8b9ae6ec42fc4f",
     "url": "index.html"
   },
   {
@@ -28,9 +32,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon.png"
   },
   {
-    "url": "css/main-3547e314b6fd662a3999.css.gz"
+    "url": "css/main-b7359f4eb0593db7083c.css.gz"
   },
   {
-    "url": "css/main-3547e314b6fd662a3999.css"
+    "url": "css/main-b7359f4eb0593db7083c.css"
   }
 ]);

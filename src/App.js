@@ -27,7 +27,6 @@ const Item = {
         m('.postBottom', [
           m('.',[
             m('code.points',`${points}`), m('a', ` points by ${user}`),
-
           ]),
           m('.row', [
             m('code.left', `${time_ago}`),
@@ -39,37 +38,40 @@ const Item = {
   },
 }
 
-const Comment = ({attrs:{model}}) => {
-  console.log('???',model)
-  return {
-    view: ({ attrs: { model, item: { comments_count,
-      id,
-      time_ago,
-      content,
-      url,
-      user } } }) => {
-
-      return m(
-        '.grid-item',
-        {
-          href: url,
-          id: `${id}`,
-        },
-        [
-          m('.postTop', m('h1.title', model.state.title)),
-          m('.postBottom', [
-            m('.', [
-              m('code', m.trust(content)), m('a', `  by ${user}`),
-            ]),
-            m('.row', [
-              m('code.left', `${time_ago}`),
-              m('a.right', { oncreate: m.route.link, href: `/item/${id}`, onclick: () => model.state.id = id }, `${comments_count} comments`),
-            ]),
+const Comment = {
+  view: ({ attrs: { model, item: { comments, comments_count,
+    id,
+    time_ago,
+    content,
+    url,
+    user } } }) => {
+    return m(
+      '.commentContainer',
+      {
+        href: url,
+        id: `${id}`,
+      },
+      [
+        m('.commentTop' ),
+        m('.commentBottom', [
+          m('.', [
+            m('code', m.trust(content)), m('a', `  by ${user}`),
           ]),
-        ]
-      )
-    },
-  }}
+          m('.', {style:{display:'flex', flexFlow:'column'}},[
+            m('code.left', `${time_ago}`),
+            m('code.right', `${comments_count} comments`),
+            comments.map((_item, idx) => m(Comment, {
+              key: idx,
+              item: _item,
+              model,
+            })),
+
+          ]),
+        ]),
+      ]
+    )
+  },
+}
 
 
 const Component = () => {
@@ -81,7 +83,6 @@ const Component = () => {
       let route = model.state.route
       let data = model.data[route].data
       let showItem = (id, title = '') => {
-        console.log(id)
         model.state.title = title
         model.state.id = id
         model.state.showComment = !model.state.showComment
@@ -103,27 +104,27 @@ const Component = () => {
               item: _item,
               model, showItem,
             })
-          ) : isComment(data) ? [m(Comment, {
-            style: { backgroundColor:'rgba(225, 102, 0, .9)'},
-            item: data,
-            model,
-          }), data.comments.map((_item, idx) =>
+          ) : isComment(data) ? [
+            m('.postTop', m('h1.title', data.title)),
             m(Comment, {
-              oncreate: animateComponentEntrance(idx),
-              key: idx,
-              item: _item,
+              item: data,
               model,
-            })
-          )] : '' // add User component here...
+            }), data.comments.map((_item, idx) =>
+              m(Comment, {
+                oncreate: animateComponentEntrance(idx),
+                key: idx,
+                item: _item,
+                model,
+              })
+            )] : '' // add User component here...
       )
     },
   }}
 
 
 const toRoute = model => ({
-  onmatch: (_, path) => {
-    init(model)(path)
-  },
+  onmatch: (_, path) =>
+    init(model)(path),
   render: () =>
     m(
       Layout,

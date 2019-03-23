@@ -7,7 +7,7 @@ const Footer = {
   view: () => m('footer.footer', {
     oncreate:animateChildrenLimitsEntrance, id: 'footer',
   },
-  'content served from https://jsonplaceholder.typicode.com',
+  'content served from https://api.hnpwa.com/',
   ),
 }
 

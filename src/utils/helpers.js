@@ -14,6 +14,7 @@ export const infiniteScroll = model => e => {
 
 export const init = model => path => {
   model.state.page = 1
+  model.state.scrollPos = 1
   model.state.tabsShowing = false
   let id =  path.split('/')[2]
   let route = path.split('/')[1]
