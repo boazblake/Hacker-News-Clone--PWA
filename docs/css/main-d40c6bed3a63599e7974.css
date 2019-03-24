@@ -18,7 +18,7 @@ body {
   max-width: 100vw;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 40px 75vh 10vh;
+  grid-template-rows: 40px 85vh 40px;
   grid-template-areas: "header" "content" "footer"; }
 
 .loader {
@@ -30,8 +30,9 @@ body {
   display: flex;
   flex-flow: row;
   max-width: 100vw;
-  height: 100px;
+  height: 40px;
   justify-content: space-around;
+  background: #fc4e07;
   padding-left: 10px; }
 
 #content {
@@ -45,7 +46,7 @@ body {
   align-content: center;
   flex-flow: column;
   overflow-y: scroll;
-  padding: 4px;
+  padding: 10px;
   max-height: 100%;
   width: 100vw; }
 
@@ -56,6 +57,36 @@ body {
   flex-flow: wrap;
   padding: 10px;
   justify-content: center; }
+
+/* Flexbox Grid */
+.column {
+  flex-basis: 100%; }
+
+.left {
+  order: 1;
+  margin-right: auto; }
+
+.right {
+  order: 2;
+  margin-left: auto; }
+
+.postContainer {
+  display: flex;
+  flex-flow: column;
+  transition-duration: .3s;
+  min-height: 120px; }
+  .postContainer:hover h1 {
+    color: #000000; }
+
+.top {
+  order: 1;
+  display: flex;
+  flex-flow: column; }
+
+.bottom {
+  order: 2;
+  display: flex;
+  flex-flow: row; }
 
 .commentContainer {
   display: flex;
@@ -79,29 +110,15 @@ body {
   display: flex;
   flex-flow: column; }
 
-.postTop {
-  display: flex;
-  flex-flow: column; }
-
-.postBottom {
-  display: flex;
-  flex-flow: column;
-  margin-top: auto; }
-
 .title {
   margin: 0; }
 
 .subTitle {
-  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 10px; }
 
 .points {
-  border: 1px dashed red; }
-
-.row {
-  display: flex;
-  flex-flow: row;
-  align-items: center; }
+  color: #fc4e07; }
 
 .tab {
   flex-basis: 20%;
@@ -111,7 +128,8 @@ body {
   justify-content: space-around;
   align-content: flex-end;
   letter-spacing: 1px;
-  transition: .2s; }
+  transition: .2s;
+  color: white; }
   .tab:hover {
     color: #000000;
     letter-spacing: 2px; }
@@ -139,15 +157,19 @@ body {
   align-content: center;
   grid-area: 1 / 3; }
 
-/* Flexbox Grid */
-.column {
-  flex-basis: 100%; }
-
-.left {
-  margin-right: auto; }
-
-.right {
-  margin-left: auto; }
+.comment {
+  z-index: 1;
+  padding: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(20, 29, 37, 0.2);
+  width: 100%;
+  flex-basis: 20%;
+  font-size: 24px;
+  align-items: center;
+  grid-area: 1 / 3;
+  color: #141d25;
+  background-color: white;
+  letter-spacing: 1px;
+  transition: .5s; }
 
 /* Media Qs */
 @media (min-width: 668px) {
@@ -163,11 +185,7 @@ body {
     display: none; }
   .tab {
     font-size: 1.5rem;
-    line-height: 2.5rem; }
-  .grid-item {
-    max-width: 75vw; }
-    .grid-item.user {
-      max-width: 50vw; } }
+    line-height: 2.5rem; } }
 /*
 ==============================================
 CSS3 ANIMATION CHEAT SHEET
@@ -1007,4 +1025,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-b7359f4eb0593db7083c.css.map*/
+/*# sourceMappingURL=main-d40c6bed3a63599e7974.css.map*/

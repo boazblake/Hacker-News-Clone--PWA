@@ -6,8 +6,8 @@ const IsLoading = m('.holder',  [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
 ])
 
-const Item = {
-  view: ({ attrs: { showItem, item: { comments_count,
+const Post = {
+  view: ({ attrs: { showItem, post: { comments_count,
     domain,
     id,
     points,
@@ -16,30 +16,35 @@ const Item = {
     url,
     user } } }) => {
     return m(
-      '.grid-item',
+      '.postContainer',
       {
-        href:url,
         id: `${id}`,
       },
       [
-        m('.postTop', [
-          m('h1.title', title), m('code.subTitle', ` from ${domain}`)]),
-        m('.postBottom', [
-          m('.',[
-            m('code.points',`${points}`), m('a', ` points by ${user}`),
+        m('.top', [
+          m('h1.title', title), m('code.subTitle', ' from ', m('a.', { oncreate: m.route.link, href: url }, `${domain}`)),
+        ]),
+        m('.bottom', [
+          m('.left', [
+            m('a.top', ` by ${user}`),
+            m('code.bottom', `${time_ago}`),
           ]),
-          m('.row', [
-            m('code.left', `${time_ago}`),
-            m('a.right', { oncreate: m.route.link, href: `/item/${id}`, onclick: () => showItem(id, title)},`${comments_count} comments`),
+          m('.right', [
+            m('code.points.top', `${points} points`),
+            m('a.bottom', {
+              oncreate: m.route.link,
+              href: `/item/${id}`,
+              onclick: () => showItem(id, title),
+            },
+            `${comments_count} comments`),
           ]),
         ]),
-      ]
-    )
+      ])
   },
 }
 
 const Comment = {
-  view: ({ attrs: { model, item: { comments, comments_count,
+  view: ({ attrs: { model, comment: { comments, comments_count,
     id,
     time_ago,
     content,
@@ -60,9 +65,9 @@ const Comment = {
           m('.', {style:{display:'flex', flexFlow:'column'}},[
             m('code.left', `${time_ago}`),
             m('code.right', `${comments_count} comments`),
-            comments.map((_item, idx) => m(Comment, {
+            comments.map((c, idx) => m(Comment, {
               key: idx,
-              item: _item,
+              comment: c,
               model,
             })),
 
@@ -75,7 +80,7 @@ const Comment = {
 
 
 const Component = () => {
-  const isItem = data => data.map
+  const isPost = data => data.map
   const isComment= data => data.comments.map
 
   return {
@@ -97,23 +102,23 @@ const Component = () => {
         },
         isEmpty(data)
           ? m('.loader', IsLoading)
-          : isItem(data) ? data.map((_item, idx) =>
-            m(Item, {
+          : isPost(data) ? data.map((_post, idx) =>
+            m(Post, {
               oncreate: animateComponentEntrance(idx),
               key: idx,
-              item: _item,
+              post: _post,
               model, showItem,
             })
           ) : isComment(data) ? [
             m('.postTop', m('h1.title', data.title)),
             m(Comment, {
-              item: data,
+              comment: data,
               model,
-            }), data.comments.map((_item, idx) =>
+            }), data.comments.map((c, idx) =>
               m(Comment, {
                 oncreate: animateComponentEntrance(idx),
                 key: idx,
-                item: _item,
+                comment: c,
                 model,
               })
             )] : '' // add User component here...

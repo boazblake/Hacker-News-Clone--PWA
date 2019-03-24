@@ -28,7 +28,7 @@ html {
   max-width: 100vw;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 40px 75vh 10vh;
+  grid-template-rows: 40px 85vh 40px;
   grid-template-areas: "header" "content" "footer";
 }
 
@@ -42,8 +42,9 @@ html {
   display: flex;
   flex-flow: row;
   max-width: 100vw;
-  height: 100px;
+  height: 40px;
   justify-content: space-around;
+  background: rgba(252,78,7,9);
   padding-left:10px;
 }
 
@@ -59,7 +60,7 @@ html {
   align-content: center;
   flex-flow: column;
   overflow-y: scroll;
-  padding: 4px;
+  padding: 10px;
   max-height: 100%;
   width: 100vw;
 }
@@ -71,6 +72,46 @@ html {
   flex-flow: wrap;
   padding: 10px;
   justify-content: center;
+}
+
+/* Flexbox Grid */
+.column {
+  flex-basis: 100%;
+}
+
+.left {
+  order:1;
+  margin-right:auto;
+}
+
+.right {
+  order:2;
+  margin-left:auto;
+}
+
+.postContainer {
+  display:flex;
+  flex-flow:column;
+  transition-duration: .3s;
+  min-height: 120px;
+
+  &:hover {
+    h1 {
+      color: #000000;
+    }
+  }
+}
+
+.top {
+  order:1;
+  display:flex;
+  flex-flow:column;
+}
+
+.bottom {
+  order:2;
+  display:flex;
+  flex-flow:row;
 }
 
 .commentContainer {
@@ -102,28 +143,17 @@ html {
   flex-flow:column;
 }
 
-.postTop {
-  display:flex;
-  flex-flow:column;
-}
-
-.postBottom {
-  display:flex;
-  flex-flow:column;
-  margin-top:auto;
-}
-
 .title {
   margin: 0;
 }
 
 .subTitle {
-  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 10px;
 }
 
 .points {
-  border: 1px dashed red;
+  color: rgba(252,78,7,9);
 }
 
 .row {
@@ -142,6 +172,7 @@ html {
   align-content: flex-end;
   letter-spacing: 1px;
   transition: .2s;
+  color:white;
 
   &:hover {
     color: #000000;
@@ -189,19 +220,6 @@ html {
   background-color: white;
   letter-spacing: 1px;
   transition: .5s;
-}
-
-/* Flexbox Grid */
-.column {
-  flex-basis: 100%;
-}
-
-.left {
-  margin-right: auto;
-}
-
-.right {
-  margin-left: auto;
 }
 
 /* Media Qs */
