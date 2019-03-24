@@ -28,6 +28,7 @@ const reqs = {
 
 const getData = model => route => {
   model.state.showComment = false
+  model.state.comment = {}
   model.state.route = route
   let path = model.getPath(route)
   model.data[route] ? model.data[route] : (model.data[route] = { data: [] })
@@ -43,6 +44,25 @@ const getComments = model => route => id => {
 
 const getPath = route => route.split('/')[1]
 
+const state = {
+  key: '',
+  url: '',
+  route: '',
+  scrollPos: 1,
+  page: 1,
+  profile: '',
+  tabsShowing: false,
+  title: '',
+  comment: {},
+}
+
+
+const toggleComments = ({model, key, level}) => {
+  model.state.comment[`${key}-${level}`] ?
+    model.state.comment[`${key}-${level}`] = !model.state.comment[`${key}-${level}`] : model.state.comment[`${key}-${level}`] = true
+  console.log(model.state)
+}
+
 export const model = {
   getComments,
   getData,
@@ -50,7 +70,8 @@ export const model = {
   getPath,
   reqs,
   data: {},
-  state: { key: '', url: '', route: '', scrollPos: 1, page: 1, profile: '', tabsShowing: false, title: '', showComments: false },
+  state,
+  toggleComments,
   changePage: delta => model => {
     model.state.page = model.state.page + delta
     model.getData(model)(model.state.route)

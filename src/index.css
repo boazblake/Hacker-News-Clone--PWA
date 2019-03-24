@@ -89,11 +89,11 @@ html {
   margin-left:auto;
 }
 
-.postContainer {
+.container {
   display:flex;
   flex-flow:column;
   transition-duration: .3s;
-  min-height: 120px;
+  min-height:150px;
 
   &:hover {
     h1 {
@@ -114,33 +114,16 @@ html {
   flex-flow:row;
 }
 
-.commentContainer {
-  display:flex;
+.column {
   flex-flow:column;
-  min-height: fit-content;
-  padding: 4px 10px;
-  flex-flow: column;
-  display: flex;
-  flex-grow: 1;
-  transition-duration: .3s;
-  min-width: 280px;
-
-  &:hover {
-    h1 {
-      color: #000000;
-    }
-  }
 }
 
-.commentTop {
-  display:flex;
-  flex-flow:column;
-  margin-bottom:10px;
+.block {
+  display:block;
 }
 
-.commentBottom {
-  display:flex;
-  flex-flow:column;
+.nudgeRight {
+  padding-left: 30px;
 }
 
 .title {

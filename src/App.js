@@ -16,7 +16,7 @@ const Post = {
     url,
     user } } }) => {
     return m(
-      '.postContainer',
+      '.container',
       {
         id: `${id}`,
       },
@@ -44,34 +44,30 @@ const Post = {
 }
 
 const Comment = {
-  view: ({ attrs: { model, comment: { comments, comments_count,
+  view: ({ attrs:{ key, model, comment: { comments, comments_count,
     id,
     time_ago,
     content,
-    url,
+    url, level,
     user } } }) => {
     return m(
-      '.commentContainer',
+      '.',
       {
-        href: url,
         id: `${id}`,
       },
       [
-        m('.commentTop' ),
-        m('.commentBottom', [
-          m('.', [
-            m('code', m.trust(content)), m('a', `  by ${user}`),
-          ]),
-          m('.', {style:{display:'flex', flexFlow:'column'}},[
-            m('code.left', `${time_ago}`),
-            m('code.right', `${comments_count} comments`),
-            comments.map((c, idx) => m(Comment, {
-              key: idx,
-              comment: c,
-              model,
-            })),
-
-          ]),
+        m('.',[
+          m('a.nudgeRight', `${user}`),
+          m('code', `${time_ago}`),
+        ]),
+        m('.nudgeRight',[
+          m('code', m.trust(content)),
+          comments_count ? m('button',{onclick:() => model.toggleComments({model, key,level} ) } ,`unfold ${comments_count} comments`): '',
+          (model.state.comment[`${key}-${level}`] ? comments.map((c, idx) => m(Comment, {
+            key: idx,
+            comment: c,
+            model,
+          })): ''),
         ]),
       ]
     )
@@ -92,7 +88,6 @@ const Component = () => {
         model.state.id = id
         model.state.showComment = !model.state.showComment
       }
-
       return m(
         'section.component',
         {
@@ -110,11 +105,8 @@ const Component = () => {
               model, showItem,
             })
           ) : isComment(data) ? [
-            m('.postTop', m('h1.title', data.title)),
-            m(Comment, {
-              comment: data,
-              model,
-            }), data.comments.map((c, idx) =>
+            m('h1.title', data.title),
+            data.comments.map((c, idx) =>
               m(Comment, {
                 oncreate: animateComponentEntrance(idx),
                 key: idx,
