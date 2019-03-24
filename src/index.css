@@ -135,7 +135,7 @@ html {
   padding-bottom: 10px;
 }
 
-.points {
+.highlight {
   color: rgba(252,78,7,9);
 }
 
@@ -155,7 +155,7 @@ html {
   align-content: flex-end;
   letter-spacing: 1px;
   transition: .2s;
-  color:white;
+  color:#000000;
 
   &:hover {
     color: #000000;

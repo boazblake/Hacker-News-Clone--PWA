@@ -96,7 +96,7 @@ body {
   margin-right: auto;
   padding-bottom: 10px; }
 
-.points {
+.highlight {
   color: #fc4e07; }
 
 .tab {
@@ -108,7 +108,7 @@ body {
   align-content: flex-end;
   letter-spacing: 1px;
   transition: .2s;
-  color: white; }
+  color: #000000; }
   .tab:hover {
     color: #000000;
     letter-spacing: 2px; }
@@ -1004,4 +1004,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-c40f9cad0ca6c2f2191d.css.map*/
+/*# sourceMappingURL=main-7e4c096b3a3a9ed51aad.css.map*/

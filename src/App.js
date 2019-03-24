@@ -26,11 +26,11 @@ const Post = {
         ]),
         m('.bottom', [
           m('.left', [
-            m('a.top', ` by ${user}`),
+            m('a.top.highlight', ` by ${user}`),
             m('code.bottom', `${time_ago}`),
           ]),
           m('.right', [
-            m('code.points.top', `${points} points`),
+            m('code.highlight.top', `${points} points`),
             m('a.bottom', {
               oncreate: m.route.link,
               href: `/item/${id}`,
@@ -57,7 +57,7 @@ const Comment = {
       },
       [
         m('.',[
-          m('a.nudgeRight', `${user}`),
+          m('a.nudgeRight.highlight', `${user}`),
           m('code', `${time_ago}`),
         ]),
         m('.nudgeRight',[
