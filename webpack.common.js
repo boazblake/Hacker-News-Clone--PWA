@@ -148,7 +148,7 @@ module.exports = {
     }),
   ],
   optimization: {
-    runtimeChunk: true,
+    runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
         commons: {

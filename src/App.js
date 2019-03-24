@@ -48,8 +48,11 @@ const Comment = {
     id,
     time_ago,
     content,
-    url, level,
+    level,
     user } } }) => {
+
+    let state = {showComments : model.state.comment[`${key}-${level}`] }
+
     return m(
       '.',
       {
@@ -62,8 +65,8 @@ const Comment = {
         ]),
         m('.nudgeRight',[
           m('code', m.trust(content)),
-          comments_count ? m('button',{onclick:() => model.toggleComments({model, key,level} ) } ,`unfold ${comments_count} comments`): '',
-          (model.state.comment[`${key}-${level}`] ? comments.map((c, idx) => m(Comment, {
+          comments_count ? m('button', { onclick: () => model.toggleComments({ model, key, level }) }, `${state.showComments ? 'hide' : 'show' } ${comments_count} comments`): '',
+          (state.showComments ? comments.map((c, idx) => m(Comment, {
             key: idx,
             comment: c,
             model,

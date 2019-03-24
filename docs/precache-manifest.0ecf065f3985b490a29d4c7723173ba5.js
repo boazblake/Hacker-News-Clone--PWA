@@ -8,19 +8,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "vendors-chunk.js"
   },
   {
-    "revision": "b49e64de0ce31fe73fd8",
-    "url": "runtime~main-bundle.js"
+    "revision": "eb8f9136a6f0f05fb008",
+    "url": "runtime-bundle.js"
   },
   {
     "revision": "464f89907f8fa3f77804afcae7efdbc8",
     "url": "mithril.svg"
   },
   {
-    "revision": "109f0371eea9a28f2cd0",
+    "revision": "e465e32a8fd96edfff88",
     "url": "main-chunk.js"
   },
   {
-    "revision": "ad12cdd78a71c5b56c777d5ce94d4d7d",
+    "revision": "5bfab212471a32a818abbfa0fdc8c8c2",
     "url": "index.html"
   },
   {
@@ -32,9 +32,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon.png"
   },
   {
-    "url": "css/main-9e7f6054bcf2f97040ea.css.gz"
+    "url": "css/main-287c7d6e533e528b00b7.css.gz"
   },
   {
-    "url": "css/main-9e7f6054bcf2f97040ea.css"
+    "url": "css/main-287c7d6e533e528b00b7.css"
   }
 ]);
