@@ -44,7 +44,7 @@ html {
   max-width: 100vw;
   height: 40px;
   justify-content: space-around;
-  background: rgba(252,78,7,9);
+  background: #ff6600;
   padding-left:10px;
 }
 
@@ -89,7 +89,7 @@ html {
   margin-left:auto;
 }
 
-.container {
+.postContainer {
   display:flex;
   flex-flow:column;
   transition-duration: .3s;
@@ -100,6 +100,20 @@ html {
       color: #000000;
     }
   }
+}
+
+.commentContainer {
+  padding:10px 0;
+  /* border-left:1px dashed grey; */
+}
+
+
+.commentBtn {
+  display:flex;
+  flex-flow:row;
+  align-contents:center;
+  align-items:center;
+  justify-contents: space-around;
 }
 
 .top {
@@ -136,7 +150,11 @@ html {
 }
 
 .highlight {
-  color: rgba(152,78,7,9);
+  color: #ff6600;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .row {
@@ -149,13 +167,12 @@ html {
 .tab {
   flex-basis: 20%;
   display: flex;
-  font-size: 14px;
+  font-size: 20px;
   text-decoration: none;
   justify-content: space-around;
-  align-content: flex-end;
-  letter-spacing: 1px;
+  align-items:center;
   transition: .2s;
-  color:#000000;
+  color: #000000;
 
   &:hover {
     color: #000000;

@@ -48,7 +48,6 @@ const state = {
   key: '',
   url: '',
   route: '',
-  scrollPos: 1,
   page: 1,
   profile: '',
   tabsShowing: false,
@@ -72,10 +71,4 @@ export const model = {
   data: {},
   state,
   toggleComments,
-  changePage: delta => model => {
-    model.state.page = model.state.page + delta
-    model.getData(model)(model.state.route)
-  },
-  showTabs: model =>
-    model.state.tabsShowing = !model.state.tabsShowing,
 }

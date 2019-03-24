@@ -40,7 +40,7 @@ export const animate = dir => ({ dom }) => {
   },  200)
 }
 
-export const slideModalOut = ({ dom }) => {
+export const slideOutAnimation = ({ dom }) => {
   return new Promise(() => {
     dom.classList.remove('slideRight')
     return setTimeout(()=> {

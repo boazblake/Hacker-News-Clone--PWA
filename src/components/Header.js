@@ -8,9 +8,9 @@ const mithrilIcon = m('path', { 'd': 'M31.716,13.5C31.699,6.47,25.974,0.755,18.9
 const Tab = ({ attrs: { key } }) => {
   return {
     oncreate: animateHeaderEntrance,
-    view: ({ attrs: { tab } }) =>
+    view: ({ attrs: { tab, isActive } }) =>
       m(
-        'a.tab',
+        `a.tab.${isActive? 'bold' :''}`,
         {
           key,
           id: `${tab}`,
@@ -25,7 +25,6 @@ const Tab = ({ attrs: { key } }) => {
 const Header = ({ attrs: { model } }) => {
   let tabs = Object.keys(model.reqs.urls)
   let navTabs = without(['item/:key', 'user:/key'], tabs)
-
   return {
     oncreate: animateHeaderEntrance,
     view: ({ attrs: { model } }) =>
@@ -38,7 +37,7 @@ const Header = ({ attrs: { model } }) => {
           navTabs.map((tab, idx) =>
             m(Tab, {
               key: idx,
-              active: model.state.route == tab,
+              isActive: model.state.route == `/${tab}`,
               tab,
             })
           )]
