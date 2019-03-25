@@ -1,7 +1,7 @@
 export const animateComponentEntrance = idx => ({ dom }) => {
   dom.style.opacity = 0
   return setTimeout(() => {
-    dom.classList.toggle('stretchRight')
+    dom.classList.toggle('expandOpen')
     dom.style.opacity = 1
   }, idx * 100 + 20)
 }
@@ -9,6 +9,12 @@ export const animateComponentEntrance = idx => ({ dom }) => {
 export const animateHeaderEntrance = ({ dom }) => {
   dom.style.opacity = 0
   dom.classList.toggle('slideRight')
+  dom.style.opacity = 1
+}
+
+export const animateFooterEntrance = ({ dom }) => {
+  dom.style.opacity = 0
+  dom.classList.toggle('slideLeft')
   dom.style.opacity = 1
 }
 
@@ -40,11 +46,13 @@ export const animate = dir => ({ dom }) => {
   },  200)
 }
 
-export const slideOutAnimation = ({ dom }) => {
+export const slideOutAnimation = ({dom} ) => {
+  console.log(dom)
   return new Promise(() => {
-    dom.classList.remove('slideRight')
+    dom.classList.remove('expandOpen')
     return setTimeout(()=> {
-      dom.classList.add('reverseAnimation', 'slideRight')
+      dom.style.opacity = 0
+      // dom.classList.add('reverseAnimation', 'hatch')
     } , 200)
   })
 }

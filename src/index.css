@@ -104,7 +104,6 @@ html {
 
 .commentContainer {
   padding:10px 0;
-  /* border-left:1px dashed grey; */
 }
 
 
@@ -114,6 +113,14 @@ html {
   align-contents:center;
   align-items:center;
   justify-contents: space-around;
+  line-height: 40px;
+  padding: 0 40px;
+}
+
+.toggleCommentSvg {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
 
 .top {

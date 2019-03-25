@@ -80,15 +80,21 @@ body {
     color: #000000; }
 
 .commentContainer {
-  padding: 10px 0;
-  /* border-left:1px dashed grey; */ }
+  padding: 10px 0; }
 
 .commentBtn {
   display: flex;
   flex-flow: row;
   align-contents: center;
   align-items: center;
-  justify-contents: space-around; }
+  justify-contents: space-around;
+  line-height: 40px;
+  padding: 0 40px; }
+
+.toggleCommentSvg {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px; }
 
 .top {
   order: 1;
@@ -287,6 +293,14 @@ slideUp
 slideLeft
 ==============================================
 */
+.slideLeft {
+  animation-name: slideLeft;
+  -webkit-animation-name: slideLeft;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+  visibility: visible !important; }
 
 @keyframes slideLeft {
   0% {
@@ -467,6 +481,14 @@ fadeIn
 expandOpen
 ==============================================
 */
+.expandOpen {
+  animation-name: expandOpen;
+  -webkit-animation-name: expandOpen;
+  animation-duration: 1.2s;
+  -webkit-animation-duration: 1.2s;
+  animation-timing-function: ease-out;
+  -webkit-animation-timing-function: ease-out;
+  visibility: visible !important; }
 
 @keyframes expandOpen {
   0% {
@@ -549,6 +571,17 @@ bigEntrance
 hatch
 ==============================================
 */
+.hatch {
+  animation-name: hatch;
+  -webkit-animation-name: hatch;
+  animation-duration: 2s;
+  -webkit-animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+  transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
+  visibility: visible !important; }
 
 @keyframes hatch {
   0% {
@@ -807,16 +840,6 @@ stretchLeft
 stretchRight
 ==============================================
 */
-.stretchRight {
-  animation-name: stretchRight;
-  -webkit-animation-name: stretchRight;
-  animation-duration: 1.5s;
-  -webkit-animation-duration: 1.5s;
-  animation-timing-function: ease-out;
-  -webkit-animation-timing-function: ease-out;
-  transform-origin: 0% 0%;
-  -ms-transform-origin: 0% 0%;
-  -webkit-transform-origin: 0% 0%; }
 
 @keyframes stretchRight {
   0% {
@@ -1022,4 +1045,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-b0c4e64e257f93cf7be3.css.map*/
+/*# sourceMappingURL=main-301ef46df642ccebf3bf.css.map*/

@@ -1,6 +1,6 @@
 import m from 'mithril'
 import Layout from './components/Layout.js'
-import { makeRoutes, isEmpty, init, infiniteScroll, animateComponentEntrance, slideOutAnimation } from './utils/index'
+import { makeRoutes, isEmpty, init, infiniteScroll } from './utils/index'
 
 const IsLoading = m('.holder',  [
   m('.preloader', [ m('div'), m('div'), m('div'), m('div'), m('div'), m('div'), m('div') ]),
@@ -12,6 +12,15 @@ const minus = 'M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486
 const toUnFurl = (bool = false) => bool ?  m('path', { style:{fill:'#ff6600'}, d: minus }) :  m('path', { style:{fill:'#ff6600'}, d: plus })
 
 
+const toComment = comments_count => showItem => (id, title) =>
+  comments_count ?
+    m('a.bottom', {
+      oncreate: m.route.link,
+      target: '_blank',
+      href: `/item/${id}`,
+      onclick: () => showItem(id, title),
+    },
+    `${comments_count} comments`) : `${comments_count} comments`
 
 const Post = {
   view: ({ attrs: { showItem, post: { comments_count,
@@ -29,7 +38,7 @@ const Post = {
       },
       [
         m('.top', [
-          m('h1.title', title), m('code.subTitle', ' from ', m('a.', { oncreate: m.route.link, href: url }, `${domain}`)),
+          m('h1.title', title), m('code.subTitle', ' from ', m('a.', {target:'_blank', href: url }, `${domain}`)),
         ]),
         m('.bottom', [
           m('.left', [
@@ -38,12 +47,7 @@ const Post = {
           ]),
           m('.right', [
             m('code.highlight.top', `${points} points`),
-            m('a.bottom', {
-              oncreate: m.route.link,
-              href: `/item/${id}`,
-              onclick: () => showItem(id, title),
-            },
-            `${comments_count} comments`),
+            toComment(comments_count)(showItem)(id, title),
           ]),
         ]),
       ])
@@ -74,11 +78,9 @@ const Comment = {
           m('code', m.trust(content)),
           comments_count
             ? m('button.commentBtn', { onclick: () => model.toggleComments({ model, key, level }) },
-              [m('svg', { style: { width: '30px', height: '30px' } }, toUnFurl(state.showComments)), `${comments_count} comments`])
+              [m('svg.toggleCommentSvg', toUnFurl(state.showComments)), `${comments_count} comments`])
             : '',
           (state.showComments ? comments.map((c, idx) => m(Comment, {
-            oncreate: animateComponentEntrance(idx),
-            // onbeforeremove: slideOutAnimation,
             key: idx,
             comment: c,
             model,
@@ -114,7 +116,6 @@ const Component = () => {
           ? m('.loader', IsLoading)
           : isPost(data) ? data.map((_post, idx) =>
             m(Post, {
-              oncreate: animateComponentEntrance(idx),
               key: idx,
               post: _post,
               model, showItem,
@@ -123,7 +124,6 @@ const Component = () => {
             m('h1.title', data.title),
             data.comments.map((c, idx) =>
               m(Comment, {
-                oncreate: animateComponentEntrance(idx),
                 key: idx,
                 comment: c,
                 model,

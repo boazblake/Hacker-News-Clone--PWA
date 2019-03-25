@@ -56,11 +56,10 @@ const state = {
 }
 
 
-const toggleComments = ({model, key, level}) => {
+const toggleComments = ({model, key, level}) =>
   model.state.comment[`${key}-${level}`] ?
     model.state.comment[`${key}-${level}`] = !model.state.comment[`${key}-${level}`] : model.state.comment[`${key}-${level}`] = true
-  console.log(model.state)
-}
+
 
 export const model = {
   getComments,
