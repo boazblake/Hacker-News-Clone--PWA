@@ -80,7 +80,8 @@ body {
     color: #000000; }
 
 .commentContainer {
-  padding: 10px 0; }
+  padding: 10px 0;
+  max-width: 90vw; }
 
 .commentBtn {
   display: flex;
@@ -176,13 +177,8 @@ body {
 @media (min-width: 668px) {
   * {
     font-size: 18px; }
-  #layout {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 10px;
-    grid-template-areas: "header" "content" "footer"; }
-  .content {
+  .commentContainer {
+    padding: 10px 0;
     max-width: 60vw; }
   .tab {
     font-size: 1.5rem;
@@ -251,14 +247,6 @@ slideDown
 slideUp
 ==============================================
 */
-.slideUp {
-  animation-name: slideUp;
-  -webkit-animation-name: slideUp;
-  animation-duration: 1s;
-  -webkit-animation-duration: 1s;
-  animation-timing-function: ease;
-  -webkit-animation-timing-function: ease;
-  visibility: visible !important; }
 
 @keyframes slideUp {
   0% {
@@ -1045,4 +1033,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-301ef46df642ccebf3bf.css.map*/
+/*# sourceMappingURL=main-92dd448758f7f4ac9c83.css.map*/

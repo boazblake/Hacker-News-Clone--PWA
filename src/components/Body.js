@@ -2,7 +2,7 @@ import m from 'mithril'
 import { animate } from '../utils/animations.js'
 
 const Body = {
-  oncreate: animate('slideUp'),
+  oncreate: animate('slideLeft'),
   view: ({attrs:{ children }}) => m('section.content', { id: 'content' }, children),
 }
 

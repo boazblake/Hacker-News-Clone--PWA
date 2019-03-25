@@ -104,6 +104,7 @@ html {
 
 .commentContainer {
   padding:10px 0;
+  max-width:90vw;
 }
 
 
@@ -236,16 +237,9 @@ html {
     font-size: 18px;
   }
 
-  #layout {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 10px;
-    grid-template-areas: "header" "content" "footer";
-  }
-
-  .content {
-    max-width: 60vw;
+  .commentContainer {
+    padding:10px 0;
+    max-width:60vw;
   }
 
   .tab {
@@ -253,11 +247,4 @@ html {
     line-height: 2.5rem;
   }
 
-  .grid-item {
-    max-width: 75vw;
-
-    &.user {
-      max-width: 50vw;
-    }
-  }
 }

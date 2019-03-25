@@ -16,11 +16,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "mithril.svg"
   },
   {
-    "revision": "9d674f2353acb22e8530",
+    "revision": "48b66aac25cb2bb9929c",
     "url": "main-chunk.js"
   },
   {
-    "revision": "96a5a826cc82f85296c9e98f57d465d2",
+    "revision": "71d891624074f5e6bcd4e75db8c08d44",
     "url": "index.html"
   },
   {
@@ -32,9 +32,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon.png"
   },
   {
-    "url": "css/main-301ef46df642ccebf3bf.css.gz"
+    "url": "css/main-92dd448758f7f4ac9c83.css.gz"
   },
   {
-    "url": "css/main-301ef46df642ccebf3bf.css"
+    "url": "css/main-92dd448758f7f4ac9c83.css"
   }
 ]);

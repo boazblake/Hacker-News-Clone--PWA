@@ -3,7 +3,7 @@ import { animate, animateFooterEntrance } from '../utils/animations.js'
 
 
 const Footer = {
-  oncreate: animate('slideUp'),
+  oncreate: animate('slideRight'),
   view: () => m('footer.footer', {
     oncreate: animateFooterEntrance, id: 'footer',
   },
