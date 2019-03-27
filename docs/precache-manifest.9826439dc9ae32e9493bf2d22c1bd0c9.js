@@ -1,7 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "fa0e2c2119a9ab03a6f7705422069ca2",
-    "url": "vendors-chunk.js.gz"
+    "url": "css/main-7db63286079e12613356.css.gz"
   },
   {
     "revision": "53c4e81b80ad3476f013",
@@ -24,6 +23,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "mithril.svg"
   },
   {
+    "revision": "fa0e2c2119a9ab03a6f7705422069ca2",
+    "url": "vendors-chunk.js.gz"
+  },
+  {
     "revision": "0b06ee9850c925407a509dfb10e2bd9e",
     "url": "index.html"
   },
@@ -36,13 +39,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon.png"
   },
   {
-    "url": "css/main-7db63286079e12613356.css.gz"
-  },
-  {
     "url": "css/main-7db63286079e12613356.css"
-  },
-  {
-    "revision": "53de3c8ba4cfc49ed8aeef09476c556e",
-    "url": "Return-Repair_Authorization.pdf"
   }
 ]);
