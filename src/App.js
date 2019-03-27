@@ -9,7 +9,7 @@ const IsLoading = m('.holder',  [
 const plus = 'M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z'
 const minus = 'M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z'
 
-const toUnFurl = (bool = false) => bool ?  m('path', { style:{fill:'#e67e22'}, d: minus }) :  m('path', { style:{fill:'#e67e22'}, d: plus })
+const toUnFurl = (bool = false) => bool ?  m('path', { style:{fill:'rgb(205,118,27)'}, d: minus }) :  m('path', { style:{fill:'rgb(205,118,27)'}, d: plus })
 
 
 const toComment = comments_count => showItem => (id, title) =>

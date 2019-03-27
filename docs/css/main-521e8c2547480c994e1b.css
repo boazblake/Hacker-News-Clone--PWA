@@ -35,7 +35,7 @@ body {
   max-width: 100vw;
   height: 40px;
   justify-content: space-around;
-  background: #e67e22;
+  background: #cd761b;
   padding-left: 10px; }
 
 #content {
@@ -164,7 +164,7 @@ body {
   padding-bottom: 10px; }
 
 .highlight {
-  color: #e67e22; }
+  color: #cd761b; }
 
 .bold {
   font-weight: bold; }
@@ -203,7 +203,7 @@ body {
   position: relative;
   order: 1;
   padding: 4px;
-  background: #e67e22;
+  background: #cd761b;
   display: flex;
   flex-flow: row;
   justify-content: center; }
@@ -1093,4 +1093,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-8912d29a073f92428b8a.css.map*/
+/*# sourceMappingURL=main-521e8c2547480c994e1b.css.map*/

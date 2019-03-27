@@ -44,7 +44,7 @@ html {
   max-width: 100vw;
   height: 40px;
   justify-content: space-around;
-  background: #e67e22;
+  background: rgb(205,118,27);
   padding-left:10px;
 }
 
@@ -211,7 +211,7 @@ html {
 }
 
 .highlight {
-  color:#e67e22;
+  color:rgb(205,118,27);
 }
 
 .bold {
@@ -265,7 +265,7 @@ html {
   position: relative;
   order:1;
   padding: 4px;
-  background: #e67e22;
+  background: rgb(205,118,27);
   display: flex;
   flex-flow: row;
   justify-content: center;
