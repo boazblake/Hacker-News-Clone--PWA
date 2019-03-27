@@ -35,7 +35,7 @@ body {
   max-width: 100vw;
   height: 40px;
   justify-content: space-around;
-  background: #cd761b;
+  background: #1e5799;
   padding-left: 10px; }
 
 #content {
@@ -164,7 +164,8 @@ body {
   padding-bottom: 10px; }
 
 .highlight {
-  color: #cd761b; }
+  color: #1e5799;
+  fill: #1e5799; }
 
 .bold {
   font-weight: bold; }
@@ -177,7 +178,7 @@ body {
   justify-content: space-around;
   align-items: center;
   transition: .2s;
-  color: #000000; }
+  color: white; }
   .tab:hover {
     color: #000000;
     letter-spacing: 2px; }
@@ -203,12 +204,13 @@ body {
   position: relative;
   order: 1;
   padding: 4px;
-  background: #cd761b;
+  background: #1e5799;
   display: flex;
   flex-flow: row;
   justify-content: center; }
   .modal-header .title {
-    font-size: 2rem; }
+    font-size: 2rem;
+    color: white; }
   .modal-header .closeBtn {
     position: absolute;
     top: -18px;
@@ -1093,4 +1095,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-521e8c2547480c994e1b.css.map*/
+/*# sourceMappingURL=main-7db63286079e12613356.css.map*/

@@ -44,7 +44,7 @@ html {
   max-width: 100vw;
   height: 40px;
   justify-content: space-around;
-  background: rgb(205,118,27);
+  background: #1e5799;
   padding-left:10px;
 }
 
@@ -211,7 +211,8 @@ html {
 }
 
 .highlight {
-  color:rgb(205,118,27);
+  color:#1e5799;
+  fill:#1e5799;
 }
 
 .bold {
@@ -233,7 +234,7 @@ html {
   justify-content: space-around;
   align-items:center;
   transition: .2s;
-  color: #000000;
+  color: white;
 
   &:hover {
     color: #000000;
@@ -265,13 +266,14 @@ html {
   position: relative;
   order:1;
   padding: 4px;
-  background: rgb(205,118,27);
+  background: #1e5799;
   display: flex;
   flex-flow: row;
   justify-content: center;
 
   .title {
     font-size: 2rem;
+    color: white;
   }
 
   .closeBtn {
