@@ -7,7 +7,7 @@ const mithrilIcon = m('path', { 'd': 'M31.716,13.5C31.699,6.47,25.974,0.755,18.9
 
 const ModalStuff = {
   title: 'About',
-  contents: [m('p', 'built with ', m('a', { href: 'https://mithril.js.org' }, ' Mithril.JS'), ' and webpack'), m('p', 'source code: ', m('a', { href: 'https://github.com/boazblake/mithril-hn-pwa'}, 'can be found here')) ],
+  contents: [m('p', 'built with ', m('a', { rel:'noopener', href: 'https://mithril.js.org' }, ' Mithril.JS'), ' and webpack'), m('p', 'source code: ', m('a', { rel:'noopener', href: 'https://github.com/boazblake/mithril-hn-pwa'}, 'can be found here')) ],
   footer: [m('p', 'made by @boazblake')],
 }
 
