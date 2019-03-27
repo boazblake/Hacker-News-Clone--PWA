@@ -44,6 +44,7 @@ const getComments = model => route => id => {
 
 const getPath = route => route.split('/')[1]
 
+
 const state = {
   key: '',
   url: '',
@@ -53,6 +54,7 @@ const state = {
   tabsShowing: false,
   title: '',
   comment: {},
+  showModal: false,
 }
 
 
@@ -60,6 +62,9 @@ const toggleComments = ({model, key, level}) =>
   model.state.comment[`${key}-${level}`] ?
     model.state.comment[`${key}-${level}`] = !model.state.comment[`${key}-${level}`] : model.state.comment[`${key}-${level}`] = true
 
+
+const toggleModal = model =>
+  model.state.showModal = !model.state.showModal
 
 export const model = {
   getComments,
@@ -70,4 +75,5 @@ export const model = {
   data: {},
   state,
   toggleComments,
+  toggleModal,
 }

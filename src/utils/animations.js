@@ -12,6 +12,12 @@ export const animateHeaderEntrance = ({ dom }) => {
   dom.style.opacity = 1
 }
 
+export const animateModalEntrance = ({ dom }) => {
+  dom.style.opacity = 0
+  dom.classList.toggle('expandOpen')
+  dom.style.opacity = 1
+}
+
 export const animateFooterEntrance = ({ dom }) => {
   dom.style.opacity = 0
   dom.classList.toggle('slideLeft')

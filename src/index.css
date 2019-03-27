@@ -44,7 +44,7 @@ html {
   max-width: 100vw;
   height: 40px;
   justify-content: space-around;
-  background: #ff6600;
+  background: #e67e22;
   padding-left:10px;
 }
 
@@ -73,6 +73,12 @@ html {
   flex-flow: wrap;
   padding: 10px;
   justify-content: center;
+}
+
+.brand {
+  width: 50px;
+  enable-background: new 0 0 38.044 38.044;
+  cursor: pointer;
 }
 
 /* Flexbox Grid */
@@ -152,7 +158,7 @@ html {
   transition-duration: .2s;
   letter-spacing: 1px;
   line-height: 2;
-  border-radius:10%;
+  border-radius: 5%;
 
   > svg {
     padding: 2px 0 0 6px;
@@ -205,7 +211,7 @@ html {
 }
 
 .highlight {
-  color: #ff6600;
+  color:#e67e22;
 }
 
 .bold {
@@ -234,6 +240,67 @@ html {
     letter-spacing: 2px;
   }
 }
+
+.modalContainer {
+  position: absolute;
+  left:0;
+  top:0;
+  width: 100vw;
+  height: 100vh;
+  z-index:10;
+  background: rgba(20, 29, 37, 0.9);
+}
+
+
+.modal {
+  position: relative;
+  display:flex;
+  flex-flow:column;
+  top: 25%;
+  left: 10%;
+  max-width: 80vw;
+}
+
+.modal-header {
+  position: relative;
+  order:1;
+  padding: 4px;
+  background: #e67e22;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    color: white;
+    background: #c0392b;
+    cursor:pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.modal-contents {
+  order:2;
+  padding: 4px;
+  /* width: 500px; */
+  background: white;
+}
+
+.modal-footer {
+  order:3;
+  /* width: 500px; */
+  padding: 4px;
+  background: white;
+}
+
 
 /* Media Qs */
 
