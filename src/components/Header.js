@@ -1,5 +1,5 @@
 import m from 'mithril'
-import { animateHeaderEntrance } from '../utils/animations.js'
+// import { animateHeaderEntrance } from '../utils/animations.js'
 import { without } from 'ramda'
 import Modal from './Modal.js'
 
@@ -15,7 +15,7 @@ const ModalStuff = {
 
 const Tab = ({ attrs: { key } }) => {
   return {
-    oncreate: animateHeaderEntrance,
+    // oncreate: animateHeaderEntrance,
     view: ({ attrs: { tab, isActive } }) =>
       m(
         `a.tab.${isActive? 'underline' :''}`,
@@ -34,7 +34,7 @@ const Header = ({ attrs: { model } }) => {
   let tabs = Object.keys(model.reqs.urls)
   let navTabs = without(['item/:key', 'user/:key'], tabs)
   return {
-    oncreate: animateHeaderEntrance,
+    // oncreate: animateHeaderEntrance,
     view: ({ attrs: { model } }) =>
       m(
         '.header',

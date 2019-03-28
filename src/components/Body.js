@@ -1,8 +1,8 @@
 import m from 'mithril'
-import { animate } from '../utils/animations.js'
+// import { animate } from '../utils/animations.js'
 
 const Body = {
-  oncreate: animate('slideLeft'),
+  // oncreate: animate('slideLeft'),
   view: ({attrs:{ children }}) => m('section.content', { id: 'content' }, children),
 }
 

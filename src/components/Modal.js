@@ -1,5 +1,5 @@
 import m from 'mithril'
-import { animateModalEntrance } from '../utils/animations.js'
+// import { animateModalEntrance } from '../utils/animations.js'
 
 const Header = {
   view: ({ attrs: {title, model, close} }) => {
@@ -32,7 +32,7 @@ const Modal = {
   view: ({ attrs:{title, contents, footer, model, close }}) =>
     m('section.modalContainer',
       m('.modal', {
-        oncreate: animateModalEntrance,
+        // oncreate: animateModalEntrance,
       }, [
         m(Header, { title, model, close }),
         m(Content, contents),
