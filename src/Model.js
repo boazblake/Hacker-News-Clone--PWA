@@ -1,5 +1,5 @@
 
-const routes = ['news', 'newest', 'ask', 'show', 'jobs', 'item/:key', 'user:/key']
+const routes = ['news', 'newest', 'ask', 'show', 'jobs', 'item/:key', 'user/:key']
 
 const url = route => page => {
   let path = route.split('/')[0]
@@ -35,11 +35,16 @@ const getData = model => route => {
   model.reqs.http(model)(model.reqs.urls[path](model.state.page))(route)
 }
 
-const getComments = model => route => id => {
+const getDataById = model => route => id => {
   model.state.prev = model.state.route
-  model.state.route = route
+
+  if(route == 'item'){
+    model.state.route = route
+  }
+
+
   model.data[route] ? model.data[route] : (model.data[route] = { data: [] })
-  model.reqs.http(model)(model.reqs.urls['item/:key'](id))(route)
+  model.reqs.http(model)(model.reqs.urls[`${route}/:key`](id))(route)
 }
 
 const getPath = route => route.split('/')[1]
@@ -55,6 +60,8 @@ const state = {
   title: '',
   comment: {},
   showModal: false,
+  showUser: false,
+  user:{id:''},
 }
 
 
@@ -66,9 +73,16 @@ const toggleComments = ({model, key, level}) =>
 const toggleModal = model =>
   model.state.showModal = !model.state.showModal
 
+const toggleUser = model => id =>  {
+  model.state.user.id = id
+  model.state.showUser = !model.state.showUser
+  console.log(model)
+}
+
+
 export const model = {
-  getComments,
   getData,
+  getDataById,
   routes,
   getPath,
   reqs,
@@ -76,4 +90,5 @@ export const model = {
   state,
   toggleComments,
   toggleModal,
+  toggleUser,
 }

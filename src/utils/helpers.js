@@ -16,7 +16,8 @@ export const init = model => path => {
   model.state.page = 1
   let id =  path.split('/')[2]
   let route = path.split('/')[1]
-  return id ? model.getComments(model)(route)(id) : model.getData(model)(path)
+  console.log('route, id', route, id, model)
+  return id ? model.getDataById(model)(route)(id) : model.getData(model)(path)
 }
 
 export const makeRoutes = model => toRoute => (routes, route) => {

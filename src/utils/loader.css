@@ -1,7 +1,7 @@
 $count: 7;
 $time: 2; //in seconds
 $size: 150;
-$color: #000000;
+$color: white;
 
 .holder {
   position: absolute;
@@ -9,7 +9,7 @@ $color: #000000;
   top: 40px;
   width: 100%;
   height: 100%;
-  background-color: #ff6600;
+  background-color: #1e5799;
 
   .preloader {
     /* size */

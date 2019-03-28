@@ -2,11 +2,12 @@ import m from 'mithril'
 import { animateModalEntrance } from '../utils/animations.js'
 
 const Header = {
-  view: ({ attrs: {title,  model} }) => {
+  view: ({ attrs: {title, model, close} }) => {
     return m('.modal-header', [
       m('h4.title', title),
       m('button.closeBtn', {
-        onclick: () => model.toggleModal(model),
+        onclick: () =>
+          close(model),
       },'X'),
     ])
   },
@@ -27,12 +28,13 @@ const Footer =  {
 
 
 const Modal = {
-  view: ({ attrs:{title, contents, footer, model }}) =>
+  oninit:({attrs:{init, model}}) => init(model),
+  view: ({ attrs:{title, contents, footer, model, close }}) =>
     m('section.modalContainer',
       m('.modal', {
         oncreate: animateModalEntrance,
       }, [
-        m(Header, { title, model }),
+        m(Header, { title, model, close }),
         m(Content, contents),
         m(Footer, footer ),
       ])),

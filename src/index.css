@@ -12,10 +12,6 @@
   box-sizing: border-box;
 }
 
-.bold {
-  font-weight: 900;
-}
-
 body,
 html {
   scroll-behavior: smooth;
@@ -237,7 +233,7 @@ html {
   color: white;
 
   &:hover {
-    color: #000000;
+    text-decoration:underline;
     letter-spacing: 2px;
   }
 }
@@ -303,6 +299,13 @@ html {
   background: white;
 }
 
+.underline {
+  text-decoration:underline;
+}
+
+.bold {
+  font-weight: 900;
+}
 
 /* Media Qs */
 
