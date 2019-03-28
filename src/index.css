@@ -155,6 +155,7 @@ html {
   letter-spacing: 1px;
   line-height: 2;
   border-radius: 5%;
+  transition-duration: .3s;
 
   > svg {
     padding: 2px 0 0 6px;
@@ -305,6 +306,15 @@ html {
 
 .bold {
   font-weight: 900;
+}
+
+.cursor {
+  cursor: pointer;
+  transition-duration: .3s;
+
+  &:hover {
+    letter-spacing: 1.2px;
+  }
 }
 
 /* Media Qs */

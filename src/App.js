@@ -60,7 +60,7 @@ const Post = {
         ]),
         m('.bottom', [
           m('.left', [
-            m('.top.highlight',{onclick: () => {
+            m('.top.highlight.cursor',{onclick: () => {
               model.toggleUser(model)(user)
             }},` by ${user}`),
             m('code.bottom', `${time_ago}`),
@@ -91,7 +91,7 @@ const Comment = {
       },
       [
         m('.',[
-          m('a.highlight', {
+          m('a.highlight.cursor', {
             onclick: () => {
               model.toggleUser(model)(user)
               console.log(user)

@@ -127,7 +127,8 @@ body {
   transition-duration: .2s;
   letter-spacing: 1px;
   line-height: 2;
-  border-radius: 5%; }
+  border-radius: 5%;
+  transition-duration: .3s; }
   .commentBtn > svg {
     padding: 2px 0 0 6px; }
   .commentBtn:hover {
@@ -230,6 +231,12 @@ body {
 
 .underline {
   text-decoration: underline; }
+
+.cursor {
+  cursor: pointer;
+  transition-duration: .3s; }
+  .cursor:hover {
+    letter-spacing: 1.2px; }
 
 /* Media Qs */
 @media (min-width: 668px) {
@@ -1092,4 +1099,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-2bb5326cba0fd144002b.css.map*/
+/*# sourceMappingURL=main-595581e94f188f32af11.css.map*/
