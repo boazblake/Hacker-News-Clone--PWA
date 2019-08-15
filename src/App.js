@@ -30,10 +30,13 @@ const userModalInfo = (model) => ({
   contents:
     model.data.user && model.data.user.data
       ? [
-        m('code', `id: ${model.data.user.data.id}`),
-        m('code', `created: ${model.data.user.data.created}`),
-        m('code', `about: ${model.data.user.data.about}`),
-        m('code', `karma: ${model.data.user.data.karma}`),
+        m('code.row', [m('.bold', 'id: '), model.data.user.data.id]),
+        m('code.row', [
+          m('.bold', 'created: '),
+          model.data.user.data.created,
+        ]),
+        m('code.row', [m('.bold', 'about: '), model.data.user.data.about]),
+        m('code.row', [m('.bold', 'karma: '), model.data.user.data.karma]),
       ]
       : [],
   footer: [],
