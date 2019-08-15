@@ -1,6 +1,6 @@
-export const isEmpty = data => data.length == 0
+export const isEmpty = (data) => data.length == 0
 
-export const infiniteScroll = model => e => {
+export const infiniteScroll = (model) => (e) => {
   let route = model.state.route
   let length = model.data[route].data.length
   let setpoint = 10 * length * model.state.scrollPos
@@ -12,15 +12,9 @@ export const infiniteScroll = model => e => {
   }
 }
 
-export const init = model => path => {
+export const init = (model) => (path) => {
   model.state.page = 1
-  let id =  path.split('/')[2]
+  let id = path.split('/')[2]
   let route = path.split('/')[1]
-  console.log('route, id', route, id, model)
   return id ? model.getDataById(model)(route)(id) : model.getData(model)(path)
-}
-
-export const makeRoutes = model => toRoute => (routes, route) => {
-  routes[`/${route}`] = toRoute(model)
-  return routes
 }

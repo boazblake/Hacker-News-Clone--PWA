@@ -7,14 +7,15 @@ const Hamburger = ({ attrs: { model } }) => {
     open: 'M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z',
   }
 
-  const render = dom =>{
+  const render = (dom) => {
     return m.render(
       dom,
       m('path', {
         xmlns: 'http://www.w3.org/2000/svg',
         d: model.state.tabsShowing ? state.close : state.open,
       })
-    )}
+    )
+  }
 
   return {
     oncreate: ({ dom }) => {
@@ -27,7 +28,7 @@ const Hamburger = ({ attrs: { model } }) => {
     },
     view: ({ attrs: { model } }) =>
       m('svg.btn.hamburger', {
-        style:{fill: model.state.tabsShowing? 'white': 'inherit'},
+        style: { fill: model.state.tabsShowing ? 'white' : 'inherit' },
         onclick: () => model.showTabs(model),
       }),
   }

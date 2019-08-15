@@ -14,7 +14,7 @@ const Layout = ({ attrs: { model } }) => {
         children
           ? [
             m(Header, { model }),
-            m(Body, { model, children}),
+            m(Body, { model, children }),
             m(Footer, { model }),
           ]
           : []
