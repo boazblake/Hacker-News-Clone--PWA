@@ -184,6 +184,14 @@ body {
   color: #1e5799;
   fill: #1e5799; }
 
+.bold {
+  font-weight: bold; }
+
+.row {
+  display: flex;
+  flex-flow: row;
+  align-items: center; }
+
 .tab {
   flex-basis: 20%;
   display: flex;
@@ -250,6 +258,9 @@ body {
 
 .underline {
   text-decoration: underline; }
+
+.bold {
+  font-weight: 900; }
 
 .cursor {
   cursor: pointer;
@@ -1120,4 +1131,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-f84fb2d81480acc75f25.css.map*/
+/*# sourceMappingURL=main-43f78a6eaafb34fdf524.css.map*/
