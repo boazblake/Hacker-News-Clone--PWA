@@ -78,7 +78,7 @@ body {
   display: flex;
   flex-flow: column;
   max-width: 90vw;
-  width: 60vw;
+  width: 100vw;
   transition-duration: 0.3s;
   min-height: 150px;
   margin: 0 auto; }
@@ -1131,4 +1131,4 @@ stretchRight
     transform: rotateZ(-308.57143deg);
     opacity: 1; } }
 
-/*# sourceMappingURL=main-43f78a6eaafb34fdf524.css.map*/
+/*# sourceMappingURL=main-53df7e768bdd248eeb6f.css.map*/

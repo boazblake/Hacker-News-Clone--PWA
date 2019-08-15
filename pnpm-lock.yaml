@@ -9378,7 +9378,7 @@ specifiers:
   html-webpack-plugin: ^3.0.4
   image-webpack-loader: ^4.6.0
   mithril: 2.0.3
-  node-sass: ^4.11.0
+  node-sass: ^4.12.0
   optimize-css-assets-webpack-plugin: ^5.0.1
   purgecss-webpack-plugin: ^1.4.0
   ramda: ^0.26.1
