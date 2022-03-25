@@ -1,7 +1,7 @@
 import m from "mithril"
 import Layout from "./components/Layout.js"
 import Modal from "./components/Modal.js"
-import { isEmpty, init, infiniteScroll } from "./utils/index"
+import { isEmpty, init, infiniteScroll } from "./helpers"
 
 const IsLoading = m(".holder", [
   m(".preloader", [
