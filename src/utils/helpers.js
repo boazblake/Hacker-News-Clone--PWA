@@ -14,7 +14,7 @@ export const infiniteScroll = (model) => (e) => {
 
 export const init = (model) => (path) => {
   model.state.page = 1
-  let id = path.split('/')[2]
-  let route = path.split('/')[1]
+  let id = path.split("/")[2]
+  let route = path.split("/")[1]
   return id ? model.getDataById(model)(route)(id) : model.getData(model)(path)
 }

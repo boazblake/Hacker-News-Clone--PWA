@@ -1,15 +1,17 @@
+import m from "mithril"
+
 const routes = [
-  'news',
-  'newest',
-  'ask',
-  'show',
-  'jobs',
-  'item/:key',
-  'user/:key',
+  "news",
+  "newest",
+  "ask",
+  "show",
+  "jobs",
+  "item/:key",
+  "user/:key",
 ]
 
 const url = (route) => (page) => {
-  let path = route.split('/')[0]
+  let path = route.split("/")[0]
   return `https://api.hnpwa.com/v0/${path}/${page}.json`
 }
 
@@ -22,7 +24,7 @@ const http = (model) => (url) => (route) =>
   m
     .request({
       url,
-      method: 'GET',
+      method: "GET",
     })
     .then((data) => {
       model.data[route].data = data
@@ -46,7 +48,7 @@ const getData = (model) => (route) => {
 const getDataById = (model) => (route) => (id) => {
   model.state.prev = model.state.route
 
-  if (route == 'item') {
+  if (route == "item") {
     model.state.route = route
   }
 
@@ -54,27 +56,26 @@ const getDataById = (model) => (route) => (id) => {
   model.reqs.http(model)(model.reqs.urls[`${route}/:key`](id))(route)
 }
 
-const getPath = (route) => route.split('/')[1]
+const getPath = (route) => route.split("/")[1]
 
 const state = {
-  key: '',
-  url: '',
-  route: '',
+  key: "",
+  url: "",
+  route: "",
   page: 1,
-  profile: '',
+  profile: "",
   tabsShowing: false,
-  title: '',
+  title: "",
   comment: {},
   showModal: false,
   showUser: false,
-  user: { id: '' },
+  user: { id: "" },
 }
 
 const toggleComments = ({ model, key, level }) =>
   model.state.comment[`${key}-${level}`]
-    ? (model.state.comment[`${key}-${level}`] = !model.state.comment[
-      `${key}-${level}`
-    ])
+    ? (model.state.comment[`${key}-${level}`] =
+        !model.state.comment[`${key}-${level}`])
     : (model.state.comment[`${key}-${level}`] = true)
 
 const toggleModal = (model) => (model.state.showModal = !model.state.showModal)

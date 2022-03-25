@@ -1,27 +1,23 @@
-import m from 'mithril'
+import m from "mithril"
 const root = document.body
-import { model } from './Model.js'
+import { model } from "./Model.js"
+import { App } from "./App.js"
 
-import { App } from './App.js'
+window.log = (m) => (v) => (console.log(m, v), v)
 
-
-if (module.hot) {
-  module.hot.accept()
-}
-
-if (process.env.NODE_ENV !== 'production') {
-  console.log('Looks like we are in development mode!')
+if (process.env.NODE_ENV !== "production") {
+  console.log("Looks like we are in development mode!")
 }
 
 // Styles
-import './index.css'
-import './utils/animations.css'
-import './utils/loader.css'
+import "./index.css"
+import "./utils/animations.css"
+import "./utils/loader.css"
 
 function getProfile(w) {
-  if (w < 668) return 'phone'
-  if (w < 920) return 'tablet'
-  return 'desktop'
+  if (w < 668) return "phone"
+  if (w < 920) return "tablet"
+  return "desktop"
 }
 
 let winW = window.innerWidth
@@ -38,17 +34,19 @@ function checkWidth() {
   requestAnimationFrame(checkWidth)
 }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js').then(registration => {
-      console.log('🧟 SW registered: ', registration)
-    }).catch(registrationError => {
-      console.log('⚙️ SW registration failed: ', registrationError)
-    })
-  })
-}
-
+// if ("serviceWorker" in navigator) {
+//   window.addEventListener("load", () => {
+//     navigator.serviceWorker
+//       .register("./service-worker.js")
+//       .then((registration) => {
+//         console.log("🧟 SW registered: ", registration)
+//       })
+//       .catch((registrationError) => {
+//         console.log("⚙️ SW registration failed: ", registrationError)
+//       })
+//   })
+// }
 
 checkWidth()
 
-m.route(root, '/news', App(model))
+m.route(root, "/news", App(model))
