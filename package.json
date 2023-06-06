@@ -11,6 +11,6 @@
     "ramda": "^0.28.0"
   },
   "devDependencies": {
-    "vite": "^2.6.2"
+    "vite": "^2.9.16"
   }
 }
